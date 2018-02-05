@@ -1,0 +1,86 @@
+<div class="row">
+
+  <div id="profileInfo" class="col-sm-4">
+    <div id="nov">
+    <img id="profile" src="../../assets/img/avatar-female.png"/>
+    <h4>Dajana Stojchevska</h4>
+    <h6>24 years</h6>
+
+    <div style="display:flex;justify-content: center;">
+      <ngb-rating [(rate)]="currentRate"></ngb-rating>
+    </div>
+
+    <div style="display:flex;justify-content: center; margin-top: 10%;">
+      <button class="btn btn-lg btn-outline-primary" (click)="open()">Tweet a new message</button>
+    </div>
+  </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card">
+      <h4 class="card-title">Dajana Stojchevska</h4>
+      <h6 class="card-subtitle mb-2 text-muted">01-Feb-2018 17:02</h6>
+      <p class="card-text">Dali e dobar izgledot na eden tvit vaka? llalalaalal lalll allal lall al all lal ll
+        lalallllalla al al lalalal lllal llal lalala l</p>
+      <div class="row" style="padding: 0 10% 0 5%;">
+        <div class="col">
+          <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;" /></a>
+          <a *ngIf="liked" href="#" class="card-link" style="float:left"><img src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;" /></a>
+        </div>
+        <div class="col">
+          <p class="card-link" style="float:right">Likes: 55</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div style="border-left:#99A3A4 solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
+      <ul id="followers" class="list-group list-group-flush">
+        <li class="list-group-item"><h4 style="color: royalblue;">Followers</h4></li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Drug ime
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Treto ie
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Chetvrto imeeeee
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Pettooooooooooooooo
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Shesto ime
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Edno ime
+        </li>
+      </ul>
+    </div>
+    <div style="border-left:royalblue solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
+      <ul id="following" class="list-group list-group-flush">
+        <li class="list-group-item"><h4 style="color: dimgray;">Following</h4></li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Edno ime
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Drugo ime
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Treto ime
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Chetvrto imeeeee
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Pettoooooooooooooooo
+        </li>
+        <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                         style="width:25px;height: 25px; margin-right:5%;"/>Shesto ime
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

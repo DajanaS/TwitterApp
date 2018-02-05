@@ -1,0 +1,33 @@
+<div class="container col-sm-4 offset-sm-4">
+
+  <img src="../../assets/img/logo.png"/>
+
+  <h2>Login</h2>
+
+  <div *ngIf="loginFail===true" class="alert alert-danger">
+    <strong>Login unsuccessful!</strong> Please enter a valid e-mail address and correspondent password, or register.
+  </div>
+
+  <form>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    <div class="row">
+      <div class="col" style="float:left">
+        <a routerLink="/register" class="nav-link" href="">Register here</a>
+      </div>
+      <div class="col">
+        <button type="submit" (click)="onSubmit()" class="btn btn-default" style="float:right">Submit</button>
+      </div>
+    </div>
+
+  </form>
+</div>
