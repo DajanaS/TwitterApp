@@ -14,6 +14,7 @@ import {UserComponent} from './user/user.component';
 import {LogoutComponent} from './logout/logout.component';
 import {UserManagementService} from './user-management.service';
 import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
+import {TweetManagementService} from './tweet-management.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
   entryComponents: [
     PublishTweetComponent
   ],
-  providers: [WikipediaService, UserManagementService],
+  providers: [WikipediaService, UserManagementService, TweetManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

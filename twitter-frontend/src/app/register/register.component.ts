@@ -12,7 +12,6 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
-  model: NgbDateStruct;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
               private userService: UserManagementService) {
@@ -35,7 +34,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     const user = this.prepareSaveUser();
-    this.userService.addUser(user);
+    this.userService.addUser(user)
+      .subscribe(/* */); // addedUser => console.log(JSON.stringify(addedUser))
   }
 
   prepareSaveUser(): User {

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {TweetManagementService} from '../tweet-management.service';
 
 @Component({
   selector: 'app-publish-tweet',
@@ -25,7 +26,7 @@ export class PublishTweetComponent implements OnInit {
   @Input() name;
   value = '';
 
-  constructor(public activeModal: NgbActiveModal) {
+  constructor(public activeModal: NgbActiveModal, private tweetService: TweetManagementService) {
   }
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class PublishTweetComponent implements OnInit {
 
   onSubmit() {
     this.value = (<HTMLInputElement>document.getElementById('tweet')).value;
-    console.log(this.value);
+    this.tweetService.addTweet(this.value);
     this.activeModal.close();
   }
 

@@ -1,10 +1,10 @@
-package service;
+package com.service;
 
-import model.Tweet;
+import com.model.Tweet;
 
 import java.util.List;
 
 public interface TweetService {
     List<Tweet> listTweets();
-    void save(Tweet tweet);
+    void save(String tweet);
 }

@@ -24,7 +24,7 @@
       <input type="radio" name="gender" value="m" formControlName="gender"> Male
       <input type="radio" name="gender" value="f" formControlName="gender"> Female
     </div>
-    
+
     <div class="form-group">
       <label for="email">Email address</label> <input type="email" class="form-control" id="email"
                                                       formControlName="email" placeholder="example@domain.com" required>
@@ -89,7 +89,7 @@
         </button>
       </div>
       <div class="col">
-        <button type="submit" (click)="onSubmit()" routerLink="/login" [disabled]="userForm.invalid"
+        <button type="button" (click)="onSubmit()" routerLink="/login" [disabled]="userForm.invalid"
                 class="btn btn-success" style="float:right">Register
         </button>
       </div>

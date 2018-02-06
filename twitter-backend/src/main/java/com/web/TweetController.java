@@ -1,10 +1,10 @@
-package web;
+package com.web;
 
-import model.Tweet;
+import com.model.Tweet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import service.TweetService;
+import com.service.TweetService;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class TweetController {
 
     @PostMapping
     @ResponseBody
-    public void saveTweet(@RequestBody Tweet tweet) {
-        tweetService.save(tweet);
+    public void saveTweet(@RequestBody String content) {
+        tweetService.save(content);
     }
 }
