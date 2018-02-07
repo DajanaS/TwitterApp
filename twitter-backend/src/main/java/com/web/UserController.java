@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.service.UserService;
 
-import java.util.Date;
-
 @CrossOrigin
 @Controller
 @RequestMapping("/users")
