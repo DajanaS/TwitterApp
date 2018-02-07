@@ -5,7 +5,7 @@
 /dist-server
 /tmp
 /out-tsc
-*/target/**
+target/
 
 # dependencies
 /node_modules
