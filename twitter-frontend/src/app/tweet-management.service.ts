@@ -10,7 +10,7 @@ export class TweetManagementService {
   }
 
   addTweet(content: string) {
-    return this.http.post(this.api + 'tweets', {content: content}).map((res: Response) => res.json());
+    console.log('SE PRAKJA REQUEST ZA ' + content + ' DA SE DODADE VO TVITOVI!!!!');
+    return this.http.post(this.api + 'tweets', content).map((res: Response) => res.json());
   }
-
 }

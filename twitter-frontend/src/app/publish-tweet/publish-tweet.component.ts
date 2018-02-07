@@ -34,7 +34,7 @@ export class PublishTweetComponent implements OnInit {
 
   onSubmit() {
     this.value = (<HTMLInputElement>document.getElementById('tweet')).value;
-    this.tweetService.addTweet(this.value);
+    this.tweetService.addTweet(this.value).subscribe(/* */);
     this.activeModal.close();
   }
 
