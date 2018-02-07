@@ -17,13 +17,12 @@ export class UserComponent implements OnInit {
   constructor(private modalService: NgbModal, private userService: UserManagementService) {
   }
 
-  open() {
-    const modalRef = this.modalService.open(PublishTweetComponent);
-    modalRef.componentInstance.name = 'Dajana';
-  }
-
   ngOnInit() {
     this.userService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
   }
 
+  open() {
+    const modalRef = this.modalService.open(PublishTweetComponent);
+    modalRef.componentInstance.name = this.authenticatedUser.name;
+  }
 }

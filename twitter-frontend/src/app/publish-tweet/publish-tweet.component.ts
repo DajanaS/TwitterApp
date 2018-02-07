@@ -15,7 +15,7 @@ import {TweetManagementService} from '../tweet-management.service';
       <textarea [(ngModel)]="value" class="form-control" id="tweet" placeholder="Enter your text here" required></textarea>
     </div>
     <div class="modal-footer">
-      <button *ngIf="value" type="submit" (click)="onSubmit()" routerLink="/nav" class="btn btn-primary">Publish</button>
+      <button *ngIf="value" type="button" (click)="onSubmit()" routerLink="/nav" class="btn btn-primary">Publish</button>
       <button *ngIf="value===''" class="btn btn-primary" disabled>Publish</button>
     </div>
   `,

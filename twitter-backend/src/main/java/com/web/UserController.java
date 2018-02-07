@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping
     @ResponseBody
-    public User getAuthenticatedUser(){
+    public User getAuthenticatedUser() {
         return authenticationService.getAuthenticatedUser();
     }
 
@@ -37,7 +37,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/login")
     public boolean authenticateUser(@RequestBody LoginData loginData) {
-        return authenticationService.authenticateUser(loginData.email, loginData.password);
+        return !authenticationService.authenticateUser(loginData.email, loginData.password);
     }
 
     @Data

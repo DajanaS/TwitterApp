@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserManagementService} from '../user-management.service';
-import {ActivatedRoute} from '@angular/router';
-import {User} from '../model/user';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
-              private userService: UserManagementService) {
+              private userService: UserManagementService, private router: Router) {
     this.createForm();
   }
 
@@ -34,7 +32,12 @@ export class LoginComponent implements OnInit {
     const email = formModel.email as string;
     const password = formModel.password as string;
     this.userService.authenticateUser(email, password)
-      .subscribe(response => console.log('====== RESPONSE =====' + JSON.stringify(response)));
+      .subscribe(response => {
+        this.loginFail = response;
+        if (this.loginFail === false) {
+          this.router.navigate(['/nav']);
+        }
+      });
   }
 
   get email() {

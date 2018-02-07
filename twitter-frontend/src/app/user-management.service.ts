@@ -22,8 +22,8 @@ export class UserManagementService {
     }).map((res: Response) => res.json());
   }
 
-  authenticateUser(email: string, password: string) {
-    return this.http.post(this.api + 'users/login', {email: email, password: password}).map((res: Response) => res.json());
+  authenticateUser(email: string, password: string): Observable<boolean> {
+    return this.http.post<boolean>(this.api + 'users/login', {email: email, password: password}).pipe();
   }
 
   getAuthenticatedUser(): Observable<User> {
