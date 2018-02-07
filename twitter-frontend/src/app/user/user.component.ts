@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 import {UserManagementService} from '../user-management.service';
@@ -29,6 +29,13 @@ export class UserComponent implements OnInit {
 
   editProfile() {
     const modalRef = this.modalService.open(EditProfileComponent);
+    modalRef.componentInstance.id = this.authenticatedUser.id;
     modalRef.componentInstance.name = this.authenticatedUser.name;
+    modalRef.componentInstance.gender = this.authenticatedUser.gender;
+    modalRef.componentInstance.email = this.authenticatedUser.email;
+    modalRef.componentInstance.birth = this.authenticatedUser.birth;
+    modalRef.componentInstance.oldPassword = this.authenticatedUser.password;
+    modalRef.componentInstance.newPassword = this.authenticatedUser.password;
+    modalRef.componentInstance.avatar = this.authenticatedUser.avatar;
   }
 }

@@ -23,6 +23,13 @@ public class AuthenticationService {
         return authenticatedUser.getEmail().equals(email);
     }
 
+    public boolean logOut(String email) {
+        if (this.isLoggedIn(email)) {
+            this.authenticatedUser = null;
+            return true;
+        } else return false;
+    }
+
     public boolean authenticateUser(String email, String password) {
         User user = userRepository.findByEmail(email);
         if (user != null && user.getPassword().equals(password)) {

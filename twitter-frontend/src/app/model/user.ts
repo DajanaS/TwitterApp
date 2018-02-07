@@ -19,4 +19,12 @@ export class User {
       this.avatar = '../../assets/img/avatar-female.png';
     }
   }
+
+  setId(id) {
+    this.id = id;
+  }
+
+  setAvatar(avatar) {
+    this.avatar = avatar;
+  }
 }

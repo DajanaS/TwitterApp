@@ -31,7 +31,15 @@ export class UserManagementService {
     );
   }
 
-  editProfile(content: string) {
-    return this.http.post(this.api + 'users', content).map((res: Response) => res.json());
+  editUser(user: User) {
+    return this.http.post(this.api + 'users', {
+      id: user.id,
+      name: user.name,
+      gender: user.gender,
+      email: user.email,
+      birth: user.birth,
+      password: user.password,
+      avatar: user.avatar
+    }).map((res: Response) => res.json());
   }
 }
