@@ -32,7 +32,7 @@ public class DefaultTweetService implements TweetService {
         if (author != null) {
             Tweet tweet = new Tweet();
             tweet.setContent(content);
-            tweet.setAuthor(findUserOfAuthenticatedPrincipal());
+            tweet.setAuthor(author);
             tweetRepository.save(tweet);
         }
     }

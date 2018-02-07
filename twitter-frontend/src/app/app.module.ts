@@ -15,6 +15,7 @@ import {LogoutComponent} from './logout/logout.component';
 import {UserManagementService} from './user-management.service';
 import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
 import {TweetManagementService} from './tweet-management.service';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {TweetManagementService} from './tweet-management.service';
     HomeComponent,
     UserComponent,
     LogoutComponent,
-    PublishTweetComponent
+    PublishTweetComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import {TweetManagementService} from './tweet-management.service';
     ReactiveFormsModule
   ],
   entryComponents: [
-    PublishTweetComponent
+    PublishTweetComponent, EditProfileComponent
   ],
   providers: [WikipediaService, UserManagementService, TweetManagementService],
   bootstrap: [AppComponent]

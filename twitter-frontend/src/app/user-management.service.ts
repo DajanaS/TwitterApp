@@ -30,4 +30,8 @@ export class UserManagementService {
     return this.http.get<User>(this.api + 'users').pipe(
     );
   }
+
+  editProfile(content: string) {
+    return this.http.post(this.api + 'users', content).map((res: Response) => res.json());
+  }
 }

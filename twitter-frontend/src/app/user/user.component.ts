@@ -3,6 +3,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
+import {EditProfileComponent} from '../edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-user',
@@ -23,6 +24,11 @@ export class UserComponent implements OnInit {
 
   open() {
     const modalRef = this.modalService.open(PublishTweetComponent);
+    modalRef.componentInstance.name = this.authenticatedUser.name;
+  }
+
+  editProfile() {
+    const modalRef = this.modalService.open(EditProfileComponent);
     modalRef.componentInstance.name = this.authenticatedUser.name;
   }
 }
