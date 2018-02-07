@@ -2,18 +2,18 @@
 
   <div id="profileInfo" class="col-sm-4">
     <div id="nov">
-    <img id="profile" src="../../assets/img/avatar-female.png"/>
-    <h4>Dajana Stojchevska</h4>
-    <h6>24 years</h6>
+      <img id="profile" src="../../assets/img/avatar-female.png"/>
+      <h4>{{authenticatedUser.name}}</h4>
+      <h6>{{authenticatedUser.birth | date}}</h6>
 
-    <div style="display:flex;justify-content: center;">
-      <ngb-rating [(rate)]="currentRate"></ngb-rating>
-    </div>
+      <div style="display:flex;justify-content: center;">
+        <ngb-rating [(rate)]="currentRate"></ngb-rating>
+      </div>
 
-    <div style="display:flex;justify-content: center; margin-top: 10%;">
-      <button class="btn btn-lg btn-outline-primary" (click)="open()">Tweet a new message</button>
+      <div style="display:flex;justify-content: center; margin-top: 10%;">
+        <button class="btn btn-lg btn-outline-primary" (click)="open()">Tweet a new message</button>
+      </div>
     </div>
-  </div>
   </div>
 
   <div class="col-sm-4">
@@ -24,8 +24,10 @@
         lalallllalla al al lalalal lllal llal lalala l</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;" /></a>
-          <a *ngIf="liked" href="#" class="card-link" style="float:left"><img src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;" /></a>
+          <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
+            src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
+          <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
+            src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
         </div>
         <div class="col">
           <p class="card-link" style="float:right">Likes: 55</p>

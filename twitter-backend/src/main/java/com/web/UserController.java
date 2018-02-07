@@ -27,6 +27,12 @@ public class UserController {
         userService.save(user);
     }
 
+    @GetMapping
+    @ResponseBody
+    public User getAuthenticatedUser(){
+        return authenticationService.getAuthenticatedUser();
+    }
+
     @PostMapping
     @ResponseBody
     @RequestMapping("/login")

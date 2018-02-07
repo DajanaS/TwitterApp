@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
+import {UserManagementService} from '../user-management.service';
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-user',
@@ -10,8 +12,9 @@ import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 export class UserComponent implements OnInit {
   currentRate = 5;
   liked = false;
+  authenticatedUser: User;
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private userService: UserManagementService) {
   }
 
   open() {
@@ -20,6 +23,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
   }
 
 }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from './model/user';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class UserManagementService {
@@ -23,5 +24,10 @@ export class UserManagementService {
 
   authenticateUser(email: string, password: string) {
     return this.http.post(this.api + 'users/login', {email: email, password: password}).map((res: Response) => res.json());
+  }
+
+  getAuthenticatedUser(): Observable<User> {
+    return this.http.get<User>(this.api + 'users').pipe(
+    );
   }
 }
