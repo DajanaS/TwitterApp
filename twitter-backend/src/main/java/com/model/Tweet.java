@@ -1,7 +1,7 @@
 package com.model;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Tweet {
@@ -13,7 +13,7 @@ public class Tweet {
     private String content;
 
     @Column(nullable = false)
-    private LocalDateTime time = LocalDateTime.now();
+    private Date date = new Date();
 
     @ManyToOne
     private User author;
@@ -34,12 +34,12 @@ public class Tweet {
         this.content = content;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTime(LocalDateTime time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public User getAuthor() {

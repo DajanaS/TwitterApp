@@ -1,6 +1,7 @@
 package com.service.implementation;
 
 import com.authentication.AuthenticationService;
+import com.google.common.collect.Lists;
 import com.model.Tweet;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class DefaultTweetService implements TweetService {
 
     @Override
     public List<Tweet> listTweets() {
-        return null;
+        return Lists.newArrayList(tweetRepository.findAll());
     }
 
     @Override
