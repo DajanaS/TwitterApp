@@ -71,5 +71,5 @@ export class NavigationComponent implements OnInit {
             return of([]);
           }))
       .do(() => this.searching = false)
-      .merge(this.hideSearchingWhenUnsubscribed)
+      .merge(this.hideSearchingWhenUnsubscribed);
 }

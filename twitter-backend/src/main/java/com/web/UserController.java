@@ -53,6 +53,13 @@ public class UserController {
         return !authenticationService.authenticateUser(loginData.email, loginData.password);
     }
 
+    @PostMapping
+    @ResponseBody
+    @RequestMapping("/logout")
+    public boolean logOutUser(@RequestBody String email) {
+        return authenticationService.logOut(email);
+    }
+
     @Data
     public static class LoginData {
         public String email;

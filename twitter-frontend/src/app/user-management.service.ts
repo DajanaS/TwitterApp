@@ -12,18 +12,15 @@ export class UserManagementService {
   }
 
   addUser(user: User) {
-    return this.http.post(this.api + 'users', {
-      name: user.name,
-      gender: user.gender,
-      email: user.email,
-      birth: user.birth,
-      password: user.password,
-      avatar: user.avatar
-    }).map((res: Response) => res.json());
+    return this.http.post(this.api + 'users', user).map((res: Response) => res.json());
   }
 
   authenticateUser(email: string, password: string): Observable<boolean> {
     return this.http.post<boolean>(this.api + 'users/login', {email: email, password: password}).pipe();
+  }
+
+  logOutUser(email: string): Observable<boolean> {
+    return this.http.post<boolean>(this.api + 'users/logout', email).pipe();
   }
 
   getAuthenticatedUser(): Observable<User> {
@@ -32,14 +29,6 @@ export class UserManagementService {
   }
 
   editUser(user: User) {
-    return this.http.post(this.api + 'users', {
-      id: user.id,
-      name: user.name,
-      gender: user.gender,
-      email: user.email,
-      birth: user.birth,
-      password: user.password,
-      avatar: user.avatar
-    }).map((res: Response) => res.json());
+    return this.http.post(this.api + 'users', user).map((res: Response) => res.json());
   }
 }
