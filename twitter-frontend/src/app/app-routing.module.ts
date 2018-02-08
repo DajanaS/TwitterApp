@@ -5,6 +5,7 @@ import {UserComponent} from './user/user.component';
 import {NavigationComponent} from './navigation/navigation.component';
 import {LogoutComponent} from './logout/logout.component';
 import {RegisterComponent} from './register/register.component';
+import {EditProfileComponent} from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'profile/:id', component: UserComponent},
   {path: 'profile', redirectTo: '/home', pathMatch: 'full'},
   {path: 'nav', component: NavigationComponent},
+  {path: 'edit', component: EditProfileComponent},
 ];
 
 @NgModule({
