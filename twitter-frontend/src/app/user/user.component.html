@@ -21,11 +21,10 @@
   </div>
 
   <div class="col-sm-4">
-    <div class="card">
-      <h4 class="card-title">Dajana Stojchevska</h4>
-      <h6 class="card-subtitle mb-2 text-muted">01-Feb-2018 17:02</h6>
-      <p class="card-text">Dali e dobar izgledot na eden tvit vaka? llalalaalal lalll allal lall al all lal ll
-        lalallllalla al al lalalal lllal llal lalala l</p>
+    <div class="card" *ngFor="let tweet of tweets">
+      <h4 class="card-title">{{this.authenticatedUser.name}}</h4>
+      <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date}} {{tweet.date | date:'shortTime'}}</h6>
+      <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
           <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
@@ -34,7 +33,7 @@
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
         </div>
         <div class="col">
-          <p class="card-link" style="float:right">Likes: 55</p>
+          <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
         </div>
       </div>
     </div>

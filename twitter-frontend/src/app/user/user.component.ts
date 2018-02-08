@@ -4,6 +4,8 @@ import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
 import {EditProfileComponent} from '../edit-profile/edit-profile.component';
+import {Tweet} from '../model/tweet';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-user',
@@ -14,12 +16,19 @@ export class UserComponent implements OnInit {
   currentRate = 5;
   liked = false;
   authenticatedUser: User;
+  tweets: Tweet[];
 
   constructor(private modalService: NgbModal, private userService: UserManagementService) {
   }
 
   ngOnInit() {
     this.userService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
+    this.tweets = [
+      new Tweet('Sodrzhina 1', this.authenticatedUser, new Date(), 5),
+      new Tweet('Ova e vtorata sodrzinaaaaa!', this.authenticatedUser, new Date(), 10),
+      new Tweet('Nesho sodrzhina 3', this.authenticatedUser, new Date(), 21),
+      new Tweet('Eve ednaaa pogolemaa sodrzhina 4 lalalalal ne e neso mnogu lala !!!!', this.authenticatedUser, new Date(), 12)
+    ];
   }
 
   open() {
