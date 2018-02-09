@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {NavigationComponent, WikipediaService} from './navigation/navigation.component';
+import {NavigationComponent} from './navigation/navigation.component';
 import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
 import {UserComponent} from './user/user.component';
@@ -40,7 +40,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
   entryComponents: [
     PublishTweetComponent, EditProfileComponent
   ],
-  providers: [WikipediaService, UserManagementService, TweetManagementService],
+  providers: [UserManagementService, TweetManagementService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

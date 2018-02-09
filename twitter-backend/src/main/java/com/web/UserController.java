@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.service.UserService;
 
+import java.util.List;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/users")
@@ -36,17 +38,23 @@ public class UserController {
             user1.setBirth(user.getBirth());
             user1.setPassword(user.getPassword());
             user1.setAvatar(user.getAvatar());
-            if(authenticationService.getAuthenticatedUser().getId().equals(user.getId())){
+            if (authenticationService.getAuthenticatedUser().getId().equals(user.getId())) {
                 authenticationService.updateUser(user1);
             }
         }
-       return userService.save(user1);
+        return userService.save(user1);
     }
 
     @GetMapping
     @ResponseBody
     public User getAuthenticatedUser() {
         return authenticationService.getAuthenticatedUser();
+    }
+
+    @GetMapping("/all")
+    @ResponseBody
+    public List<String> getAllRegisteredUsersEmails() {
+        return userService.getAllRegisteredUsersEmails();
     }
 
     @PostMapping

@@ -17,8 +17,16 @@ export class UserManagementService {
     this.profileDataChangedSource.next(user);
   }
 
+  getAllUsersEmails(): Observable<string[]> {
+    return this.http.get<string[]>(this.api + 'users/all').pipe();
+  }
+
   addUser(user: User) {
     return this.http.post(this.api + 'users', user).map((res: Response) => res.json());
+  }
+
+  editUser(user: User): Observable<User> {
+    return this.http.post<User>(this.api + 'users', user).pipe();
   }
 
   authenticateUser(email: string, password: string): Observable<boolean> {
@@ -30,11 +38,6 @@ export class UserManagementService {
   }
 
   getAuthenticatedUser(): Observable<User> {
-    return this.http.get<User>(this.api + 'users').pipe(
-    );
-  }
-
-  editUser(user: User): Observable<User> {
-    return this.http.post<User>(this.api + 'users', user).pipe();
+    return this.http.get<User>(this.api + 'users').pipe();
   }
 }
