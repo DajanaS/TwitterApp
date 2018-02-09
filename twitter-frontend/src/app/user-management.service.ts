@@ -2,13 +2,19 @@ import {Injectable} from '@angular/core';
 import {User} from './model/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UserManagementService {
-
   api = 'http://localhost:8080/';
+  private profileDataChangedSource = new Subject<User>();
+  profileDataChanged$ = this.profileDataChangedSource.asObservable();
 
   constructor(private http: HttpClient) {
+  }
+
+  profileDataChanged(user: User) {
+    this.profileDataChangedSource.next(user);
   }
 
   addUser(user: User) {
@@ -28,7 +34,7 @@ export class UserManagementService {
     );
   }
 
-  editUser(user: User) {
-    return this.http.post(this.api + 'users', user).map((res: Response) => res.json());
+  editUser(user: User): Observable<User> {
+    return this.http.post<User>(this.api + 'users', user).pipe();
   }
 }

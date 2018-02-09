@@ -94,6 +94,7 @@ export class EditProfileComponent implements OnInit {
   @Input() avatar;
 
   userForm: FormGroup;
+  userEdited: User;
 
   constructor(private fb: FormBuilder, public activeModal: NgbActiveModal,
               private userService: UserManagementService, private route: ActivatedRoute) {
@@ -142,7 +143,10 @@ export class EditProfileComponent implements OnInit {
       this.newPassword);
     updatedUser.setAvatar(this.avatar); // for avatar -> Upload button, when using check if it is not available, then use the default
     updatedUser.setId(this.id);
-    this.userService.editUser(updatedUser).subscribe(/* */);
+    this.userService.editUser(updatedUser).subscribe(user => {
+      this.userEdited = user;
+      this.userService.profileDataChanged(this.userEdited);
+    });
     this.activeModal.close();
   }
 

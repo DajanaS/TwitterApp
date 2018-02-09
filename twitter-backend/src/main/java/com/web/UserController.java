@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping
     @ResponseBody
-    public void saveUser(@RequestBody User user) {
+    public User saveUser(@RequestBody User user) {
         User user1 = user;
         if (user.getId() != null) {
             user1 = userRepository.findOne(user.getId());
@@ -36,8 +36,11 @@ public class UserController {
             user1.setBirth(user.getBirth());
             user1.setPassword(user.getPassword());
             user1.setAvatar(user.getAvatar());
+            if(authenticationService.getAuthenticatedUser().getId().equals(user.getId())){
+                authenticationService.updateUser(user1);
+            }
         }
-        userService.save(user1);
+       return userService.save(user1);
     }
 
     @GetMapping

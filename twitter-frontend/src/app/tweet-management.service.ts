@@ -7,18 +7,14 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class TweetManagementService {
   api = 'http://localhost:8080/';
-
-  // Observable string sources
   private newTweetPublishedSource = new Subject<Tweet>();
-
-  // Observable string streams
   newTweetPublished$ = this.newTweetPublishedSource.asObservable();
+
+  constructor(private http: HttpClient) {
+  }
 
   newTweetPublished(tweet: Tweet) {
     this.newTweetPublishedSource.next(tweet);
-  }
-
-  constructor(private http: HttpClient) {
   }
 
   addTweet(content: string): Observable<Tweet> {

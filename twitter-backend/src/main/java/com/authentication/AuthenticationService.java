@@ -38,4 +38,8 @@ public class AuthenticationService {
         }
         return false;
     }
+
+    public void updateUser(User user) {
+        this.authenticatedUser = user;
+    }
 }

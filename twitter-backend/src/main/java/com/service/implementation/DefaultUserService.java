@@ -1,6 +1,5 @@
 package com.service.implementation;
 
-import com.authentication.AuthenticationService;
 import com.model.User;
 import com.repository.UserRepository;
 import com.service.UserService;
@@ -17,7 +16,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }

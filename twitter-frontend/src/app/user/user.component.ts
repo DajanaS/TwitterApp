@@ -26,6 +26,9 @@ export class UserComponent implements OnInit {
         this.tweets.push(tweet);
         this.tweets.reverse();
       });
+    userService.profileDataChanged$.subscribe(user => {
+      this.authenticatedUser = user;
+    });
   }
 
   ngOnInit() {
