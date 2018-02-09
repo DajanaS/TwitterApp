@@ -28,14 +28,15 @@ public class DefaultTweetService implements TweetService {
     }
 
     @Override
-    public void save(String content) {
+    public Tweet save(String content) {
         User author = findUserOfAuthenticatedPrincipal();
         if (author != null) {
             Tweet tweet = new Tweet();
             tweet.setContent(content);
             tweet.setAuthor(author);
-            tweetRepository.save(tweet);
+            return tweetRepository.save(tweet);
         }
+        return null;
     }
 
     private User findUserOfAuthenticatedPrincipal() {

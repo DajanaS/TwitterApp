@@ -20,6 +20,10 @@ export class UserComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private userService: UserManagementService,
               private tweetService: TweetManagementService) {
+    tweetService.missionConfirmed$.subscribe(
+      tweet => {
+        this.tweets.push(tweet);
+      });
   }
 
   ngOnInit() {

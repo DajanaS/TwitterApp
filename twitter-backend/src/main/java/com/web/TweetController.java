@@ -27,7 +27,7 @@ public class TweetController {
 
     @PostMapping
     @ResponseBody
-    public void saveTweet(@RequestBody String content) {
-        tweetService.save(content);
+    public Tweet saveTweet(@RequestBody String content) {
+        return tweetService.save(content);
     }
 }

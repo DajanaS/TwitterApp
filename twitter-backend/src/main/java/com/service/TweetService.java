@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TweetService {
     List<Tweet> listTweets();
-    void save(String tweet);
+    Tweet save(String tweet);
 }
