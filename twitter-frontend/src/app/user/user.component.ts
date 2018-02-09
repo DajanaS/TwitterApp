@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 import {UserManagementService} from '../user-management.service';
@@ -6,7 +6,6 @@ import {User} from '../model/user';
 import {EditProfileComponent} from '../edit-profile/edit-profile.component';
 import {Tweet} from '../model/tweet';
 import {TweetManagementService} from '../tweet-management.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +19,7 @@ export class UserComponent implements OnInit {
   tweets: Tweet[];
 
   constructor(private modalService: NgbModal, private userService: UserManagementService,
-              private tweetService: TweetManagementService, private router: Router) {
+              private tweetService: TweetManagementService) {
   }
 
   ngOnInit() {

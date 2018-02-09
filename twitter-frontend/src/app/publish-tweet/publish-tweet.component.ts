@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TweetManagementService} from '../tweet-management.service';
-import {UserComponent} from '../user/user.component';
 
 @Component({
   selector: 'app-publish-tweet',
