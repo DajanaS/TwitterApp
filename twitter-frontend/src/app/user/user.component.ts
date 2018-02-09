@@ -20,19 +20,19 @@ export class UserComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private userService: UserManagementService,
               private tweetService: TweetManagementService) {
-    tweetService.missionConfirmed$.subscribe(
+    tweetService.newTweetPublished$.subscribe(
       tweet => {
+        this.tweets.reverse();
         this.tweets.push(tweet);
+        this.tweets.reverse();
       });
   }
 
   ngOnInit() {
-    this.userService.getAuthenticatedUser().subscribe(user => this.authenticatedUser = user);
-    this.update();
-  }
-
-  public update() {
-    this.tweetService.getTweets().subscribe(tweets => this.tweets = tweets);
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.authenticatedUser = user;
+      this.tweetService.getTweets(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
+    });
   }
 
   open() {

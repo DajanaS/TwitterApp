@@ -9,13 +9,13 @@ export class TweetManagementService {
   api = 'http://localhost:8080/';
 
   // Observable string sources
-  private missionConfirmedSource = new Subject<Tweet>();
+  private newTweetPublishedSource = new Subject<Tweet>();
 
   // Observable string streams
-  missionConfirmed$ = this.missionConfirmedSource.asObservable();
+  newTweetPublished$ = this.newTweetPublishedSource.asObservable();
 
-  confirmMission(tweet: Tweet) {
-    this.missionConfirmedSource.next(tweet);
+  newTweetPublished(tweet: Tweet) {
+    this.newTweetPublishedSource.next(tweet);
   }
 
   constructor(private http: HttpClient) {
@@ -25,8 +25,8 @@ export class TweetManagementService {
     return this.http.post<Tweet>(this.api + 'tweets', content).pipe();
   }
 
-  getTweets(): Observable<Tweet[]> {
-    return this.http.get<Tweet[]>(this.api + 'tweets').pipe(
+  getTweets(id): Observable<Tweet[]> {
+    return this.http.get<Tweet[]>(this.api + 'tweets?id=' + id).pipe(
     );
   }
 }

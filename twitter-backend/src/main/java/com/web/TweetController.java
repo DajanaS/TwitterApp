@@ -21,8 +21,8 @@ public class TweetController {
 
     @GetMapping
     @ResponseBody
-    public List<Tweet> listTweets() {
-        return tweetService.listTweets();
+    public List<Tweet> listTweetsByAuthor(@RequestParam Long id) {
+        return tweetService.listTweetsByAuthorId(id);
     }
 
     @PostMapping

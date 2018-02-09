@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TweetRepository extends CrudRepository<Tweet, Long> {
-    List<Tweet> findAllByIdOrderByDateDesc(Long id);
+    List<Tweet> findAllByAuthorIdOrderByDateDesc(Long id);
+
     List<Tweet> findAllByAuthorIn(List<User> users);
 }

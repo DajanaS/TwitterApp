@@ -37,7 +37,7 @@ export class PublishTweetComponent implements OnInit {
   onSubmit() {
     this.tweetService.addTweet(this.value).subscribe(tweet => {
       this.tweet = tweet;
-      this.tweetService.confirmMission(this.tweet);
+      this.tweetService.newTweetPublished(this.tweet);
     });
     this.activeModal.close();
   }

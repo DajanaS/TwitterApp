@@ -23,8 +23,8 @@ public class DefaultTweetService implements TweetService {
     }
 
     @Override
-    public List<Tweet> listTweets() {
-        return Lists.newArrayList(tweetRepository.findAll());
+    public List<Tweet> listTweetsByAuthorId(Long id) {
+        return Lists.newArrayList(tweetRepository.findAllByAuthorIdOrderByDateDesc(id));
     }
 
     @Override
