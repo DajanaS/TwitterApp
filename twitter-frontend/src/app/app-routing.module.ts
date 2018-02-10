@@ -6,6 +6,7 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {LogoutComponent} from './logout/logout.component';
 import {RegisterComponent} from './register/register.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -13,9 +14,9 @@ const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile/:id', component: UserComponent},
-  {path: 'profile', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'nav', component: NavigationComponent},
-  {path: 'edit', component: EditProfileComponent},
+  {path: 'profile', redirectTo: '/home', pathMatch: 'full', canActivate: [AuthGuard]},
+  {path: 'nav', component: NavigationComponent, canActivate: [AuthGuard]},
+  {path: 'edit', component: EditProfileComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -10,4 +10,6 @@ public interface TweetRepository extends CrudRepository<Tweet, Long> {
     List<Tweet> findAllByAuthorIdOrderByDateDesc(Long id);
 
     List<Tweet> findAllByAuthorIn(List<User> users);
+
+    List<Tweet> findFirst5ByOrderByDateDesc();
 }

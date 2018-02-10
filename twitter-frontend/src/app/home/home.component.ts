@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TweetManagementService} from '../tweet-management.service';
+import {Tweet} from '../model/tweet';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +10,18 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   currentRate = 5;
   page = 1;
+  topTweets: Tweet[];
 
-  constructor() { }
+  constructor(private tweetManagementService: TweetManagementService) { }
 
   ngOnInit() {
+    this.loadTopTweets();
+  }
+
+  loadTopTweets() {
+    this.tweetManagementService.getTopTweets().subscribe(tweets => {
+      this.topTweets = tweets;
+    });
   }
 
 }

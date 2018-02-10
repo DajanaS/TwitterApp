@@ -25,9 +25,16 @@ public class TweetController {
         return tweetService.listTweetsByAuthorId(id);
     }
 
+    @GetMapping("/top")
+    @ResponseBody
+    public List<Tweet> listTopTweetsByDateDesc() {
+        return tweetService.listTopTweetsByDateDesc();
+    }
+
     @PostMapping
     @ResponseBody
     public Tweet saveTweet(@RequestBody String content) {
         return tweetService.save(content);
     }
+
 }

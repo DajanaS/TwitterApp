@@ -3,12 +3,16 @@ import {User} from './model/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class UserManagementService {
   api = 'http://localhost:8080/';
   private profileDataChangedSource = new Subject<User>();
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
+  checkUser: User;
+
+  userManagementServiceInfo$: BehaviorSubject<UserManagementService> = new BehaviorSubject<UserManagementService>(this);
 
   constructor(private http: HttpClient) {
   }
@@ -39,5 +43,16 @@ export class UserManagementService {
 
   getAuthenticatedUser(): Observable<User> {
     return this.http.get<User>(this.api + 'users').pipe();
+  }
+
+
+  isLoggedInReal(): boolean {
+    this.getAuthenticatedUser().do(user => this.checkUser = user);
+    if (this.checkUser === null) {
+      return false;
+    } else {
+      console.log(this.checkUser);
+      return true;
+    }
   }
 }

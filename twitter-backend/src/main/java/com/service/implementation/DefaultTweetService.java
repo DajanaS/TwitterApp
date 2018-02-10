@@ -28,6 +28,11 @@ public class DefaultTweetService implements TweetService {
     }
 
     @Override
+    public List<Tweet> listTopTweetsByDateDesc() {
+        return Lists.newArrayList(tweetRepository.findFirst5ByOrderByDateDesc());
+    }
+
+    @Override
     public Tweet save(String content) {
         User author = findUserOfAuthenticatedPrincipal();
         if (author != null) {

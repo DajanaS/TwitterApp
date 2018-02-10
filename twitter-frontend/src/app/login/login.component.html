@@ -17,7 +17,7 @@
 
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password" required>
+      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password" (keyup.enter)="onSubmit($event)" required>
     </div>
 
     <div class="row">

@@ -25,4 +25,8 @@ export class TweetManagementService {
     return this.http.get<Tweet[]>(this.api + 'tweets?id=' + id).pipe(
     );
   }
+
+  getTopTweets(): Observable<Tweet[]> {
+    return this.http.get<Tweet[]>(this.api + 'tweets/top').pipe();
+  }
 }
