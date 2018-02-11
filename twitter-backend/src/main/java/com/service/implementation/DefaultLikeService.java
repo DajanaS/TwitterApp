@@ -28,12 +28,12 @@ public class DefaultLikeService implements LikeService {
     }
 
     @Override
-    public List<Like> listLikesByTweet(Long id) {
+    public List<Like> getLikesByTweet(Long id) {
         return Lists.newArrayList(likeRepository.findAllByLikedTweet(id));
     }
 
     @Override
-    public List<Like> listLikesByUser(Long id) {
+    public List<Like> getLikesByUser(Long id) {
         return Lists.newArrayList(likeRepository.findAllByLikeOwner(id));
     }
 

@@ -37,15 +37,15 @@
   -->
 
   <div>
-    <div class="card" *ngFor="let tweet of topTweets">
-      <h4 class="card-title">{{this.tweet.author}}</h4>
+    <div class="card" *ngFor="let tweet of topTweets; let i = index">
+      <h4 class="card-title">{{this.tweet.author.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
+          <a *ngIf="!currentUserLiked[i]" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
-          <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
+          <a *ngIf="currentUserLiked[i]" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
         </div>
         <div class="col">

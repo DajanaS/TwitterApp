@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TweetManagementService} from '../tweet-management.service';
 import {Tweet} from '../model/tweet';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-publish-tweet',
@@ -13,10 +14,10 @@ import {Tweet} from '../model/tweet';
       </button>
     </div>
     <div class="modal-body">
-      <textarea [(ngModel)]="value" class="form-control" id="tweet" placeholder="Enter your text here" required></textarea>
+      <textarea [(ngModel)]="value" class="form-control" id="tweet" placeholder="Enter your text here" (keyup.enter)="onSubmit()" required></textarea>
     </div>
     <div class="modal-footer">
-      <button *ngIf="value" type="button" (click)="onSubmit()" routerLink="/nav" class="btn btn-primary">Publish</button>
+      <button *ngIf="value" type="button" (click)="onSubmit()" class="btn btn-primary">Publish</button>
       <button *ngIf="value===''" class="btn btn-primary" disabled>Publish</button>
     </div>
   `,
@@ -28,7 +29,9 @@ export class PublishTweetComponent implements OnInit {
   value = '';
   tweet: Tweet;
 
-  constructor(public activeModal: NgbActiveModal, private tweetService: TweetManagementService) {
+  constructor(public activeModal: NgbActiveModal,
+              private tweetService: TweetManagementService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -41,6 +44,7 @@ export class PublishTweetComponent implements OnInit {
       this.tweetService.newTweetPublished(this.tweet);
     });
     this.activeModal.close();
+    this.router.navigate(['/nav']);
   }
 
 }

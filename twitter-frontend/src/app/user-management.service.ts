@@ -10,11 +10,10 @@ export class UserManagementService {
   api = 'http://localhost:8080/';
   private profileDataChangedSource = new Subject<User>();
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
-  checkUser: User;
-
-  userManagementServiceInfo$: BehaviorSubject<UserManagementService> = new BehaviorSubject<UserManagementService>(this);
+  isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
+    this.isLoggedIn = false;
   }
 
   profileDataChanged(user: User) {
@@ -43,16 +42,5 @@ export class UserManagementService {
 
   getAuthenticatedUser(): Observable<User> {
     return this.http.get<User>(this.api + 'users').pipe();
-  }
-
-
-  isLoggedInReal(): boolean {
-    this.getAuthenticatedUser().do(user => this.checkUser = user);
-    if (this.checkUser === null) {
-      return false;
-    } else {
-      console.log(this.checkUser);
-      return true;
-    }
   }
 }

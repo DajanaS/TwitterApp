@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface LikeService {
 
-    List<Like> listLikesByTweet(Long id);
+    List<Like> getLikesByTweet(Long id);
 
-    List<Like> listLikesByUser(Long id);
+    List<Like> getLikesByUser(Long id);
 
     Like save(Long likedTweetId);
 }

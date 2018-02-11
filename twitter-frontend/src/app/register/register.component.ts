@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +13,7 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+  constructor(private fb: FormBuilder, private router: Router,
               private userService: UserManagementService) {
     this.createForm();
   }
@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
     const user = this.prepareSaveUser();
     this.userService.addUser(user)
       .subscribe(/* */); // addedUser => console.log(JSON.stringify(addedUser))
+    this.router.navigate(['/login']);
   }
 
   prepareSaveUser(): User {

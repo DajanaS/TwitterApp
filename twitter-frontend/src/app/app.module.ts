@@ -17,6 +17,7 @@ import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
 import {TweetManagementService} from './tweet-management.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {AuthGuard} from './auth.guard';
+import {LikeManagementService} from './like-management.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import {AuthGuard} from './auth.guard';
   entryComponents: [
     PublishTweetComponent, EditProfileComponent
   ],
-  providers: [UserManagementService, TweetManagementService, AuthGuard],
+  providers: [UserManagementService, TweetManagementService, LikeManagementService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

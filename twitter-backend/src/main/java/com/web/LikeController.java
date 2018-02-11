@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @Controller
 @RequestMapping("/likes")
@@ -19,7 +21,14 @@ public class LikeController {
 
     @PostMapping
     @ResponseBody
-    public Like saveLike(@RequestParam Long likedTweetId) {
+    public Like saveLike(@RequestBody Long likedTweetId) {
         return likeService.save(likedTweetId);
+    }
+
+    @GetMapping("/byTweet")
+    @ResponseBody
+    @RequestMapping(value = "/{id}")
+    public List<Like> getLikesByTweet(@PathVariable("id") Long id) {
+        return likeService.getLikesByTweet(id);
     }
 }
