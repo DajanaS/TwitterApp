@@ -65,6 +65,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
           <label for="password">Enter your new password</label> <input type="password" class="form-control" id="password"
                                                                        formControlName="password">
         </div>
+        <div class="alert alert-warning">
+          The new password won't be saved if the old password entered is not correct.
+        </div>
         <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
           <div *ngIf="password.errors.pattern">
             The password must be at least 8 characters long and contain uppercase(s), lowercase(s) and at least one special
