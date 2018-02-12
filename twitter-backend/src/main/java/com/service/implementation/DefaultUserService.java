@@ -30,9 +30,10 @@ public class DefaultUserService implements UserService {
     @Override
     public List<String> getAllRegisteredUsersEmails() {
         List<User> all = Lists.newArrayList(userRepository.findAll());
-        /*if (authenticationService.getAuthenticatedUser() != null) {
-            all.remove(authenticationService.getAuthenticatedUser());
-        }*/
+        if (authenticationService.getAuthenticatedUser() != null) {
+            String email = authenticationService.getAuthenticatedUser().getEmail();
+            return all.stream().map(user -> user.getEmail()).filter(e -> !e.equals(email)).collect(Collectors.toList());
+        }
         return all.stream().map(user -> user.getEmail()).collect(Collectors.toList());
     }
 }
