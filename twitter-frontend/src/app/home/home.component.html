@@ -26,5 +26,6 @@
     </div>
   </div>
 
-  <ngb-pagination [collectionSize]="10" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+  <ngb-pagination *ngIf="topTweets && topTweets.length>20" [collectionSize]="10" [(page)]="page"
+                  [boundaryLinks]="true"></ngb-pagination>
 </div>

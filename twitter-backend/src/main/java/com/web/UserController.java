@@ -41,6 +41,12 @@ public class UserController {
         return authenticationService.getAuthenticatedUser();
     }
 
+    @GetMapping("/id/{id}")
+    @ResponseBody
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
     @GetMapping("/all")
     @ResponseBody
     public List<String> getAllRegisteredUsersEmails() {

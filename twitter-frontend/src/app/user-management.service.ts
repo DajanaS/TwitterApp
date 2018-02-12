@@ -31,6 +31,10 @@ export class UserManagementService {
     return this.http.get<User>(this.api + 'users').pipe();
   }
 
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(this.api + 'users/id/' + id).pipe();
+  }
+
   getAllUsersEmails(): Observable<string[]> {
     return this.http.get<string[]>(this.api + 'users/all').pipe();
   }

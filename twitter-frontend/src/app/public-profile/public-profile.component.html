@@ -1,3 +1,114 @@
-<p>
-  Information will be shown for user with id: {{id}}
-</p>
+<ngb-tabset justify="justified" activeId="profile_tab">
+  <ngb-tab disabled="true">
+    <ng-template ngbTabTitle>
+      <a routerLink="/nav">Home</a>
+    </ng-template>
+  </ngb-tab>
+
+
+  <ngb-tab title={{currentUser.name}} id="profile_tab">
+    <ng-template ngbTabContent>
+
+      <div *ngIf="currentUser" class="row">
+
+        <div id="profileInfo" class="col-sm-4">
+          <div id="nov">
+            <img id="profile" style="width:225px; height:225px;" src={{currentUser.avatar}}/>
+            <h4>{{currentUser.name}}</h4>
+            <h6>{{currentUser.birth | date}}</h6>
+
+            <div style="display:flex;justify-content: center;">
+              <ngb-rating [(rate)]="currentRate"></ngb-rating>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ako go sledi da mu se prikaze sledniot div, inaku: "You must follow this user to see their tweets." i kopche 'Follow' -->
+
+        <div *ngIf="tweets" class="col-sm-4">
+          <div *ngIf="tweets.length===0">
+            <div class="card" style="border:none;">
+              <div class="card-body">
+                This user has not published any tweets yet.
+              </div>
+            </div>
+          </div>
+          <div class="card" *ngFor="let tweet of tweets">
+            <h4 class="card-title">{{tweet.author.name}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
+            <p class="card-text">{{tweet.content}}</p>
+            <div class="row" style="padding: 0 10% 0 5%;">
+              <div class="col">
+                <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
+                  src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
+                <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
+                  src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
+              </div>
+              <div class="col">
+                <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div style="border-left:#99A3A4 solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
+            <ul id="followers" class="list-group list-group-flush">
+              <li class="list-group-item"><h4 style="color: royalblue;">Followers (5)</h4></li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Drug ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Treto ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Chetvrto imeeeee
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Pettooooooooooooooo
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Shesto ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Edno ime
+              </li>
+            </ul>
+          </div>
+          <div style="border-left:royalblue solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
+            <ul id="following" class="list-group list-group-flush">
+              <li class="list-group-item"><h4 style="color: dimgray;">Following (6)</h4></li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Edno ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Drugo ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Treto ime
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Chetvrto imeeeee
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-female.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Pettoooooooooooooooo
+              </li>
+              <li class="list-group-item"><img src="../../assets/img/avatar-male.png"
+                                               style="width:25px;height: 25px; margin-right:5%;"/>Shesto ime
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </ng-template>
+  </ngb-tab>
+
+
+  <ngb-tab disabled="true">
+    <ng-template ngbTabTitle>
+      <a routerLink="/logout">Logout</a>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

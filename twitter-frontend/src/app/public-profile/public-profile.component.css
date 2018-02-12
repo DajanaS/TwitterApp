@@ -1,0 +1,26 @@
+.card {
+  margin: 5% auto;
+  border: cornflowerblue solid 2px;
+  padding: 5%;
+  border-radius: 15px;
+}
+
+ul {
+  height: 250px;
+  overflow-y: scroll;
+}
+
+#profile {
+  display: block;
+  margin: 5% auto auto auto;
+}
+
+#profileInfo h4, #profileInfo h6 {
+  text-align: center;
+}
+
+#nov {
+  margin: 5%;
+  padding-bottom: 5%;
+  border-right: #99A3A4 solid 2px;
+}

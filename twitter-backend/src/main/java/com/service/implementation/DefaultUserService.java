@@ -65,4 +65,9 @@ public class DefaultUserService implements UserService {
         if (user != null) return user.getId();
         else return Long.valueOf(-1);
     }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.getUserById(id);
+    }
 }
