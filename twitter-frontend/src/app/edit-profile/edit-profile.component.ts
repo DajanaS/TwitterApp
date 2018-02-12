@@ -41,7 +41,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
         <div class="form-group">
           <label for="email">Email address</label> <input type="email" class="form-control" id="email"
-                                                          formControlName="email" placeholder="example@domain.com" required>
+                                                          [(ngModel)]="newEmail" formControlName="email"
+                                                          placeholder="example@domain.com" required>
         </div>
         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
           <div *ngIf="email.errors.required">
@@ -50,6 +51,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
           <div *ngIf="email.errors.email">
             Not a valid e-mail format.
           </div>
+        </div>
+        <div *ngIf="emailTaken && newEmail===invalidEmail" class="alert alert-danger">
+          Sorry, the email is already taken.
         </div>
 
         <div class="form-group">
@@ -95,6 +99,9 @@ export class EditProfileComponent implements OnInit {
 
   userForm: FormGroup;
   userEdited: User;
+  emailTaken = false;
+  invalidEmail = '';
+  newEmail;
 
   constructor(private fb: FormBuilder, public activeModal: NgbActiveModal,
               private userService: UserManagementService) {
@@ -103,6 +110,7 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     this.revert();
+    this.newEmail = this.oldEmail;
   }
 
   createForm() {
@@ -144,10 +152,15 @@ export class EditProfileComponent implements OnInit {
     updatedUser.setAvatar(this.avatar); // for avatar -> Upload button, when using check if it is not available, then use the default
     updatedUser.setId(this.id);
     this.userService.editUser(updatedUser).subscribe(user => {
-      this.userEdited = user;
-      this.userService.profileDataChanged(this.userEdited);
+      if (user != null) {
+        this.userEdited = user;
+        this.userService.profileDataChanged(this.userEdited);
+        this.activeModal.close();
+      } else {
+        this.emailTaken = true;
+        this.invalidEmail = formModel.email as string;
+      }
     });
-    this.activeModal.close();
   }
 
   get name() {
