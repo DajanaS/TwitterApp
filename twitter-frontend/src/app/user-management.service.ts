@@ -24,7 +24,7 @@ export class UserManagementService {
   }
 
   addUser(user: User) {
-    return this.http.post(this.api + 'users', user).map((res: Response) => res.json());
+    return this.http.post(this.api + 'users', user).pipe();
   }
 
   editUser(user: User): Observable<User> {

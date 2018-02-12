@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="authenticatedUser" class="row">
 
   <div id="profileInfo" class="col-sm-4">
     <div id="nov">
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="col-sm-4">
+  <div *ngIf="tweets" class="col-sm-4">
     <div *ngIf="tweets.length===0">
       <div class="card" style="border:none;">
         <div class="card-body">

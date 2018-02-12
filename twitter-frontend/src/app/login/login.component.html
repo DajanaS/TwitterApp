@@ -22,10 +22,10 @@
 
     <div class="row">
       <div class="col" style="float:left">
-        <a routerLink="/register" class="nav-link" href="">Register here</a>
+        <a routerLink="/register" class="nav-link">Register here</a>
       </div>
       <div class="col">
-        <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid" class="btn btn-default" style="float:right">Login</button>
+        <button type="button" (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-default" style="float:right">Login</button>
       </div>
     </div>
 
