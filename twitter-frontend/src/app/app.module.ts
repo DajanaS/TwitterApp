@@ -18,6 +18,7 @@ import {TweetManagementService} from './tweet-management.service';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import {AuthGuard} from './auth.guard';
 import {LikeManagementService} from './like-management.service';
+import { PublicProfileComponent } from './public-profile/public-profile.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {LikeManagementService} from './like-management.service';
     UserComponent,
     LogoutComponent,
     PublishTweetComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    PublicProfileComponent
   ],
   imports: [
     BrowserModule,

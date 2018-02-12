@@ -97,7 +97,7 @@ export class EditProfileComponent implements OnInit {
   userEdited: User;
 
   constructor(private fb: FormBuilder, public activeModal: NgbActiveModal,
-              private userService: UserManagementService, private route: ActivatedRoute) {
+              private userService: UserManagementService) {
     this.createForm();
   }
 
