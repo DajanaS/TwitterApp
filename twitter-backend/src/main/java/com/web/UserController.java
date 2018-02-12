@@ -2,7 +2,6 @@ package com.web;
 
 import com.authentication.AuthenticationService;
 import com.model.User;
-import com.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,33 +15,24 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private UserService userService;
-    private UserRepository userRepository;
     private AuthenticationService authenticationService;
 
     @Autowired
-    public UserController(UserService userService, AuthenticationService authenticationService, UserRepository userRepository) {
+    public UserController(UserService userService, AuthenticationService authenticationService) {
         this.userService = userService;
         this.authenticationService = authenticationService;
-        this.userRepository = userRepository;
     }
 
     @PostMapping
     @ResponseBody
-    public User saveUser(@RequestBody User user) {
-        User user1 = user;
-        if (user.getId() != null) {
-            user1 = userRepository.findOne(user.getId());
-            user1.setName(user.getName());
-            user1.setGender(user.getGender());
-            user1.setEmail(user.getEmail());
-            user1.setBirth(user.getBirth());
-            user1.setPassword(user.getPassword());
-            user1.setAvatar(user.getAvatar());
-            if (authenticationService.getAuthenticatedUser().getId().equals(user.getId())) {
-                authenticationService.updateUser(user1);
-            }
-        }
-        return userService.save(user1);
+    public boolean addNewUser(@RequestBody User user) {
+        return userService.save(user) == null;
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public User updateUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @GetMapping

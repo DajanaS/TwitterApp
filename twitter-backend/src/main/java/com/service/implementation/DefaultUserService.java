@@ -24,7 +24,29 @@ public class DefaultUserService implements UserService {
 
     @Override
     public User save(User user) {
-        return userRepository.save(user);
+        User user1 = user;
+        if (user.getId() != null) { // update user if already exists
+            user1 = userRepository.findOne(user.getId());
+            user1.setName(user.getName());
+            user1.setGender(user.getGender());
+            if (!user.getEmail().equals(user1.getEmail())) {
+                if (getAllRegisteredUsersEmails().stream().anyMatch(email -> user.getEmail().equals(email))) {
+                    return null; // duplicate emails not allowed
+                }
+                user1.setEmail(user.getEmail());
+            }
+            user1.setBirth(user.getBirth());
+            user1.setPassword(user.getPassword());
+            user1.setAvatar(user.getAvatar());
+            if (authenticationService.getAuthenticatedUser().getId().equals(user.getId())) {
+                authenticationService.updateUser(user1);
+            }
+            return userRepository.save(user1); // save the updated user
+        }
+        if (getAllRegisteredUsersEmails().stream().anyMatch(email -> user.getEmail().equals(email))) {
+            return null; // duplicate emails not allowed
+        }
+        return userRepository.save(user1); // save the new user
     }
 
     @Override

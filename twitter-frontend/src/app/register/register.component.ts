@@ -12,6 +12,9 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
+  emailTaken = false;
+  invalidEmail = '';
+  newEmail = '';
 
   constructor(private fb: FormBuilder, private router: Router,
               private userService: UserManagementService) {
@@ -35,8 +38,14 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     const user = this.prepareSaveUser();
     this.userService.addUser(user)
-      .subscribe(/* */); // addedUser => console.log(JSON.stringify(addedUser))
-    this.router.navigate(['/login']);
+      .subscribe(response => {
+        this.emailTaken = response;
+        if (this.emailTaken === false) {
+          this.router.navigate(['/login']);
+        } else {
+          this.invalidEmail = user.email;
+        }
+      });
   }
 
   prepareSaveUser(): User {

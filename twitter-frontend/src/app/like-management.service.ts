@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Like} from './model/like';
 import {HttpClient} from '@angular/common/http';
-import {User} from './model/user';
-import {Tweet} from './model/tweet';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()

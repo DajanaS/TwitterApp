@@ -19,16 +19,20 @@ export class UserManagementService {
     this.profileDataChangedSource.next(user);
   }
 
-  getAllUsersEmails(): Observable<string[]> {
-    return this.http.get<string[]>(this.api + 'users/all').pipe();
-  }
-
-  addUser(user: User) {
-    return this.http.post(this.api + 'users', user).pipe();
+  addUser(user: User): Observable<boolean> {
+    return this.http.post<boolean>(this.api + 'users', user).pipe();
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.post<User>(this.api + 'users', user).pipe();
+    return this.http.post<User>(this.api + 'users/update', user).pipe();
+  }
+
+  getAuthenticatedUser(): Observable<User> {
+    return this.http.get<User>(this.api + 'users').pipe();
+  }
+
+  getAllUsersEmails(): Observable<string[]> {
+    return this.http.get<string[]>(this.api + 'users/all').pipe();
   }
 
   getUserByEmail(email): Observable<number> {
@@ -41,9 +45,5 @@ export class UserManagementService {
 
   logOutUser(email: string): Observable<boolean> {
     return this.http.post<boolean>(this.api + 'users/logout', email).pipe();
-  }
-
-  getAuthenticatedUser(): Observable<User> {
-    return this.http.get<User>(this.api + 'users').pipe();
   }
 }
