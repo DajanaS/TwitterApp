@@ -33,7 +33,6 @@ export class NavigationComponent implements OnInit {
       .subscribe(id => {
         if (id === -1) {
           this.noUserFound = true;
-          alert('nouserfound' + this.noUserFound);
         } else {
           this.router.navigate(['/profile/' + id]);
         }
