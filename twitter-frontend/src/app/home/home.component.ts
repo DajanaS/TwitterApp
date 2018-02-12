@@ -12,7 +12,6 @@ import {Like} from '../model/like';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  currentRate = 5;
   page = 1;
   topTweets: Tweet[];
   currentUser: User;

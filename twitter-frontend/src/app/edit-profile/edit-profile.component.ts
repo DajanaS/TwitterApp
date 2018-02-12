@@ -19,7 +19,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
         <div class="form-group">
           <label for="fullName">Full name</label> <input type="text" class="form-control" id="fullName"
-                                                         formControlName="name" placeholder="Full Name" (click)="onSubmit()" required>
+                                                         formControlName="name" placeholder="Full Name" required>
         </div>
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
           <div *ngIf="name.errors.required">

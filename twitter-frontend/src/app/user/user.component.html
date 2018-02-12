@@ -21,6 +21,13 @@
   </div>
 
   <div class="col-sm-4">
+    <div *ngIf="tweets.length===0">
+      <div class="card" style="border:none;">
+        <div class="card-body">
+          You have no tweets yet. Click on "Tweet a new message".
+        </div>
+      </div>
+    </div>
     <div class="card" *ngFor="let tweet of tweets">
       <h4 class="card-title">{{this.authenticatedUser.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
