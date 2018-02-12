@@ -36,4 +36,11 @@ public class DefaultUserService implements UserService {
         }
         return all.stream().map(user -> user.getEmail()).collect(Collectors.toList());
     }
+
+    @Override
+    public Long getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        if (user != null) return user.getId();
+        else return Long.valueOf(-1);
+    }
 }

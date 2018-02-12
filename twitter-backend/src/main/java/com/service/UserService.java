@@ -8,4 +8,6 @@ public interface UserService {
     User save(User user);
 
     List<String> getAllRegisteredUsersEmails();
+
+    Long getUserByEmail(String email);
 }

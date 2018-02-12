@@ -3,7 +3,6 @@ import {User} from './model/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class UserManagementService {
@@ -30,6 +29,10 @@ export class UserManagementService {
 
   editUser(user: User): Observable<User> {
     return this.http.post<User>(this.api + 'users', user).pipe();
+  }
+
+  getUserByEmail(email): Observable<number> {
+    return this.http.get<number>(this.api + 'users/email?email=' + email).pipe();
   }
 
   authenticateUser(email: string, password: string): Observable<boolean> {

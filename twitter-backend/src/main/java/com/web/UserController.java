@@ -57,6 +57,12 @@ public class UserController {
         return userService.getAllRegisteredUsersEmails();
     }
 
+    @GetMapping("/email")
+    @ResponseBody
+    public long getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
+    }
+
     @PostMapping
     @ResponseBody
     @RequestMapping("/login")

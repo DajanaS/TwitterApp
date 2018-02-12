@@ -9,6 +9,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/merge';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {UserManagementService} from '../user-management.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -18,8 +19,9 @@ import {UserManagementService} from '../user-management.service';
 export class NavigationComponent implements OnInit {
   model: NgbDateStruct;
   emails: string[];
+  noUserFound = false;
 
-  constructor(private userService: UserManagementService) {
+  constructor(private userService: UserManagementService, private router: Router) {
   }
 
   ngOnInit() {
@@ -27,7 +29,15 @@ export class NavigationComponent implements OnInit {
   }
 
   onSubmit() {
-    // search user and get one (his ID) by email, post req send 'model' as parameter
+    this.userService.getUserByEmail(this.model)
+      .subscribe(id => {
+        if (id === -1) {
+          this.noUserFound = true;
+          alert('nouserfound' + this.noUserFound);
+        } else {
+          this.router.navigate(['/profile/' + id]);
+        }
+      });
   }
 
   search = (text$: Observable<string>) =>
