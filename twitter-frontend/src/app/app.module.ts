@@ -15,10 +15,12 @@ import {LogoutComponent} from './logout/logout.component';
 import {UserManagementService} from './user-management.service';
 import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
 import {TweetManagementService} from './tweet-management.service';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {AuthGuard} from './auth.guard';
 import {LikeManagementService} from './like-management.service';
-import { PublicProfileComponent } from './public-profile/public-profile.component';
+import {PublicProfileComponent} from './public-profile/public-profile.component';
+import {AgePipe} from './pipes/age-pipe';
+import {MomentModule} from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
     LogoutComponent,
     PublishTweetComponent,
     EditProfileComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
+    AgePipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
     HttpClientModule,
     NgbModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
   ],
   entryComponents: [
     PublishTweetComponent, EditProfileComponent
