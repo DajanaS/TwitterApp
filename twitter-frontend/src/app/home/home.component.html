@@ -12,7 +12,7 @@
       <h4 class="card-title">{{tweet.author.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
-      <div class="row" style="padding: 0 10% 0 5%;">
+      <div class="row" style="padding: 0 10% 0 5%;"> <!--
         <div class="col">
           <a *ngIf="!currentUserLiked[i]" (click)="likeTweet(i)" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
@@ -21,11 +21,11 @@
         </div>
         <div class="col">
           <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
-        </div>
+        </div>  -->
       </div>
     </div>
   </div>
 
-  <ngb-pagination *ngIf="topTweets && topTweets.length>20" [collectionSize]="10" [(page)]="page"
-                  [boundaryLinks]="true"></ngb-pagination>
+  <ngb-pagination *ngIf="topTweets" [collectionSize]="totalTweets" [(page)]="page" [pageSize]="4"
+                  (pageChange)="pageChanged()" [boundaryLinks]="true"></ngb-pagination>
 </div>

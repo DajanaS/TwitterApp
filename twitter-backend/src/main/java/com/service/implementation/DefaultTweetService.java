@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import com.model.Tweet;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.repository.TweetRepository;
 import com.service.TweetService;
@@ -46,5 +48,16 @@ public class DefaultTweetService implements TweetService {
 
     private User findUserOfAuthenticatedPrincipal() {
         return authenticationService.getAuthenticatedUser();
+    }
+
+    @Override
+    public Page<Tweet> findAll(int page) {
+        return tweetRepository.findAll(new PageRequest(page - 1, 4));
+        // TODO: byAuthorIn method should be used after following is implemented
+    }
+
+    @Override
+    public int totalTweets() {
+        return tweetRepository.findAll().size();
     }
 }

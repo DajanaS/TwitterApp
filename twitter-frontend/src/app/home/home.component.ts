@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TweetManagementService} from '../tweet-management.service';
 import {Tweet} from '../model/tweet';
 import {LikeManagementService} from '../like-management.service';
@@ -17,26 +17,48 @@ export class HomeComponent implements OnInit {
   currentUser: User;
   currentUserLiked: boolean[];
   like: TweetLike;
+  totalTweets: number;
 
-  constructor(private tweetManagementService: TweetManagementService,
-              private likeManagementService: LikeManagementService,
-              private userManagementService: UserManagementService) { }
+  constructor(private tweetService: TweetManagementService,
+              private likeService: LikeManagementService,
+              private userService: UserManagementService) {
+  }
 
   ngOnInit() {
-    this.userManagementService.getAuthenticatedUser().subscribe(user => {
+    this.userService.getAuthenticatedUser().subscribe(user => {
       this.currentUser = user;
     });
-    this.loadTopTweets();
+    this.getAllTweets();
+    // TODO: should be updated by adding the id of the authUser, so that only tweets of the users they follow will be returned
+    this.getTotalTweets();
+
+    // this.loadTopTweets();
+  }
+
+  getAllTweets() {
+    this.tweetService.getAllTweets(this.page).subscribe(data => {
+      this.topTweets = data['content'];
+    }, (error) => {
+      console.log(error.error.message);
+    });
+  }
+
+  pageChanged() {
+    this.getAllTweets();
+  }
+
+  getTotalTweets() {
+    this.tweetService.getTotalTweets().subscribe(total => this.totalTweets = total);
   }
 
   loadTopTweets() {
-    this.tweetManagementService.getTopTweets().subscribe(tweets => {
+    this.tweetService.getTopTweets().subscribe(tweets => {
       this.topTweets = tweets;
       let index = 0;
       this.currentUserLiked = [];
       this.currentUserLiked.length = this.topTweets.length;
       for (const tweet of this.topTweets) {
-        this.likeManagementService.getLikesByTweet(tweet.id).subscribe(likes => {
+        this.likeService.getLikesByTweet(tweet.id).subscribe(likes => {
           console.log('Reading like with id: ' + tweet.id + ' from user with name: ' + this.currentUser.name);
           if (likes.length === 0) {
             tweet.likes = 0;
@@ -58,14 +80,11 @@ export class HomeComponent implements OnInit {
   }
 
   likeTweet(likedTweetIndex: number) {
-
     console.log('Liked tweet index: ' + likedTweetIndex);
-      const likedTweetId = this.topTweets[likedTweetIndex].id;
-      this.likeManagementService.addLike(likedTweetId).subscribe(like => {
-        this.like = like;
-        this.likeManagementService.newLikedAdded(this.like);
-      });
-
+    const likedTweetId = this.topTweets[likedTweetIndex].id;
+    this.likeService.addLike(likedTweetId).subscribe(like => {
+      this.like = like;
+      this.likeService.newLikedAdded(this.like);
+    });
   }
-
 }
