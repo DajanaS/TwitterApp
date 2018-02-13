@@ -14,7 +14,7 @@
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!currentUserLiked[i]" class="card-link" style="float:left"><img
+          <a *ngIf="!currentUserLiked[i]" (click)="likeTweet(i)" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
           <a *ngIf="currentUserLiked[i]" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>

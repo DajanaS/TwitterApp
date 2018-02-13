@@ -2,47 +2,47 @@ package com.service.implementation;
 
 import com.authentication.AuthenticationService;
 import com.google.common.collect.Lists;
-import com.model.Like;
+import com.model.TweetLike;
 import com.model.Tweet;
 import com.model.User;
-import com.repository.LikeRepository;
+import com.repository.TweetLikeRepository;
 import com.repository.TweetRepository;
-import com.service.LikeService;
+import com.service.TweetLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DefaultLikeService implements LikeService {
+public class DefaultTweetLikeService implements TweetLikeService {
 
-    private LikeRepository likeRepository;
+    private TweetLikeRepository likeRepository;
     private TweetRepository tweetRepository;
     private AuthenticationService authenticationService;
 
     @Autowired
-    public DefaultLikeService(LikeRepository likeRepository, TweetRepository tweetRepository, AuthenticationService authenticationService) {
+    public DefaultTweetLikeService(TweetLikeRepository likeRepository, TweetRepository tweetRepository, AuthenticationService authenticationService) {
         this.likeRepository = likeRepository;
         this.tweetRepository = tweetRepository;
         this.authenticationService = authenticationService;
     }
 
     @Override
-    public List<Like> getLikesByTweet(Long id) {
+    public List<TweetLike> getTweetLikesByTweet(Long id) {
         return Lists.newArrayList(likeRepository.findAllByLikedTweet(id));
     }
 
     @Override
-    public List<Like> getLikesByUser(Long id) {
+    public List<TweetLike> getTweetLikesByUser(Long id) {
         return Lists.newArrayList(likeRepository.findAllByLikeOwner(id));
     }
 
     @Override
-    public Like save(Long likedTweetId) {
+    public TweetLike save(Long likedTweetId) {
         User likeOwner = findUserOfAuthenticatedPrincipal();
         if (likeOwner != null) {
             Tweet likedTweet = tweetRepository.findOne(likedTweetId);
-            Like like = new Like();
+            TweetLike like = new TweetLike();
             like.setLikeOwner(likeOwner);
             like.setLikedTweet(likedTweet);
             return likeRepository.save(like);

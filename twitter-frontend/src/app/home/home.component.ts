@@ -4,7 +4,7 @@ import {Tweet} from '../model/tweet';
 import {LikeManagementService} from '../like-management.service';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
-import {Like} from '../model/like';
+import {TweetLike} from '../model/tweetLike';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   topTweets: Tweet[];
   currentUser: User;
   currentUserLiked: boolean[];
-  like: Like;
+  like: TweetLike;
 
   constructor(private tweetManagementService: TweetManagementService,
               private likeManagementService: LikeManagementService,
@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
       this.currentUserLiked.length = this.topTweets.length;
       for (const tweet of this.topTweets) {
         this.likeManagementService.getLikesByTweet(tweet.id).subscribe(likes => {
+          console.log('Reading like with id: ' + tweet.id + ' from user with name: ' + this.currentUser.name);
           if (likes.length === 0) {
             tweet.likes = 0;
             this.currentUserLiked[index] = false;
@@ -57,14 +58,14 @@ export class HomeComponent implements OnInit {
   }
 
   likeTweet(likedTweetIndex: number) {
-    /*
+
     console.log('Liked tweet index: ' + likedTweetIndex);
       const likedTweetId = this.topTweets[likedTweetIndex].id;
       this.likeManagementService.addLike(likedTweetId).subscribe(like => {
         this.like = like;
         this.likeManagementService.newLikedAdded(this.like);
       });
-     */
+
   }
 
 }

@@ -1,7 +1,7 @@
 import {User} from './user';
 import {Tweet} from './tweet';
 
-export class Like {
+export class TweetLike {
   id: number;
   likeOwner: User;
   likedTweet: Tweet;

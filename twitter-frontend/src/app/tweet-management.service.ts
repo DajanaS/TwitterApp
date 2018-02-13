@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Tweet} from './model/tweet';
 import {Subject} from 'rxjs/Subject';
-import {Like} from './model/like';
 
 @Injectable()
 export class TweetManagementService {

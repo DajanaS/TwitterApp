@@ -3,7 +3,7 @@ package com.model;
 import javax.persistence.*;
 
 @Entity
-public class Like {
+public class TweetLike {
 
     @Id
     @GeneratedValue
