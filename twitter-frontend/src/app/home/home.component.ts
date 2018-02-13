@@ -38,22 +38,6 @@ export class HomeComponent implements OnInit {
   getAllTweets() {
     this.tweetService.getAllTweets(this.page).subscribe(data => {
       this.topTweets = data['content'];
-    }, (error) => {
-      console.log(error.error.message);
-    });
-  }
-
-  pageChanged() {
-    this.getAllTweets();
-  }
-
-  getTotalTweets() {
-    this.tweetService.getTotalTweets().subscribe(total => this.totalTweets = total);
-  }
-
-  loadTopTweets() {
-    this.tweetService.getTopTweets().subscribe(tweets => {
-      this.topTweets = tweets;
       let index = 0;
       this.currentUserLiked = [];
       this.currentUserLiked.length = this.topTweets.length;
@@ -76,7 +60,17 @@ export class HomeComponent implements OnInit {
           }
         });
       }
+    }, (error) => {
+      console.log(error.error.message);
     });
+  }
+
+  pageChanged() {
+    this.getAllTweets();
+  }
+
+  getTotalTweets() {
+    this.tweetService.getTotalTweets().subscribe(total => this.totalTweets = total);
   }
 
   likeTweet(likedTweetIndex: number) {

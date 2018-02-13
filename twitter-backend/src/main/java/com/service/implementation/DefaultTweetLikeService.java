@@ -29,7 +29,8 @@ public class DefaultTweetLikeService implements TweetLikeService {
 
     @Override
     public List<TweetLike> getTweetLikesByTweet(Long id) {
-        return Lists.newArrayList(likeRepository.findAllByLikedTweet(id));
+        Tweet likedTweet = tweetRepository.findOne(id);
+        return Lists.newArrayList(likeRepository.findAllByLikedTweet(likedTweet));
     }
 
     @Override

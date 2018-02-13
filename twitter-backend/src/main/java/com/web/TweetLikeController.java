@@ -28,8 +28,7 @@ public class TweetLikeController {
 
     @GetMapping("/byTweet")
     @ResponseBody
-    @RequestMapping(value = "/{id}")
-    public List<TweetLike> getLikesByTweet(@PathVariable("id") Long id) {
+    public List<TweetLike> getLikesByTweet(@RequestParam Long id) {
         System.out.println("Get likes for tweet with id: " + id);
         return likeService.getTweetLikesByTweet(id);
     }

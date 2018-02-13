@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
 import {Router} from '@angular/router';
+import {HomeComponent} from '../home/home.component';
 
 @Component({
   selector: 'app-logout',
