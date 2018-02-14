@@ -62,7 +62,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
         <div class="form-group">
           <label for="password">Enter your new password</label> <input type="password" class="form-control" id="password"
-                                                                       formControlName="password">
+                                                                       [(ngModel)]="passwordModel" formControlName="password">
         </div>
         <div class="alert alert-warning">
           The new password won't be saved if the old password entered is not correct.
@@ -73,6 +73,19 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
             character or numeral.
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="repeatPassword">Repeat new password</label> <input type="password" class="form-control"
+                                                                         id="repeatPassword"
+                                                                         formControlName="repeatPassword"
+                                                                         [(ngModel)]="repeatPasswordModel"
+                                                                         (keyup.enter)="onSubmit()">
+        </div>
+        <div *ngIf="(repeatPassword.dirty || repeatPassword.touched) && repeatPasswordModel !== passwordModel"
+             class="alert alert-warning">
+          The value is not equal with new password field's value.
+        </div>
+
       </form>
     </div>
     <div class="row modal-footer">
@@ -104,6 +117,8 @@ export class EditProfileComponent implements OnInit {
   emailTaken = false;
   invalidEmail = '';
   newEmail;
+  passwordModel = '';
+  repeatPasswordModel = '';
 
   constructor(private fb: FormBuilder, public activeModal: NgbActiveModal,
               private userService: UserManagementService) {
@@ -123,6 +138,7 @@ export class EditProfileComponent implements OnInit {
       oldPassword: [],
       password: ['', [Validators.pattern
       (/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)]],
+      repeatPassword: []
     });
   }
 
@@ -132,7 +148,8 @@ export class EditProfileComponent implements OnInit {
       gender: this.oldGender,
       email: this.oldEmail,
       oldPassword: '',
-      password: ''
+      password: '',
+      repeatPassword: ''
     });
   }
 
@@ -183,5 +200,9 @@ export class EditProfileComponent implements OnInit {
 
   get oldPassword() {
     return this.userForm.get('oldPassword');
+  }
+
+  get repeatPassword() {
+    return this.userForm.get('repeatPassword');
   }
 }
