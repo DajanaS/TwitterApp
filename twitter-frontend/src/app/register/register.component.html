@@ -73,7 +73,7 @@
     <div class="form-group">
       <label for="password">Password</label> <input type="password" class="form-control" id="password"
                                                     formControlName="password" placeholder="Strong&Password123"
-                                                    (keyup.enter)="onSubmit()"
+                                                    [(ngModel)]="passwordModel"
                                                     required>
     </div>
     <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
@@ -84,6 +84,25 @@
         The password must be at least 8 characters long and contain uppercase(s), lowercase(s) and at least one special
         character or numeral.
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="repeatPassword">Repeat password</label> <input type="password" class="form-control"
+                                                                 id="repeatPassword"
+                                                                 formControlName="repeatPassword"
+                                                                 placeholder="Strong&Password123"
+                                                                 [(ngModel)]="repeatPasswordModel"
+                                                                 (keyup.enter)="onSubmit()"
+                                                                 required>
+    </div>
+    <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)" class="alert alert-danger">
+      <div *ngIf="repeatPassword.errors.required">
+        This field is required.
+      </div>
+    </div>
+    <div *ngIf="(repeatPassword.dirty || repeatPassword.touched) && repeatPasswordModel !== passwordModel"
+         class="alert alert-warning">
+      The value is not equal with password field's value.
     </div>
 
     <div class="row">

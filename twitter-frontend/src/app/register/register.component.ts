@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
   emailTaken = false;
   invalidEmail = '';
   newEmail = '';
+  passwordModel = '';
+  repeatPasswordModel = '';
 
   constructor(private fb: FormBuilder, private router: Router,
               private userService: UserManagementService) {
@@ -30,7 +32,8 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       birth: ['', [Validators.required]], // Validators.pattern(/^\d{2}-\d{2}-\d{4}$/)
       password: ['', [Validators.required, Validators.pattern
-      (/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)]]
+      (/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)]],
+      repeatPassword: ['', [Validators.required]]
     });
   }
 
@@ -64,7 +67,8 @@ export class RegisterComponent implements OnInit {
       gender: '',
       email: '',
       birth: '',
-      password: ''
+      password: '',
+      repeatPassword: ''
     });
   }
 
@@ -86,5 +90,9 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.userForm.get('password');
+  }
+
+  get repeatPassword() {
+    return this.userForm.get('repeatPassword');
   }
 }
