@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="card" *ngFor="let tweet of tweets">
-      <h4 class="card-title">{{this.authenticatedUser.name}}</h4>
+      <h4 class="card-title">{{authenticatedUser.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">

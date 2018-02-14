@@ -14,7 +14,8 @@ import {Router} from '@angular/router';
       </button>
     </div>
     <div class="modal-body">
-      <textarea [(ngModel)]="value" class="form-control" id="tweet" placeholder="Enter your text here" (keyup.enter)="onSubmit()" required></textarea>
+      <textarea [(ngModel)]="value" class="form-control" id="tweet" placeholder="Enter your text here" (keyup.enter)="onSubmit()"
+                required></textarea>
     </div>
     <div class="modal-footer">
       <button *ngIf="value" type="button" (click)="onSubmit()" class="btn btn-primary">Publish</button>
@@ -46,5 +47,4 @@ export class PublishTweetComponent implements OnInit {
     this.activeModal.close();
     this.router.navigate(['/nav']);
   }
-
 }

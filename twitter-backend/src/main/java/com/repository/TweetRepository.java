@@ -2,7 +2,6 @@ package com.repository;
 
 import com.model.Tweet;
 import com.model.User;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;

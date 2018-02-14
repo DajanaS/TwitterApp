@@ -24,6 +24,9 @@ export class PublicProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.authenticatedUser = user;
+    });
     this.route.params.subscribe(params => {
       this.id = +params['id'];
       this.userService.getUserById(this.id).subscribe(user => {
@@ -32,5 +35,4 @@ export class PublicProfileComponent implements OnInit {
       });
     });
   }
-
 }

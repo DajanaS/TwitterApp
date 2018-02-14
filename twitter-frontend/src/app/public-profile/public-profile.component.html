@@ -15,7 +15,7 @@
           <div id="nov">
             <img id="profile" style="width:225px; height:225px;" src={{currentUser.avatar}}/>
             <h4>{{currentUser.name}}</h4>
-            <h6>{{currentUser.birth | date}}</h6>
+            <h6>{{currentUser.birth | age}}</h6>
 
             <div style="display:flex;justify-content: center;">
               <ngb-rating [(rate)]="currentRate"></ngb-rating>
@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <!-- Ako go sledi da mu se prikaze sledniot div, inaku: "You must follow this user to see their tweets." i kopche 'Follow' -->
+        <!-- TODO: Ako go sledi da mu se prikaze sledniot div, inaku: "You must follow this user to see their tweets." i kopche 'Follow' -->
 
         <div *ngIf="tweets" class="col-sm-4">
           <div *ngIf="tweets.length===0">

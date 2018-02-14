@@ -1,11 +1,11 @@
 package com.web;
 
 import com.model.Tweet;
+import com.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.service.TweetService;
 
 import java.util.List;
 
@@ -49,5 +49,4 @@ public class TweetController {
     public int totalTweets() {
         return tweetService.totalTweets();
     }
-
 }

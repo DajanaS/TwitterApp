@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {TweetLike} from './model/tweetLike';
 import {HttpClient} from '@angular/common/http';
@@ -10,7 +10,8 @@ export class LikeManagementService {
   private newLikeAddedSource = new Subject<TweetLike>();
   newLikeAdded$ = this.newLikeAddedSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   newLikedAdded(like: TweetLike) {
     this.newLikeAddedSource.next(like);

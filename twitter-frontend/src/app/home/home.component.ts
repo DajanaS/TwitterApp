@@ -29,10 +29,8 @@ export class HomeComponent implements OnInit {
       this.currentUser = user;
     });
     this.getAllTweets();
-    // TODO: should be updated by adding the id of the authUser, so that only tweets of the users they follow will be returned
+    // TODO: these 2 should be updated by adding the authUser.id, so that only tweets of the users they follow will be returned
     this.getTotalTweets();
-
-    // this.loadTopTweets();
   }
 
   getAllTweets() {

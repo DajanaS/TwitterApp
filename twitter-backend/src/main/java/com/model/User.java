@@ -42,7 +42,8 @@ public class User {
     @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER)
     private List<User> followers;
 
-    public User(){}
+    public User() {
+    }
 
     public User(String name, String gender, String email, Date birth, String password, String avatar) {
         this.name = name;

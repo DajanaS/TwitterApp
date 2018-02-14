@@ -17,7 +17,8 @@
 
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" placeholder="Password" (keyup.enter)="onSubmit()" required>
+      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
+             placeholder="Password" (keyup.enter)="onSubmit()" required>
     </div>
 
     <div class="row">
@@ -25,7 +26,9 @@
         <a routerLink="/register" class="nav-link">Register here</a>
       </div>
       <div class="col">
-        <button type="button" (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-default" style="float:right">Login</button>
+        <button type="button" (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-default"
+                style="float:right">Login
+        </button>
       </div>
     </div>
 

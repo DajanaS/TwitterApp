@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 
 @Component({

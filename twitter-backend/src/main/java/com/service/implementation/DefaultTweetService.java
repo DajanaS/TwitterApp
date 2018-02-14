@@ -4,12 +4,12 @@ import com.authentication.AuthenticationService;
 import com.google.common.collect.Lists;
 import com.model.Tweet;
 import com.model.User;
+import com.repository.TweetRepository;
+import com.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import com.repository.TweetRepository;
-import com.service.TweetService;
 
 import java.util.List;
 
