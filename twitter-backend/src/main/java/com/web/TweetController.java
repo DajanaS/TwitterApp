@@ -49,4 +49,10 @@ public class TweetController {
     public int totalTweets() {
         return tweetService.totalTweets();
     }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public boolean deleteTweet(@RequestBody Long id) {
+        return this.tweetService.deleteTweet(id);
+    }
 }

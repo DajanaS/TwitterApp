@@ -60,4 +60,10 @@ public class DefaultTweetService implements TweetService {
     public int totalTweets() {
         return tweetRepository.findAll().size();
     }
+
+    @Override
+    public boolean deleteTweet(Long id) {
+        tweetRepository.delete(tweetRepository.getTweetById(id));
+        return true;
+    }
 }

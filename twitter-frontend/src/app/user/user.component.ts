@@ -6,6 +6,8 @@ import {User} from '../model/user';
 import {EditProfileComponent} from '../edit-profile/edit-profile.component';
 import {Tweet} from '../model/tweet';
 import {TweetManagementService} from '../tweet-management.service';
+import {DeleteTweetComponent} from '../delete-tweet/delete-tweet.component';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-user',
@@ -28,6 +30,9 @@ export class UserComponent implements OnInit {
       });
     userService.profileDataChanged$.subscribe(user => {
       this.authenticatedUser = user;
+    });
+    tweetService.tweetDeleted$.subscribe(id => {
+      this.tweetService.getTweets(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
     });
   }
 
@@ -52,5 +57,10 @@ export class UserComponent implements OnInit {
     modalRef.componentInstance.birth = this.authenticatedUser.birth;
     modalRef.componentInstance.newPassword = this.authenticatedUser.password;
     modalRef.componentInstance.avatar = this.authenticatedUser.avatar;
+  }
+
+  deleteTweet(id: number) {
+    const modalRef = this.modalService.open(DeleteTweetComponent);
+    modalRef.componentInstance.tweetId = id;
   }
 }

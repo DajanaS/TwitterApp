@@ -35,12 +35,14 @@
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
           <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
-            src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
+            src="../../assets/img/star-icon-empty.png" style="width:25px; height:25px;"/></a>
           <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
+          <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
         </div>
         <div class="col">
-          <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
+          <button class="card-link" style="float:right; border:none; background:transparent;" (click)="deleteTweet(tweet.id)">
+            <img src="../../assets/img/bin-icon.png" style="width:25px; height:25px;"/></button>
         </div>
       </div>
     </div>

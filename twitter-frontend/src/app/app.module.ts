@@ -16,6 +16,7 @@ import {LogoutComponent} from './logout/logout.component';
 import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {PublicProfileComponent} from './public-profile/public-profile.component';
+import {DeleteTweetComponent} from './delete-tweet/delete-tweet.component';
 
 import {UserManagementService} from './user-management.service';
 import {TweetManagementService} from './tweet-management.service';
@@ -35,7 +36,8 @@ import {AgePipe} from './pipes/age-pipe';
     PublishTweetComponent,
     EditProfileComponent,
     PublicProfileComponent,
-    AgePipe
+    AgePipe,
+    DeleteTweetComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,7 @@ import {AgePipe} from './pipes/age-pipe';
     MomentModule
   ],
   entryComponents: [
-    PublishTweetComponent, EditProfileComponent
+    PublishTweetComponent, EditProfileComponent, DeleteTweetComponent
   ],
   providers: [UserManagementService, TweetManagementService, LikeManagementService, AuthGuard],
   bootstrap: [AppComponent]

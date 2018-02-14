@@ -8,13 +8,19 @@ import {Subject} from 'rxjs/Subject';
 export class TweetManagementService {
   api = 'http://localhost:8080/tweets';
   private newTweetPublishedSource = new Subject<Tweet>();
+  private tweetDeletedSource = new Subject<number>();
   newTweetPublished$ = this.newTweetPublishedSource.asObservable();
+  tweetDeleted$ = this.tweetDeletedSource.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
   newTweetPublished(tweet: Tweet) {
     this.newTweetPublishedSource.next(tweet);
+  }
+
+  tweetDeleted(id: number) {
+    this.tweetDeletedSource.next(id);
   }
 
   addTweet(content: string): Observable<Tweet> {
@@ -25,16 +31,15 @@ export class TweetManagementService {
     return this.http.get<Tweet[]>(this.api + '?id=' + id).pipe();
   }
 
-  getAllTweets(page: number) {
-    return this.http.get(this.api + '/all?page=' + page);
+  deleteTweet(id): Observable<boolean> {
+    return this.http.post<boolean>(this.api + '/delete', id).pipe();
   }
 
-  getTopTweets(): Observable<Tweet[]> {
-    return this.http.get<Tweet[]>(this.api + '/top').pipe();
+  getAllTweets(page: number) {
+    return this.http.get(this.api + '/all?page=' + page);
   }
 
   getTotalTweets(): Observable<number> {
     return this.http.get<number>(this.api + '/totalTweets').pipe();
   }
-
 }

@@ -25,7 +25,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./publish-tweet.component.css']
 })
 export class PublishTweetComponent implements OnInit {
-
   @Input() name;
   value = '';
   tweet: Tweet;

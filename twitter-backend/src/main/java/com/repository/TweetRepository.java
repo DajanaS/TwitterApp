@@ -14,4 +14,8 @@ public interface TweetRepository extends PagingAndSortingRepository<Tweet, Long>
     List<Tweet> findFirst5ByOrderByDateDesc();
 
     List<Tweet> findAll();
+
+    Tweet getTweetById(Long id);
+
+    void delete(Tweet tweet);
 }

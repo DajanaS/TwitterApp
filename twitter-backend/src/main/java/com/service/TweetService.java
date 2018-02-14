@@ -15,4 +15,6 @@ public interface TweetService {
     int totalTweets();
 
     Tweet save(String tweet);
+
+    boolean deleteTweet(Long id);
 }
