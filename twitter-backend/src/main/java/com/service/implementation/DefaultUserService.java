@@ -70,4 +70,11 @@ public class DefaultUserService implements UserService {
     public User getUserById(Long id) {
         return userRepository.getUserById(id);
     }
+
+    @Override
+    public User updateAvatar(Long userId, String avatarLocation) {
+        User exists = userRepository.findOne(userId);
+        exists.setAvatar(avatarLocation);
+        return userRepository.save(exists);
+    }
 }

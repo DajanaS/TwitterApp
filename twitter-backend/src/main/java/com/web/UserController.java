@@ -2,12 +2,15 @@ package com.web;
 
 import com.authentication.AuthenticationService;
 import com.model.User;
+import com.service.StorageService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.service.UserService;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @CrossOrigin
@@ -16,11 +19,13 @@ import java.util.List;
 public class UserController {
     private UserService userService;
     private AuthenticationService authenticationService;
+    private StorageService storageService;
 
     @Autowired
-    public UserController(UserService userService, AuthenticationService authenticationService) {
+    public UserController(UserService userService, AuthenticationService authenticationService, StorageService storageService) {
         this.userService = userService;
         this.authenticationService = authenticationService;
+        this.storageService = storageService;
     }
 
     @PostMapping
@@ -77,5 +82,11 @@ public class UserController {
     public static class LoginData {
         public String email;
         public String password;
+    }
+
+    @PostMapping("{userId}/upload/avatar")
+    public User updateAvatar(@PathVariable @NotNull Long userId, @RequestParam("avatar") MultipartFile avatar) {
+        String fileName = storageService.store(avatar);
+        return userService.updateAvatar(userId, fileName);
     }
 }

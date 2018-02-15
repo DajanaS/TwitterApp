@@ -12,4 +12,6 @@ public interface UserService {
     Long getUserByEmail(String email);
 
     User getUserById(Long id);
+
+    User updateAvatar(Long userId, String avatarLocation);
 }
