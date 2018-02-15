@@ -22,6 +22,14 @@ export class HomeComponent implements OnInit {
   constructor(private tweetService: TweetManagementService,
               private likeService: LikeManagementService,
               private userService: UserManagementService) {
+    likeService.newLikeAdded$.subscribe(like =>  {
+      this.getAllTweets();
+      this.getTotalTweets();
+    });
+    likeService.likeRemoved$.subscribe(tweetId => {
+      this.getAllTweets();
+      this.getTotalTweets();
+    });
   }
 
   ngOnInit() {
@@ -41,7 +49,6 @@ export class HomeComponent implements OnInit {
       this.currentUserLiked.length = this.topTweets.length;
       for (const tweet of this.topTweets) {
         this.likeService.getLikesByTweet(tweet.id).subscribe(likes => {
-          console.log('Reading like with id: ' + tweet.id + ' from user with name: ' + this.currentUser.name);
           if (likes.length === 0) {
             tweet.likes = 0;
             this.currentUserLiked[index] = false;
@@ -50,12 +57,13 @@ export class HomeComponent implements OnInit {
             for (const like of likes) {
               if (like.likeOwner.email === this.currentUser.email) {
                 this.currentUserLiked[index] = true;
+                break;
               } else {
                 this.currentUserLiked[index] = false;
               }
-              index++;
             }
           }
+          index++;
         });
       }
     }, (error) => {
@@ -71,12 +79,23 @@ export class HomeComponent implements OnInit {
     this.tweetService.getTotalTweets().subscribe(total => this.totalTweets = total);
   }
 
-  likeTweet(likedTweetIndex: number) {
-    console.log('Liked tweet index: ' + likedTweetIndex);
-    const likedTweetId = this.topTweets[likedTweetIndex].id;
-    this.likeService.addLike(likedTweetId).subscribe(like => {
-      this.like = like;
-      this.likeService.newLikedAdded(this.like);
-    });
+  likeTweet(tweetIndex: number) {
+    if (!this.currentUserLiked[tweetIndex]) {
+      const likedTweetId = this.topTweets[tweetIndex].id;
+      this.currentUserLiked[tweetIndex] = true;
+      this.likeService.addLike(likedTweetId).subscribe(like => {
+        this.like = like;
+        this.likeService.newLikedAdded(this.like);
+      });
+    } else {
+      this.likeService.removeLike(this.topTweets[tweetIndex].id).subscribe(resp => {
+        if (resp) {
+          this.likeService.likeRemoved(this.topTweets[tweetIndex].id);
+        }
+      });
+    }
   }
+
+
+
 }

@@ -6,9 +6,11 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LikeManagementService {
-  api = 'http://localhost:8080/';
+  api = 'http://localhost:8080/likes';
   private newLikeAddedSource = new Subject<TweetLike>();
+  private likeRemovedSource = new Subject<number>();
   newLikeAdded$ = this.newLikeAddedSource.asObservable();
+  likeRemoved$ = this.likeRemovedSource.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -18,12 +20,19 @@ export class LikeManagementService {
   }
 
   addLike(likedTweetId: number): Observable<TweetLike> {
-    return this.http.post<TweetLike>(this.api + 'likes', likedTweetId).pipe();
+    return this.http.post<TweetLike>(this.api, likedTweetId).pipe();
   }
 
   getLikesByTweet(tweetId: number): Observable<TweetLike[]> {
-    console.log('Get likes for tweet with id: ' + tweetId);
-    return this.http.get<TweetLike[]>(this.api + 'likes/byTweet?id=' + tweetId).pipe();
+    return this.http.get<TweetLike[]>(this.api + '/byTweet?id=' + tweetId).pipe();
+  }
+
+  removeLike(tweetId: number): Observable<boolean> {
+    return this.http.post<boolean>(this.api + '/remove', tweetId).pipe();
+  }
+
+  likeRemoved(tweetId: number) {
+    this.likeRemovedSource.next(tweetId);
   }
 
 }

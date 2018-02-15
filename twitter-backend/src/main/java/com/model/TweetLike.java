@@ -38,5 +38,4 @@ public class TweetLike {
     public void setLikedTweet(Tweet likedTweet) {
         this.likedTweet = likedTweet;
     }
-
 }

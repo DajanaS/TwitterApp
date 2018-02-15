@@ -42,6 +42,10 @@ public class User {
     @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER)
     private List<User> followers;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "likeOwner", fetch = FetchType.EAGER)
+    private List<TweetLike> likes;
+
     public User() {
     }
 
@@ -132,5 +136,13 @@ public class User {
 
     public void setFollowers(List<User> followers) {
         this.followers = followers;
+    }
+
+    public List<TweetLike> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<TweetLike> likes) {
+        this.likes = likes;
     }
 }

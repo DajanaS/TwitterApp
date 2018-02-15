@@ -1,7 +1,10 @@
 package com.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Tweet {
@@ -17,6 +20,10 @@ public class Tweet {
 
     @ManyToOne
     private User author;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "likedTweet", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<TweetLike> likes;
 
     public Long getId() {
         return id;
@@ -48,5 +55,13 @@ public class Tweet {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public List<TweetLike> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<TweetLike> likes) {
+        this.likes = likes;
     }
 }

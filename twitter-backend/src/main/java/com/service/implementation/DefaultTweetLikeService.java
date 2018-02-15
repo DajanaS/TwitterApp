@@ -11,6 +11,7 @@ import com.service.TweetLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,9 +47,47 @@ public class DefaultTweetLikeService implements TweetLikeService {
             TweetLike like = new TweetLike();
             like.setLikeOwner(likeOwner);
             like.setLikedTweet(likedTweet);
+            List<TweetLike> likes = likedTweet.getLikes();
+            if (likes == null) {
+                likes = new ArrayList<>();
+            }
+            likes.add(like);
+            likedTweet.setLikes(likes);
+            likes = likeOwner.getLikes();
+            if (likes == null) {
+                likes = new ArrayList<>();
+            }
+            likes.add(like);
+            likeOwner.setLikes(likes);
             return likeRepository.save(like);
         }
         return null;
+    }
+
+    @Override
+    public boolean remove(Long tweetId) {
+        Tweet likedTweet = tweetRepository.findOne(tweetId);
+        User likeOwner = findUserOfAuthenticatedPrincipal();
+
+        List<TweetLike> likes = likeRepository.findAllByLikedTweet(likedTweet);
+        TweetLike likeToRemove = null;
+        for (TweetLike tl : likes) {
+            if(tl.getLikeOwner().getEmail().equals(likeOwner.getEmail())) {
+                likeToRemove = tl;
+                break;
+            }
+        }
+
+        likes = likedTweet.getLikes();
+        likes.remove(likeToRemove);
+        likedTweet.setLikes(likes);
+
+        likes = likeOwner.getLikes();
+        likes.remove(likeToRemove);
+        likeOwner.setLikes(likes);
+
+        likeRepository.delete(likeToRemove.getId());
+        return true;
     }
 
     private User findUserOfAuthenticatedPrincipal() {

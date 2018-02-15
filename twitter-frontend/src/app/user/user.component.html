@@ -28,21 +28,21 @@
         </div>
       </div>
     </div>
-    <div class="card" *ngFor="let tweet of tweets">
+    <div class="card" *ngFor="let tweet of tweets; let indx = index">
       <h4 class="card-title">{{authenticatedUser.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
+          <a *ngIf="!liked[indx]" (click)="likeTweet(indx)" class="card-link" style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px; height:25px;"/></a>
-          <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
+          <a *ngIf="liked[indx]" (click)="likeTweet(indx)" class="card-link" style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
           <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
         </div>
         <div class="col">
           <button class="card-link" style="float:right; border:none; background:transparent;" (click)="deleteTweet(tweet.id)">
-            <img src="../../assets/img/bin-icon.png" style="width:25px; height:25px;"/></button>
+            <img src="../../assets/img/bin-icon.png" style="width:25px; height:25px; cursor: pointer;"/></button>
         </div>
       </div>
     </div>

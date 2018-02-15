@@ -11,4 +11,6 @@ public interface TweetLikeService {
     List<TweetLike> getTweetLikesByUser(Long id);
 
     TweetLike save(Long likedTweetId);
+
+    boolean remove(Long tweetId);
 }

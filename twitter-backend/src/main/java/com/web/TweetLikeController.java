@@ -22,14 +22,19 @@ public class TweetLikeController {
     @PostMapping
     @ResponseBody
     public TweetLike saveLike(@RequestBody Long likedTweetId) {
-        System.out.println("Saving like for tweet with id: " + likedTweetId);
         return likeService.save(likedTweetId);
+    }
+
+    @PostMapping("/remove")
+    @ResponseBody
+    public boolean removeLike(@RequestBody Long tweetId) {
+        return likeService.remove(tweetId);
     }
 
     @GetMapping("/byTweet")
     @ResponseBody
     public List<TweetLike> getLikesByTweet(@RequestParam Long id) {
-        System.out.println("Get likes for tweet with id: " + id);
         return likeService.getTweetLikesByTweet(id);
     }
+
 }
