@@ -17,6 +17,10 @@
       <div style="display:flex;justify-content: center; margin-top: 10%;">
         <button class="btn btn-lg btn-outline-primary" (click)="editProfile()">Edit your profile</button>
       </div>
+
+      <div style="display:flex;justify-content: center; margin-top: 10%;">
+        <button class="btn btn-lg btn-outline-primary" (click)="changeAvatar()">Change your avatar</button>
+      </div>
     </div>
   </div>
 
@@ -41,7 +45,8 @@
           <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
         </div>
         <div class="col">
-          <button class="card-link" style="float:right; border:none; background:transparent;" (click)="deleteTweet(tweet.id)">
+          <button class="card-link" style="float:right; border:none; background:transparent;"
+                  (click)="deleteTweet(tweet.id)">
             <img src="../../assets/img/bin-icon.png" style="width:25px; height:25px; cursor: pointer;"/></button>
         </div>
       </div>

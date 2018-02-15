@@ -23,6 +23,7 @@ import {TweetManagementService} from './tweet-management.service';
 import {LikeManagementService} from './like-management.service';
 import {AuthGuard} from './auth.guard';
 import {AgePipe} from './pipes/age-pipe';
+import {UploadAvatarComponent} from './upload-avatar/upload-avatar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {AgePipe} from './pipes/age-pipe';
     EditProfileComponent,
     PublicProfileComponent,
     AgePipe,
-    DeleteTweetComponent
+    DeleteTweetComponent,
+    UploadAvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import {AgePipe} from './pipes/age-pipe';
     MomentModule
   ],
   entryComponents: [
-    PublishTweetComponent, EditProfileComponent, DeleteTweetComponent
+    PublishTweetComponent, EditProfileComponent, DeleteTweetComponent, UploadAvatarComponent
   ],
   providers: [UserManagementService, TweetManagementService, LikeManagementService, AuthGuard],
   bootstrap: [AppComponent]

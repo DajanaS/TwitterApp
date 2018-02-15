@@ -7,9 +7,9 @@ import {EditProfileComponent} from '../edit-profile/edit-profile.component';
 import {Tweet} from '../model/tweet';
 import {TweetManagementService} from '../tweet-management.service';
 import {DeleteTweetComponent} from '../delete-tweet/delete-tweet.component';
-import {forEach} from '@angular/router/src/utils/collection';
 import {LikeManagementService} from '../like-management.service';
 import {TweetLike} from '../model/tweetLike';
+import {UploadAvatarComponent} from '../upload-avatar/upload-avatar.component';
 
 @Component({
   selector: 'app-user',
@@ -39,7 +39,7 @@ export class UserComponent implements OnInit {
     tweetService.tweetDeleted$.subscribe(id => {
       this.tweetService.getTweets(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
     });
-    likeService.newLikeAdded$.subscribe(like =>  {
+    likeService.newLikeAdded$.subscribe(like => {
       this.loadTweets();
     });
     likeService.likeRemoved$.subscribe(tweetId => {
@@ -120,5 +120,10 @@ export class UserComponent implements OnInit {
   deleteTweet(id: number) {
     const modalRef = this.modalService.open(DeleteTweetComponent);
     modalRef.componentInstance.tweetId = id;
+  }
+
+  changeAvatar() {
+    const modalRef = this.modalService.open(UploadAvatarComponent);
+    modalRef.componentInstance.userId = this.authenticatedUser.id;
   }
 }

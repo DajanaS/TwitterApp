@@ -50,4 +50,8 @@ export class UserManagementService {
   logOutUser(email: string): Observable<boolean> {
     return this.http.post<boolean>(this.api + '/logout', email).pipe();
   }
+
+  updateAvatar(formModel): Observable<User> {
+    return this.http.post<User>(this.api + '/1/upload/avatar', formModel).pipe();
+  }
 }

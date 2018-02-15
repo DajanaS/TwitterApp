@@ -74,7 +74,10 @@ public class DefaultUserService implements UserService {
     @Override
     public User updateAvatar(Long userId, String avatarLocation) {
         User exists = userRepository.findOne(userId);
-        exists.setAvatar(avatarLocation);
+        exists.setAvatar("http://localhost:8080/images/" + avatarLocation);
+        if (authenticationService.getAuthenticatedUser().getId().equals(exists.getId())) {
+            authenticationService.updateUser(exists);
+        }
         return userRepository.save(exists);
     }
 }
