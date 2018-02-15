@@ -1,0 +1,8 @@
+---
+applications:
+- name: twitter-app
+  host: my-twitter-app
+  instances: 1
+  path: target/twitter-app-1.0-SNAPSHOT.jar
+  buildpack: java_buildpack
+  memory: 768M

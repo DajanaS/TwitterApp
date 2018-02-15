@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UserManagementService {
-  api = 'http://localhost:8080/';
+  api = 'http://localhost:8080/users';
   private profileDataChangedSource = new Subject<User>();
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
   isLoggedIn: boolean;
@@ -20,34 +20,34 @@ export class UserManagementService {
   }
 
   addUser(user: User): Observable<boolean> {
-    return this.http.post<boolean>(this.api + 'users', user).pipe();
+    return this.http.post<boolean>(this.api, user).pipe();
   }
 
   editUser(user: User): Observable<User> {
-    return this.http.post<User>(this.api + 'users/update', user).pipe();
+    return this.http.post<User>(this.api + '/update', user).pipe();
   }
 
   getAuthenticatedUser(): Observable<User> {
-    return this.http.get<User>(this.api + 'users').pipe();
+    return this.http.get<User>(this.api).pipe();
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.api + 'users/id/' + id).pipe();
+    return this.http.get<User>(this.api + '/id/' + id).pipe();
   }
 
   getAllUsersEmails(): Observable<string[]> {
-    return this.http.get<string[]>(this.api + 'users/all').pipe();
+    return this.http.get<string[]>(this.api + '/all').pipe();
   }
 
   getUserByEmail(email): Observable<number> {
-    return this.http.get<number>(this.api + 'users/email?email=' + email).pipe();
+    return this.http.get<number>(this.api + '/email?email=' + email).pipe();
   }
 
   authenticateUser(email: string, password: string): Observable<boolean> {
-    return this.http.post<boolean>(this.api + 'users/login', {email: email, password: password}).pipe();
+    return this.http.post<boolean>(this.api + '/login', {email: email, password: password}).pipe();
   }
 
   logOutUser(email: string): Observable<boolean> {
-    return this.http.post<boolean>(this.api + 'users/logout', email).pipe();
+    return this.http.post<boolean>(this.api + '/logout', email).pipe();
   }
 }

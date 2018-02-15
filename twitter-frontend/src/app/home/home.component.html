@@ -14,9 +14,11 @@
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!currentUserLiked[i]" (click)="likeTweet(i)" class="card-link" style="float:left; cursor: pointer"><img
+          <a *ngIf="!currentUserLiked[i]" (click)="likeTweet(i)" class="card-link"
+             style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
-          <a *ngIf="currentUserLiked[i]" (click)="likeTweet(i)" class="card-link" style="float:left; cursor: pointer"><img
+          <a *ngIf="currentUserLiked[i]" (click)="likeTweet(i)" class="card-link"
+             style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
         </div>
         <div class="col">
@@ -26,8 +28,6 @@
     </div>
   </div>
 
-
-
-  <ngb-pagination *ngIf="topTweets && topTweets.length>4" [collectionSize]="totalTweets" [(page)]="page" [pageSize]="4"
+  <ngb-pagination *ngIf="topTweets && topTweets.length>=1" [collectionSize]="totalTweets" [(page)]="page" [pageSize]="4"
                   (pageChange)="pageChanged()" [boundaryLinks]="true"></ngb-pagination>
 </div>
