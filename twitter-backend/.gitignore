@@ -5,6 +5,7 @@ out
 *.iml
 *.ipr
 target/
+upload/
 
 ### NetBeans ###
 nbproject/private/
