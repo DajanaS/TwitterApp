@@ -25,17 +25,4 @@ export class AuthGuard implements CanActivate {
     });
   }
 
-  /*
-  this.userManagementService.getAuthenticatedUser().subscribe(user => {
-      if (user === null) {
-        this.router.navigate(['/login']);
-        console.log('Not logged in');
-        this.flag = false;
-      } else {
-        console.log('Logged in');
-        this.flag = true;
-      }
-    });
-    return this.flag;
-   */
 }

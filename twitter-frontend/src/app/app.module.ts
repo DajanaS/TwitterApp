@@ -24,6 +24,7 @@ import {LikeManagementService} from './like-management.service';
 import {AuthGuard} from './auth.guard';
 import {AgePipe} from './pipes/age-pipe';
 import {UploadAvatarComponent} from './upload-avatar/upload-avatar.component';
+import { AutofocusDirective } from './autofocus.directive';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {UploadAvatarComponent} from './upload-avatar/upload-avatar.component';
     PublicProfileComponent,
     AgePipe,
     DeleteTweetComponent,
-    UploadAvatarComponent
+    UploadAvatarComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
