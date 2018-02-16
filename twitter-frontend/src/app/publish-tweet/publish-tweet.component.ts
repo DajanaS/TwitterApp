@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {TweetManagementService} from '../tweet-management.service';
 import {Tweet} from '../model/tweet';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-publish-tweet',
@@ -30,8 +29,7 @@ export class PublishTweetComponent implements OnInit {
   tweet: Tweet;
 
   constructor(public activeModal: NgbActiveModal,
-              private tweetService: TweetManagementService,
-              private router: Router) {
+              private tweetService: TweetManagementService) {
   }
 
   ngOnInit() {
@@ -44,7 +42,5 @@ export class PublishTweetComponent implements OnInit {
       this.tweetService.newTweetPublished(this.tweet);
     });
     this.activeModal.close();
-    this.router.navigate(['/nav']);
   }
-
 }

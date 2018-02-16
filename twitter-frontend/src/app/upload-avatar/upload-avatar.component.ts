@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserManagementService} from '../user-management.service';
+import {User} from '../model/user';
 
 @Component({
   selector: 'app-upload-avatar',
@@ -30,6 +31,7 @@ import {UserManagementService} from '../user-management.service';
 export class UploadAvatarComponent implements OnInit {
   @Input() userId;
   form: FormGroup;
+  user: User;
 
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -67,8 +69,10 @@ export class UploadAvatarComponent implements OnInit {
 
   onSubmit() {
     const formModel = this.prepareSave();
-    this.userService.updateAvatar(formModel).subscribe();
-    this.activeModal.close();
-    // this.router.navigate(['/nav']);
+    this.userService.updateAvatar(this.userId, formModel).subscribe(user => {
+      this.user = user;
+      this.userService.avatarUpdated(this.user);
+      this.activeModal.close();
+    });
   }
 }

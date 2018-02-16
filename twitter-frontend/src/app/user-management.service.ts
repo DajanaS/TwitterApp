@@ -8,7 +8,9 @@ import {Subject} from 'rxjs/Subject';
 export class UserManagementService {
   api = 'http://localhost:8080/users';
   private profileDataChangedSource = new Subject<User>();
+  private avatarUpdatedSource = new Subject<User>();
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
+  avatarUpdated$ = this.avatarUpdatedSource.asObservable();
   isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
@@ -17,6 +19,10 @@ export class UserManagementService {
 
   profileDataChanged(user: User) {
     this.profileDataChangedSource.next(user);
+  }
+
+  avatarUpdated(user: User) {
+    this.avatarUpdatedSource.next(user);
   }
 
   addUser(user: User): Observable<boolean> {
@@ -51,7 +57,7 @@ export class UserManagementService {
     return this.http.post<boolean>(this.api + '/logout', email).pipe();
   }
 
-  updateAvatar(formModel): Observable<User> {
-    return this.http.post<User>(this.api + '/1/upload/avatar', formModel).pipe();
+  updateAvatar(userId, formModel): Observable<User> {
+    return this.http.post<User>(this.api + '/' + userId + '/upload/avatar', formModel).pipe();
   }
 }

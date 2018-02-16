@@ -85,6 +85,7 @@ public class UserController {
     }
 
     @PostMapping("{userId}/upload/avatar")
+    @ResponseBody
     public User updateAvatar(@PathVariable @NotNull Long userId, @RequestParam("avatar") MultipartFile avatar) {
         String fileName = storageService.store(avatar);
         return userService.updateAvatar(userId, fileName);
