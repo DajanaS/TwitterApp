@@ -5,7 +5,7 @@
 
     <div class="form-group">
       <label for="fullName">Full name</label> <input type="text" class="form-control" id="fullName"
-                                                     formControlName="name" placeholder="Full Name" required>
+                                                     formControlName="name" placeholder="Full Name" ngModel appAutofocus required>
     </div>
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
       <div *ngIf="name.errors.required">
@@ -92,7 +92,6 @@
                                                                  formControlName="repeatPassword"
                                                                  placeholder="Strong&Password123"
                                                                  [(ngModel)]="repeatPasswordModel"
-                                                                 (keyup.enter)="onSubmit()"
                                                                  required>
     </div>
     <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)" class="alert alert-danger">
@@ -112,7 +111,7 @@
         </button>
       </div>
       <div class="col">
-        <button type="button" (click)="onSubmit()" [disabled]="userForm.invalid"
+        <button type="submit" (click)="onSubmit()" [disabled]="userForm.invalid"
                 class="btn btn-success" style="float:right">Register
         </button>
       </div>

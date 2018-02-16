@@ -41,7 +41,7 @@ import {AutofocusDirective} from './autofocus.directive';
     AgePipe,
     DeleteTweetComponent,
     UploadAvatarComponent,
-    AutofocusDirective
+    AutofocusDirective,
   ],
   imports: [
     BrowserModule,

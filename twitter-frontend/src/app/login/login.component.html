@@ -12,13 +12,13 @@
 
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" placeholder="Email">
+      <input type="email" class="form-control" formControlName="email" id="exampleInputEmail1" placeholder="Email" ngModel appAutofocus>
     </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password"
-             placeholder="Password" (keyup.enter)="onSubmit()" required>
+             placeholder="Password" required>
     </div>
 
     <div class="row">
@@ -26,7 +26,7 @@
         <a routerLink="/register" class="nav-link">Register here</a>
       </div>
       <div class="col">
-        <button type="button" (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-default"
+        <button type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid" class="btn btn-default"
                 style="float:right">Login
         </button>
       </div>

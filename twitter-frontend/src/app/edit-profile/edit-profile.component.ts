@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="userForm">
+      <form [formGroup]="userForm" (keydown.enter)="onSubmit()">
 
         <div class="form-group">
           <label for="fullName">Full name</label> <input type="text" class="form-control" id="fullName"
