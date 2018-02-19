@@ -6,6 +6,7 @@ out
 *.ipr
 target/
 upload/
+public/
 
 ### NetBeans ###
 nbproject/private/
