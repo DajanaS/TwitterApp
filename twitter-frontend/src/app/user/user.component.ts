@@ -36,7 +36,7 @@ export class UserComponent implements OnInit {
     userService.profileDataChanged$.subscribe(user => this.authenticatedUser = user);
     userService.avatarUpdated$.subscribe(user => this.authenticatedUser = user);
     tweetService.tweetDeleted$.subscribe(id => {
-      this.tweetService.getTweets(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
+      this.tweetService.getTweetsByAuthor(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
     });
     likeService.newLikeAdded$.subscribe(like => {
       this.loadTweets();
@@ -54,7 +54,7 @@ export class UserComponent implements OnInit {
   }
 
   loadTweets() {
-    this.tweetService.getTweets(this.authenticatedUser.id).subscribe(tweets => {
+    this.tweetService.getTweetsByAuthor(this.authenticatedUser.id).subscribe(tweets => {
       this.tweets = tweets;
       let index = 0;
       this.liked = [];

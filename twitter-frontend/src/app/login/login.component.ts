@@ -31,13 +31,15 @@ export class LoginComponent implements OnInit {
     const formModel = this.loginForm.value;
     const email = formModel.email as string;
     const password = formModel.password as string;
-    this.userService.authenticateUser(email, password)
-      .subscribe(response => {
-        this.loginFail = response;
-        if (this.loginFail === false) {
-          this.router.navigate(['/nav']);
-        }
-      });
+    this.userService.authenticateUser(email, password).subscribe(id => {
+      if (id === -1) {
+        this.loginFail = true;
+      } else {
+        this.loginFail = false;
+        localStorage['authUserId'] = id as number;
+        this.router.navigate(['/nav']);
+      }
+    });
   }
 
   get email() {

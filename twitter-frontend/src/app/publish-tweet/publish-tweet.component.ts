@@ -39,7 +39,8 @@ export class PublishTweetComponent implements OnInit {
 
   onSubmit() {
     if (this.value.trim() !== '') {
-      this.tweetService.addTweet(this.value).subscribe(tweet => {
+      const userId = localStorage['authUserId'] as number;
+      this.tweetService.addTweet(this.value, userId).subscribe(tweet => {
         this.tweet = tweet;
         this.tweet.author = this.name;
         this.tweetService.newTweetPublished(this.tweet);

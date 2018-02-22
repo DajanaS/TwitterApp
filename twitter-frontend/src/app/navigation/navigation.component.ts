@@ -25,7 +25,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getAllUsersEmails().subscribe(emails => this.emails = emails);
+    this.userService.getAllUsersEmails(localStorage['authUserId'] as number).subscribe(emails => this.emails = emails);
   }
 
   onSubmit() {
@@ -39,10 +39,14 @@ export class NavigationComponent implements OnInit {
       });
   }
 
+  logOut() {
+    localStorage['authUserId'] = -1;
+  }
+
   search = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
       .map(term => term.length < 2 ? []
-        : this.emails.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+        : this.emails.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
 }

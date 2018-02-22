@@ -1,10 +1,10 @@
 package com.service.implementation;
 
-import com.authentication.AuthenticationService;
 import com.google.common.collect.Lists;
 import com.model.Tweet;
 import com.model.User;
 import com.repository.TweetRepository;
+import com.repository.UserRepository;
 import com.service.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,12 +16,12 @@ import java.util.List;
 @Service
 public class DefaultTweetService implements TweetService {
     private TweetRepository tweetRepository;
-    private AuthenticationService authenticationService;
+    private UserRepository userRepository;
 
     @Autowired
-    public DefaultTweetService(TweetRepository tweetRepository, AuthenticationService authenticationService) {
+    public DefaultTweetService(TweetRepository tweetRepository, UserRepository userRepository) {
         this.tweetRepository = tweetRepository;
-        this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -30,13 +30,8 @@ public class DefaultTweetService implements TweetService {
     }
 
     @Override
-    public List<Tweet> listTopTweetsByDateDesc() {
-        return Lists.newArrayList(tweetRepository.findFirst5ByOrderByDateDesc());
-    }
-
-    @Override
-    public Tweet save(String content) {
-        User author = findUserOfAuthenticatedPrincipal();
+    public Tweet save(String content, Long id) {
+        User author = userRepository.findOne(id);
         if (author != null) {
             Tweet tweet = new Tweet();
             tweet.setContent(content);
@@ -44,10 +39,6 @@ public class DefaultTweetService implements TweetService {
             return tweetRepository.save(tweet);
         }
         return null;
-    }
-
-    private User findUserOfAuthenticatedPrincipal() {
-        return authenticationService.getAuthenticatedUser();
     }
 
     @Override
@@ -59,6 +50,7 @@ public class DefaultTweetService implements TweetService {
     @Override
     public int totalTweets() {
         return tweetRepository.findAll().size();
+        // TODO: should return the number of tweets that byAuthorIn method returns
     }
 
     @Override

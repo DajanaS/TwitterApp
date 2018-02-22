@@ -53,9 +53,9 @@ export class RegisterComponent implements OnInit {
   prepareSaveUser(): User {
     const formModel = this.userForm.value;
     return new User(
-      formModel.name as string,
+      formModel.name.trim() as string,
       formModel.gender as string,
-      formModel.email as string,
+      formModel.email.trim() as string,
       formModel.birth as Date,
       formModel.password as string
     );

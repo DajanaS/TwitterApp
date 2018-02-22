@@ -12,7 +12,6 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {RegisterComponent} from './register/register.component';
 import {HomeComponent} from './home/home.component';
 import {UserComponent} from './user/user.component';
-import {LogoutComponent} from './logout/logout.component';
 import {PublishTweetComponent} from './publish-tweet/publish-tweet.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
 import {PublicProfileComponent} from './public-profile/public-profile.component';
@@ -34,7 +33,6 @@ import {AutofocusDirective} from './autofocus.directive';
     RegisterComponent,
     HomeComponent,
     UserComponent,
-    LogoutComponent,
     PublishTweetComponent,
     EditProfileComponent,
     PublicProfileComponent,

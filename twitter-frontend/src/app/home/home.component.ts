@@ -14,15 +14,15 @@ import {TweetLike} from '../model/tweetLike';
 export class HomeComponent implements OnInit {
   page = 1;
   topTweets: Tweet[];
-  currentUser: User;
-  currentUserLiked: boolean[];
+  authenticatedUser: User;
+  authUserLiked: boolean[];
   like: TweetLike;
   totalTweets: number;
 
   constructor(private tweetService: TweetManagementService,
               private likeService: LikeManagementService,
               private userService: UserManagementService) {
-    likeService.newLikeAdded$.subscribe(like =>  {
+    likeService.newLikeAdded$.subscribe(like => {
       this.getAllTweets();
       this.getTotalTweets();
     });
@@ -34,38 +34,38 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getAuthenticatedUser().subscribe(user => {
-      this.currentUser = user;
+      this.authenticatedUser = user;
+      this.getAllTweets();
+      // TODO: these 2 should be updated by adding the authUser.id, so that only tweets of the users they follow will be returned
+      this.getTotalTweets();
     });
-    this.getAllTweets();
-    // TODO: these 2 should be updated by adding the authUser.id, so that only tweets of the users they follow will be returned
-    this.getTotalTweets();
   }
 
   getAllTweets() {
     this.tweetService.getAllTweets(this.page).subscribe(data => {
       this.topTweets = data['content'];
-      let index = 0;
-      this.currentUserLiked = [];
-      this.currentUserLiked.length = this.topTweets.length;
+      /* let index = 0;
+      this.authUserLiked = [];
+      this.authUserLiked.length = this.topTweets.length;
       for (const tweet of this.topTweets) {
         this.likeService.getLikesByTweet(tweet.id).subscribe(likes => {
           if (likes.length === 0) {
             tweet.likes = 0;
-            this.currentUserLiked[index] = false;
+            this.authUserLiked[index] = false;
           } else {
             tweet.likes = likes.length;
             for (const like of likes) {
-              if (like.likeOwner.email === this.currentUser.email) {
-                this.currentUserLiked[index] = true;
+              if (like.likeOwner.email === this.authenticatedUser.email) {
+                this.authUserLiked[index] = true;
                 break;
               } else {
-                this.currentUserLiked[index] = false;
+                this.authUserLiked[index] = false;
               }
             }
           }
           index++;
         });
-      }
+      } */
     }, (error) => {
       console.log(error.error.message);
     });
@@ -80,9 +80,9 @@ export class HomeComponent implements OnInit {
   }
 
   likeTweet(tweetIndex: number) {
-    if (!this.currentUserLiked[tweetIndex]) {
+    if (!this.authUserLiked[tweetIndex]) {
       const likedTweetId = this.topTweets[tweetIndex].id;
-      this.currentUserLiked[tweetIndex] = true;
+      this.authUserLiked[tweetIndex] = true;
       this.likeService.addLike(likedTweetId).subscribe(like => {
         this.like = like;
         this.likeService.newLikedAdded(this.like);

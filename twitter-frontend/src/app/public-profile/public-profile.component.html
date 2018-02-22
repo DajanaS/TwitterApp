@@ -1,7 +1,7 @@
-<ngb-tabset justify="justified" activeId="profile_tab">
+<ngb-tabset *ngIf="currentUser" justify="justified" activeId="profile_tab">
   <ngb-tab disabled="true">
     <ng-template ngbTabTitle>
-      <a routerLink="/nav">Home</a>
+      <a routerLink="/nav">Back to Home</a>
     </ng-template>
   </ngb-tab>
 
@@ -108,7 +108,7 @@
 
   <ngb-tab disabled="true">
     <ng-template ngbTabTitle>
-      <a routerLink="/logout">Logout</a>
+      <a (click)="logOut()" routerLink="/login">Logout</a>
     </ng-template>
   </ngb-tab>
 </ngb-tabset>

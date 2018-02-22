@@ -31,8 +31,12 @@ export class PublicProfileComponent implements OnInit {
       this.id = +params['id'];
       this.userService.getUserById(this.id).subscribe(user => {
         this.currentUser = user;
-        this.tweetService.getTweets(this.currentUser.id).subscribe(tweets => this.tweets = tweets);
+        this.tweetService.getTweetsByAuthor(this.currentUser.id).subscribe(tweets => this.tweets = tweets);
       });
     });
+  }
+
+  logOut() {
+    localStorage['authUserId'] = -1;
   }
 }

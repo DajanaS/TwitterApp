@@ -8,13 +8,11 @@ import java.util.List;
 public interface TweetService {
     List<Tweet> listTweetsByAuthorId(Long id);
 
-    List<Tweet> listTopTweetsByDateDesc();
-
     Page<Tweet> findAll(int page);
 
     int totalTweets();
 
-    Tweet save(String tweet);
+    Tweet save(String tweet, Long userId);
 
     boolean deleteTweet(Long id);
 }

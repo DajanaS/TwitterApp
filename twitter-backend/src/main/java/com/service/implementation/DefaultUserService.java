@@ -1,6 +1,5 @@
 package com.service.implementation;
 
-import com.authentication.AuthenticationService;
 import com.google.common.collect.Lists;
 import com.model.User;
 import com.repository.UserRepository;
@@ -14,12 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class DefaultUserService implements UserService {
     private UserRepository userRepository;
-    private AuthenticationService authenticationService;
 
     @Autowired
-    public DefaultUserService(UserRepository userRepository, AuthenticationService authenticationService) {
+    public DefaultUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.authenticationService = authenticationService;
     }
 
     @Override
@@ -30,7 +27,7 @@ public class DefaultUserService implements UserService {
             user1.setName(user.getName());
             user1.setGender(user.getGender());
             if (!user.getEmail().equals(user1.getEmail())) {
-                if (getAllRegisteredUsersEmails().stream().anyMatch(email -> user.getEmail().equals(email))) {
+                if (getAllRegisteredUsersEmails(user1.getId()).stream().anyMatch(email -> user.getEmail().equals(email))) {
                     return null; // duplicate emails not allowed
                 }
                 user1.setEmail(user.getEmail());
@@ -38,23 +35,22 @@ public class DefaultUserService implements UserService {
             user1.setBirth(user.getBirth());
             user1.setPassword(user.getPassword());
             user1.setAvatar(user.getAvatar());
-            if (authenticationService.getAuthenticatedUser().getId().equals(user.getId())) {
-                authenticationService.updateUser(user1);
-            }
             return userRepository.save(user1); // save the updated user
         }
-        if (getAllRegisteredUsersEmails().stream().anyMatch(email -> user.getEmail().equals(email))) {
+        if (getAllRegisteredUsersEmails(Long.valueOf(-1)).stream().anyMatch(email -> user.getEmail().equals(email))) {
             return null; // duplicate emails not allowed
         }
         return userRepository.save(user1); // save the new user
     }
 
     @Override
-    public List<String> getAllRegisteredUsersEmails() {
+    public List<String> getAllRegisteredUsersEmails(Long authUserId) {
         List<User> all = Lists.newArrayList(userRepository.findAll());
-        if (authenticationService.getAuthenticatedUser() != null) {
-            String email = authenticationService.getAuthenticatedUser().getEmail();
-            return all.stream().map(user -> user.getEmail()).filter(e -> !e.equals(email)).collect(Collectors.toList());
+        User authenticatedUser = userRepository.findOne(authUserId);
+        if (authenticatedUser != null) {
+            return all.stream().map(user -> user.getEmail())
+                    .filter(e -> !e.equals(authenticatedUser.getEmail()))
+                    .collect(Collectors.toList());
         }
         return all.stream().map(user -> user.getEmail()).collect(Collectors.toList());
     }
@@ -75,9 +71,15 @@ public class DefaultUserService implements UserService {
     public User updateAvatar(Long userId, String avatarLocation) {
         User exists = userRepository.findOne(userId);
         exists.setAvatar("http://localhost:8080/images/" + avatarLocation);
-        if (authenticationService.getAuthenticatedUser().getId().equals(exists.getId())) {
-            authenticationService.updateUser(exists);
-        }
         return userRepository.save(exists);
+    }
+
+    @Override
+    public boolean authenticateUser(String email, String password) {
+        if (getUserById(getUserByEmail(email)).getPassword().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

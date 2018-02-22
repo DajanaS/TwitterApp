@@ -1,6 +1,5 @@
 package com.web;
 
-import com.authentication.AuthenticationService;
 import com.model.User;
 import com.service.StorageService;
 import lombok.Data;
@@ -18,13 +17,11 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private UserService userService;
-    private AuthenticationService authenticationService;
     private StorageService storageService;
 
     @Autowired
-    public UserController(UserService userService, AuthenticationService authenticationService, StorageService storageService) {
+    public UserController(UserService userService, StorageService storageService) {
         this.userService = userService;
-        this.authenticationService = authenticationService;
         this.storageService = storageService;
     }
 
@@ -40,22 +37,16 @@ public class UserController {
         return userService.save(user);
     }
 
-    @GetMapping
-    @ResponseBody
-    public User getAuthenticatedUser() {
-        return authenticationService.getAuthenticatedUser();
-    }
-
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/emails/{id}")
     @ResponseBody
-    public List<String> getAllRegisteredUsersEmails() {
-        return userService.getAllRegisteredUsersEmails();
+    public List<String> getAllRegisteredUsersEmails(@PathVariable Long id) {
+        return userService.getAllRegisteredUsersEmails(id);
     }
 
     @GetMapping("/email")
@@ -64,18 +55,14 @@ public class UserController {
         return userService.getUserByEmail(email);
     }
 
-    @PostMapping
+    @PostMapping("/login")
     @ResponseBody
-    @RequestMapping("/login")
-    public boolean authenticateUser(@RequestBody LoginData loginData) {
-        return !authenticationService.authenticateUser(loginData.email, loginData.password);
-    }
-
-    @PostMapping
-    @ResponseBody
-    @RequestMapping("/logout")
-    public boolean logOutUser(@RequestBody String email) {
-        return authenticationService.logOut(email);
+    public Long authenticateUser(@RequestBody LoginData loginData) {
+        if (userService.getUserByEmail(loginData.email) != -1 && userService.authenticateUser(loginData.email, loginData.password)) {
+            return userService.getUserByEmail(loginData.email);
+        } else {
+            return Long.valueOf(-1);
+        }
     }
 
     @Data

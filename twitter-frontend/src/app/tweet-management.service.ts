@@ -23,16 +23,8 @@ export class TweetManagementService {
     this.tweetDeletedSource.next(id);
   }
 
-  addTweet(content: string): Observable<Tweet> {
-    return this.http.post<Tweet>(this.api, content).pipe();
-  }
-
-  getTweets(id): Observable<Tweet[]> {
-    return this.http.get<Tweet[]>(this.api + '?id=' + id).pipe();
-  }
-
-  deleteTweet(id): Observable<boolean> {
-    return this.http.post<boolean>(this.api + '/delete', id).pipe();
+  getTweetsByAuthor(id): Observable<Tweet[]> {
+    return this.http.get<Tweet[]>(this.api + '/author/' + id).pipe();
   }
 
   getAllTweets(page: number) {
@@ -40,6 +32,14 @@ export class TweetManagementService {
   }
 
   getTotalTweets(): Observable<number> {
-    return this.http.get<number>(this.api + '/totalTweets').pipe();
+    return this.http.get<number>(this.api + '/total').pipe();
+  }
+
+  addTweet(content: string, userId: number): Observable<Tweet> {
+    return this.http.post<Tweet>(this.api, {content: content, userId: userId}).pipe();
+  }
+
+  deleteTweet(id): Observable<boolean> {
+    return this.http.post<boolean>(this.api + '/delete', id).pipe();
   }
 }

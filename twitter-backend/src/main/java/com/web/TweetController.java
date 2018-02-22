@@ -2,6 +2,7 @@ package com.web;
 
 import com.model.Tweet;
 import com.service.TweetService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -20,16 +21,10 @@ public class TweetController {
         this.tweetService = tweetService;
     }
 
-    @GetMapping
+    @GetMapping("/author/{id}")
     @ResponseBody
-    public List<Tweet> listTweetsByAuthor(@RequestParam Long id) {
+    public List<Tweet> listTweetsByAuthor(@PathVariable Long id) {
         return tweetService.listTweetsByAuthorId(id);
-    }
-
-    @GetMapping("/top")
-    @ResponseBody
-    public List<Tweet> listTopTweetsByDateDesc() {
-        return tweetService.listTopTweetsByDateDesc();
     }
 
     @GetMapping("/all")
@@ -38,16 +33,22 @@ public class TweetController {
         return tweetService.findAll(page);
     }
 
-    @PostMapping
-    @ResponseBody
-    public Tweet saveTweet(@RequestBody String content) {
-        return tweetService.save(content);
-    }
-
-    @GetMapping("/totalTweets")
+    @GetMapping("/total")
     @ResponseBody
     public int totalTweets() {
         return tweetService.totalTweets();
+    }
+
+    @PostMapping
+    @ResponseBody
+    public Tweet saveTweet(@RequestBody TweetData tweetData) {
+        return tweetService.save(tweetData.content, tweetData.userId);
+    }
+
+    @Data
+    public static class TweetData {
+        public String content;
+        public Long userId;
     }
 
     @PostMapping("/delete")

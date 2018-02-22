@@ -1,12 +1,12 @@
 package com.service.implementation;
 
-import com.authentication.AuthenticationService;
 import com.google.common.collect.Lists;
 import com.model.TweetLike;
 import com.model.Tweet;
 import com.model.User;
 import com.repository.TweetLikeRepository;
 import com.repository.TweetRepository;
+import com.repository.UserRepository;
 import com.service.TweetLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,13 +19,13 @@ public class DefaultTweetLikeService implements TweetLikeService {
 
     private TweetLikeRepository likeRepository;
     private TweetRepository tweetRepository;
-    private AuthenticationService authenticationService;
+    private UserRepository userRepository;
 
     @Autowired
-    public DefaultTweetLikeService(TweetLikeRepository likeRepository, TweetRepository tweetRepository, AuthenticationService authenticationService) {
+    public DefaultTweetLikeService(TweetLikeRepository likeRepository, TweetRepository tweetRepository, UserRepository userRepository) {
         this.likeRepository = likeRepository;
         this.tweetRepository = tweetRepository;
-        this.authenticationService = authenticationService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,8 +40,8 @@ public class DefaultTweetLikeService implements TweetLikeService {
     }
 
     @Override
-    public TweetLike save(Long likedTweetId) {
-        User likeOwner = findUserOfAuthenticatedPrincipal();
+    public TweetLike save(Long likedTweetId, Long userId) {
+        User likeOwner = userRepository.findOne(userId);
         if (likeOwner != null) {
             Tweet likedTweet = tweetRepository.findOne(likedTweetId);
             TweetLike like = new TweetLike();
@@ -65,14 +65,14 @@ public class DefaultTweetLikeService implements TweetLikeService {
     }
 
     @Override
-    public boolean remove(Long tweetId) {
+    public boolean remove(Long tweetId, Long userId) {
         Tweet likedTweet = tweetRepository.findOne(tweetId);
-        User likeOwner = findUserOfAuthenticatedPrincipal();
+        User likeOwner = userRepository.findOne(userId);
 
         List<TweetLike> likes = likeRepository.findAllByLikedTweet(likedTweet);
         TweetLike likeToRemove = null;
         for (TweetLike tl : likes) {
-            if(tl.getLikeOwner().getEmail().equals(likeOwner.getEmail())) {
+            if (tl.getLikeOwner().getEmail().equals(likeOwner.getEmail())) {
                 likeToRemove = tl;
                 break;
             }
@@ -88,9 +88,5 @@ public class DefaultTweetLikeService implements TweetLikeService {
 
         likeRepository.delete(likeToRemove.getId());
         return true;
-    }
-
-    private User findUserOfAuthenticatedPrincipal() {
-        return authenticationService.getAuthenticatedUser();
     }
 }

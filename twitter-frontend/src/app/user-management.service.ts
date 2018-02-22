@@ -34,27 +34,27 @@ export class UserManagementService {
   }
 
   getAuthenticatedUser(): Observable<User> {
-    return this.http.get<User>(this.api).pipe();
+    const id = localStorage['authUserId'] as number;
+    if (id === -1) {
+      return null;
+    }
+    return this.http.get<User>(this.api + '/' + id).pipe();
   }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.api + '/id/' + id).pipe();
+    return this.http.get<User>(this.api + '/' + id).pipe();
   }
 
-  getAllUsersEmails(): Observable<string[]> {
-    return this.http.get<string[]>(this.api + '/all').pipe();
+  getAllUsersEmails(id: number): Observable<string[]> {
+    return this.http.get<string[]>(this.api + '/emails/' + id).pipe();
   }
 
   getUserByEmail(email): Observable<number> {
     return this.http.get<number>(this.api + '/email?email=' + email).pipe();
   }
 
-  authenticateUser(email: string, password: string): Observable<boolean> {
-    return this.http.post<boolean>(this.api + '/login', {email: email, password: password}).pipe();
-  }
-
-  logOutUser(email: string): Observable<boolean> {
-    return this.http.post<boolean>(this.api + '/logout', email).pipe();
+  authenticateUser(email: string, password: string): Observable<number> {
+    return this.http.post<number>(this.api + '/login', {email: email, password: password}).pipe();
   }
 
   updateAvatar(userId, formModel): Observable<User> {
