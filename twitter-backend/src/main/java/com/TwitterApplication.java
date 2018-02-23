@@ -1,10 +1,7 @@
 package com;
 
-import com.service.StorageService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class TwitterApplication {
@@ -12,13 +9,12 @@ public class TwitterApplication {
         SpringApplication.run(TwitterApplication.class, args);
     }
 
+    /* For fast testing
     @Bean
-    CommandLineRunner init(StorageService storageService) { // , UserRepository userRepository) {
+    CommandLineRunner init(UserRepository userRepository) {
         return (args) -> {
-            // User user = new User("User", "For", "Test", new Date(), "Purposes", "NameOfFile");
-            // userRepository.save(user);
-            storageService.deleteAll();
-            storageService.init();
+            User user = new User("User", "For", "Test", new Date(), "Purposes", "NameOfFile");
+            userRepository.save(user);
         };
-    }
+    } */
 }

@@ -29,6 +29,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Lob
     @Column(nullable = false)
     private String avatar;
 
@@ -47,4 +48,16 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "likeOwner", fetch = FetchType.EAGER)
     private List<TweetLike> likes;
+
+    public User() {
+    }
+
+    public User(String name, String gender, String email, Date birth, String password, String avatar) {
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.birth = birth;
+        this.password = password;
+        this.avatar = avatar;
+    }
 }

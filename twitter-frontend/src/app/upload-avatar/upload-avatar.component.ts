@@ -17,13 +17,16 @@ import {User} from '../model/user';
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="avatar">Upload photo</label>
-          <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+          <input type="file" id="avatar" accept="image/*" (change)="onFileChange($event)" #fileInput>
+        </div>
+        <div *ngIf="sizeExceeded" class="alert alert-danger">
+          Sorry, you can not upload images larger than 3MB.
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button *ngIf="state" type="button" (click)="onSubmit()" class="btn btn-primary">Upload</button>
-      <button *ngIf="state===false" class="btn btn-primary" disabled>Upload</button>
+      <button *ngIf="state && !sizeExceeded" type="button" (click)="onSubmit()" class="btn btn-primary">Upload</button>
+      <button *ngIf="sizeExceeded || !state" class="btn btn-primary" disabled>Upload</button>
     </div>
   `,
   styleUrls: ['./upload-avatar.component.css']
@@ -36,6 +39,7 @@ export class UploadAvatarComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
 
   state = false;
+  sizeExceeded = false;
 
   constructor(private fb: FormBuilder, private userService: UserManagementService, public activeModal: NgbActiveModal) {
     this.createForm();
@@ -46,30 +50,32 @@ export class UploadAvatarComponent implements OnInit {
 
   createForm() {
     this.form = this.fb.group({
-      name: ['', Validators.required],
       avatar: null
     });
   }
 
   onFileChange(event) {
+    const reader = new FileReader();
     this.state = event.target.value.length > 0;
-    // console.dir(this.fileInput.nativeElement);
-    // console.dir(this.fileInput.nativeElement.value);
-    if (event.target.files.length > 0) {
+    if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.form.get('avatar').setValue(file);
+      if (file.size > 3145728) {
+        this.sizeExceeded = true;
+      } else {
+        this.sizeExceeded = false;
+      }
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.get('avatar').setValue({
+          value: reader.result
+        });
+      };
     }
   }
 
-  private prepareSave(): any {
-    const input = new FormData();
-    input.append('avatar', this.form.get('avatar').value);
-    return input;
-  }
-
   onSubmit() {
-    const formModel = this.prepareSave();
-    this.userService.updateAvatar(this.userId, formModel).subscribe(user => {
+    const formModel = this.form.value;
+    this.userService.updateAvatar(this.userId, formModel.avatar.value).subscribe(user => {
       this.user = user;
       this.userService.avatarUpdated(this.user);
       this.activeModal.close();

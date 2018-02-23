@@ -1,13 +1,11 @@
 package com.web;
 
 import com.model.User;
-import com.service.StorageService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import com.service.UserService;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -17,12 +15,10 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private UserService userService;
-    private StorageService storageService;
 
     @Autowired
-    public UserController(UserService userService, StorageService storageService) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.storageService = storageService;
     }
 
     @PostMapping
@@ -73,8 +69,7 @@ public class UserController {
 
     @PostMapping("{userId}/upload/avatar")
     @ResponseBody
-    public User updateAvatar(@PathVariable @NotNull Long userId, @RequestParam("avatar") MultipartFile avatar) {
-        String fileName = storageService.store(avatar);
-        return userService.updateAvatar(userId, fileName);
+    public User updateAvatar(@PathVariable @NotNull Long userId, @RequestBody String value) {
+        return userService.updateAvatar(userId, value);
     }
 }

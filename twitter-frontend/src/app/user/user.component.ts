@@ -34,7 +34,9 @@ export class UserComponent implements OnInit {
         this.tweets.reverse();
       });
     userService.profileDataChanged$.subscribe(user => this.authenticatedUser = user);
-    userService.avatarUpdated$.subscribe(user => this.authenticatedUser = user);
+    userService.avatarUpdated$.subscribe(user => {
+      this.authenticatedUser = user;
+    });
     tweetService.tweetDeleted$.subscribe(id => {
       this.tweetService.getTweetsByAuthor(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
     });
