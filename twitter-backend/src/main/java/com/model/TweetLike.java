@@ -1,10 +1,12 @@
 package com.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 public class TweetLike {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -14,28 +16,4 @@ public class TweetLike {
 
     @OneToOne
     private Tweet likedTweet;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getLikeOwner() {
-        return likeOwner;
-    }
-
-    public void setLikeOwner(User likeOwner) {
-        this.likeOwner = likeOwner;
-    }
-
-    public Tweet getLikedTweet() {
-        return likedTweet;
-    }
-
-    public void setLikedTweet(Tweet likedTweet) {
-        this.likedTweet = likedTweet;
-    }
 }

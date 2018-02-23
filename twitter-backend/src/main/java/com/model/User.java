@@ -1,12 +1,14 @@
 package com.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
 public class User {
     @Id
     @GeneratedValue
@@ -45,104 +47,4 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "likeOwner", fetch = FetchType.EAGER)
     private List<TweetLike> likes;
-
-    public User() {
-    }
-
-    public User(String name, String gender, String email, Date birth, String password, String avatar) {
-        this.name = name;
-        this.gender = gender;
-        this.email = email;
-        this.birth = birth;
-        this.password = password;
-        this.avatar = avatar;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public List<Tweet> getTweets() {
-        return tweets;
-    }
-
-    public void setTweets(List<Tweet> tweets) {
-        this.tweets = tweets;
-    }
-
-    public List<User> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(List<User> following) {
-        this.following = following;
-    }
-
-    public List<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(List<User> followers) {
-        this.followers = followers;
-    }
-
-    public List<TweetLike> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(List<TweetLike> likes) {
-        this.likes = likes;
-    }
 }
