@@ -8,7 +8,7 @@
                                                      formControlName="name" placeholder="Full Name" ngModel appAutofocus required>
     </div>
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-      <div *ngIf="name.errors.required">
+      <div *ngIf="name.errors.required || name.hasError('whitespace')">
         Full name is required.
       </div>
       <div *ngIf="name.errors.minlength">

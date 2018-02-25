@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';
 import {Router} from '@angular/router';
+import {noWhitespaceValidator} from '../no-whitespace.validator';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
 
   createForm() {
     this.userForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+      name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30), noWhitespaceValidator]],
       gender: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       birth: ['', [Validators.required]], // Validators.pattern(/^\d{2}-\d{2}-\d{4}$/)
@@ -53,9 +54,9 @@ export class RegisterComponent implements OnInit {
   prepareSaveUser(): User {
     const formModel = this.userForm.value;
     return new User(
-      formModel.name.trim() as string,
+      formModel.name as string,
       formModel.gender as string,
-      formModel.email.trim() as string,
+      formModel.email as string,
       formModel.birth as Date,
       formModel.password as string
     );
