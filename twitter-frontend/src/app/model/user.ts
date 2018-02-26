@@ -6,6 +6,9 @@ export class User {
   birth: Date;
   password: string;
   avatar: string;
+  following: User[];
+  followers: User[];
+  rating: number[];
 
   constructor(name, gender, email, birth, password) {
     this.name = name;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,5 +82,55 @@ public class DefaultUserService implements UserService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public User followUser(Long userId, Long followerId) {
+        User user = userRepository.getUserById(userId);
+        User follower = userRepository.getUserById(followerId);
+
+        List<User> userFollowers = user.getFollowers();
+        List<User> followerFollowing = follower.getFollowing();
+
+        userFollowers.add(follower);
+        followerFollowing.add(user);
+
+        user.setFollowers(userFollowers);
+        follower.setFollowing(followerFollowing);
+
+        userRepository.save(follower);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User unfollowUser(Long userId, Long followerId) {
+        User user = userRepository.getUserById(userId);
+        User follower = userRepository.getUserById(followerId);
+
+        List<User> userFollowers = user.getFollowers();
+        List<User> followerFollowing = follower.getFollowing();
+
+        userFollowers.remove(follower);
+        followerFollowing.remove(user);
+
+        user.setFollowers(userFollowers);
+        follower.setFollowing(followerFollowing);
+
+        userRepository.save(follower);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User rateUser(Long userId, Long senderId, Float rating) {
+        User user = userRepository.getUserById(userId);
+        User sender = userRepository.getUserById(senderId);
+
+        List<Float> userRatings = user.getRating();
+        userRatings.add(rating);
+
+        user.setRating(userRatings);
+        userRepository.save(user);
+
+        return user;
     }
 }

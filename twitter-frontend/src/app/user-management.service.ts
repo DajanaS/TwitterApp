@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from './model/user';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
@@ -9,8 +9,18 @@ export class UserManagementService {
   api = 'http://localhost:8080/users';
   private profileDataChangedSource = new Subject<User>();
   private avatarUpdatedSource = new Subject<User>();
+
+  private followUserSource = new Subject<User>();
+  private unfollowUserSource = new Subject<User>();
+  private rateUserSource = new Subject<User>();
+
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
   avatarUpdated$ = this.avatarUpdatedSource.asObservable();
+
+  followUser$ = this.followUserSource.asObservable();
+  unfollowUser$ = this.unfollowUserSource.asObservable();
+  rateUser$ = this.rateUserSource.asObservable();
+
   isLoggedIn: boolean;
 
   constructor(private http: HttpClient) {
@@ -23,6 +33,18 @@ export class UserManagementService {
 
   avatarUpdated(user: User) {
     this.avatarUpdatedSource.next(user);
+  }
+
+  userFollowed(user: User) {
+    this.followUserSource.next(user);
+  }
+
+  userUnfollowed(user: User) {
+    this.unfollowUserSource.next(user);
+  }
+
+  userRated(user: User) {
+    this.rateUserSource.next(user);
   }
 
   addUser(user: User): Observable<boolean> {
@@ -59,5 +81,17 @@ export class UserManagementService {
 
   updateAvatar(userId, formModel): Observable<User> {
     return this.http.post<User>(this.api + '/' + userId + '/upload/avatar', formModel).pipe();
+  }
+
+  followUser(userId, followerId): Observable<User> {
+    return this.http.post<User>(this.api + '/' + followerId + '/follow/' + userId, '').pipe();
+  }
+
+  unfollowUser(userId, followerId): Observable<User> {
+    return this.http.post<User>(this.api + '/' + followerId + '/unfollow/' + userId, '').pipe();
+  }
+
+  rateUser(userId, senderId, rating): Observable<User> {
+    return this.http.post<User>(this.api + '/' + senderId + '/rate/' + userId, rating).pipe();
   }
 }

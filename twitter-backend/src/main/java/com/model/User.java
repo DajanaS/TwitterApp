@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Data
@@ -48,6 +49,9 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "likeOwner", fetch = FetchType.EAGER)
     private List<TweetLike> likes;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Float> rating;
 
     public User() {
     }

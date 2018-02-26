@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PublishTweetComponent} from '../publish-tweet/publish-tweet.component';
 import {UserManagementService} from '../user-management.service';
@@ -17,11 +17,12 @@ import {UploadAvatarComponent} from '../upload-avatar/upload-avatar.component';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  currentRate = 5;
   authenticatedUser: User;
   tweets: Tweet[];
   liked: boolean[];
   like: TweetLike;
+
+  @Output() totalRate: string;
 
   constructor(private modalService: NgbModal,
               private userService: UserManagementService,
@@ -51,8 +52,19 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     this.userService.getAuthenticatedUser().subscribe(user => {
       this.authenticatedUser = user;
+      this.setRating();
       this.loadTweets();
     });
+  }
+
+  setRating() {
+    if (this.authenticatedUser.rating.length === 0) {
+      this.totalRate = '0';
+    } else {
+      let sum = 0;
+      this.authenticatedUser.rating.forEach(value => sum += value);
+      this.totalRate = (sum / this.authenticatedUser.rating.length).toFixed(2);
+    }
   }
 
   loadTweets() {

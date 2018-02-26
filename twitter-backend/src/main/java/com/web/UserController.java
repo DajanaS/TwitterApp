@@ -72,4 +72,22 @@ public class UserController {
     public User updateAvatar(@PathVariable @NotNull Long userId, @RequestBody String value) {
         return userService.updateAvatar(userId, value);
     }
+
+    @PostMapping("{followerId}/follow/{userId}")
+    @ResponseBody
+    public User followUser(@PathVariable @NotNull Long followerId, @PathVariable @NotNull Long userId) {
+        return userService.followUser(userId, followerId);
+    }
+
+    @PostMapping("{followerId}/unfollow/{userId}")
+    @ResponseBody
+    public User unfollowUser(@PathVariable @NotNull Long followerId, @PathVariable @NotNull Long userId) {
+        return userService.unfollowUser(userId, followerId);
+    }
+
+    @PostMapping("{senderId}/rate/{userId}")
+    @ResponseBody
+    public User rateUser(@PathVariable @NotNull Long senderId, @PathVariable @NotNull Long userId, @RequestBody Float rating) {
+        return userService.rateUser(userId, senderId, rating);
+    }
 }

@@ -18,7 +18,7 @@
             <h6>{{currentUser.birth | age}}</h6>
 
             <div style="display:flex;justify-content: center;">
-              <ngb-rating [(rate)]="currentRate"></ngb-rating>
+              <ngb-rating [(rate)]="currentRate" (rateChange)="rateUser($event)"></ngb-rating>&nbsp;{{totalRate}}
             </div>
           </div>
         </div>
