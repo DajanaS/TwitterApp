@@ -5,7 +5,8 @@
 
     <div class="form-group">
       <label for="fullName">Full name</label> <input type="text" class="form-control" id="fullName"
-                                                     formControlName="name" placeholder="Full Name" ngModel appAutofocus required>
+                                                     formControlName="name" placeholder="Full Name" ngModel appAutofocus
+                                                     required>
     </div>
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
       <div *ngIf="name.errors.required || name.hasError('whitespace')">

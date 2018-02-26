@@ -1,7 +1,0 @@
----
-applications:
-- name: twitter-app-frontend
-  host: my-twitter-app-frontend
-  instances: 1
-  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
-  memory: 1024M
