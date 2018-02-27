@@ -33,19 +33,21 @@
               </div>
             </div>
           </div>
-          <div class="card" *ngFor="let tweet of tweets">
+          <div class="card" *ngFor="let tweet of tweets; let indx2 = index">
             <h4 class="card-title">{{tweet.author.name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
             <p class="card-text">{{tweet.content}}</p>
             <div class="row" style="padding: 0 10% 0 5%;">
               <div class="col">
-                <a *ngIf="!liked" href="#" class="card-link" style="float:left"><img
+                <a *ngIf="!currentLiked[indx2]" (click)="likeTweet(indx2)" class="card-link"
+                   style="float:left; cursor: pointer"><img
                   src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
-                <a *ngIf="liked" href="#" class="card-link" style="float:left"><img
+                <a *ngIf="currentLiked[indx2]" (click)="likeTweet(indx2)" class="card-link"
+                   style="float:left; cursor: pointer"><img
                   src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
               </div>
               <div class="col">
-                <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
+                <p class="card-link" style="float:right">Likes: {{tweet.sumLikes}}</p>
               </div>
             </div>
           </div>
