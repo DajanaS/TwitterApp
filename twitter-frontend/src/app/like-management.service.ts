@@ -19,8 +19,12 @@ export class LikeManagementService {
     this.newLikeAddedSource.next(like);
   }
 
-  addLike(likedTweetId: number): Observable<TweetLike> {
-    return this.http.post<TweetLike>(this.api, likedTweetId).pipe();
+  likeRemoved(tweetId: number) {
+    this.likeRemovedSource.next(tweetId);
+  }
+
+  addLike(tweetId, userId): Observable<TweetLike> {
+    return this.http.post<TweetLike>(this.api, {likedTweetId: tweetId, userId: userId}).pipe();
     // parametri: {likedTweetId: tweetId, userId: da se zeme od local storage i da se predade na ovaa f-ja kako parametar}
   }
 
@@ -28,13 +32,8 @@ export class LikeManagementService {
     return this.http.get<TweetLike[]>(this.api + '/byTweet?id=' + tweetId).pipe();
   }
 
-  removeLike(tweetId: number): Observable<boolean> {
-    return this.http.post<boolean>(this.api + '/remove', tweetId).pipe();
+  removeLike(tweetId, userId): Observable<boolean> {
+    return this.http.post<boolean>(this.api + '/remove', {likedTweetId: tweetId, userId: userId}).pipe();
     // parametri: {likedTweetId: tweetId, userId: da se zeme od local storage i da se predade na ovaa f-ja kako parametar}
   }
-
-  likeRemoved(tweetId: number) {
-    this.likeRemovedSource.next(tweetId);
-  }
-
 }

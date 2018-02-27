@@ -23,7 +23,6 @@ public class Tweet {
     @ManyToOne
     private User author;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "likedTweet", fetch = FetchType.EAGER, orphanRemoval = true)
+    @ElementCollection
     private List<TweetLike> likes;
 }

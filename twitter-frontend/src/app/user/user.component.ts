@@ -30,16 +30,19 @@ export class UserComponent implements OnInit {
               private likeService: LikeManagementService) {
     tweetService.newTweetPublished$.subscribe(
       tweet => {
+        /*
         this.tweets.reverse();
         this.tweets.push(tweet);
         this.tweets.reverse();
+         */
+        this.loadTweets();
       });
     userService.profileDataChanged$.subscribe(user => this.authenticatedUser = user);
     userService.avatarUpdated$.subscribe(user => {
       this.authenticatedUser = user;
     });
     tweetService.tweetDeleted$.subscribe(id => {
-      this.tweetService.getTweetsByAuthor(this.authenticatedUser.id).subscribe(tweets => this.tweets = tweets);
+      this.loadTweets();
     });
     likeService.newLikeAdded$.subscribe(like => {
       this.loadTweets();
@@ -74,23 +77,21 @@ export class UserComponent implements OnInit {
       this.liked = [];
       this.liked.length = this.tweets.length;
       for (const tweet of this.tweets) {
-        this.likeService.getLikesByTweet(tweet.id).subscribe(likes => {
-          if (likes.length === 0) {
-            tweet.likes = 0;
-            this.liked[index] = false;
-          } else {
-            tweet.likes = likes.length;
-            for (const like of likes) {
-              if (like.likeOwner.email === this.authenticatedUser.email) {
-                this.liked[index] = true;
-                break;
-              } else {
-                this.liked[index] = false;
-              }
+        const tweetLikes = tweet.likes;
+        tweet.sumLikes = tweetLikes.length;
+        if (tweetLikes.length === 0) {
+          this.liked[index] = false;
+        } else {
+          for (const like of tweetLikes) {
+            if (like.likeOwnerId === this.authenticatedUser.id) {
+              this.liked[index] = true;
+              break;
+            } else {
+              this.liked[index] = false;
             }
           }
-          index++;
-        });
+        }
+        index++;
       }
     }, (error) => {
       console.log(error.error.message);
@@ -101,12 +102,12 @@ export class UserComponent implements OnInit {
     if (!this.liked[tweetIndex]) {
       const likedTweetId = this.tweets[tweetIndex].id;
       this.liked[tweetIndex] = true;
-      this.likeService.addLike(likedTweetId).subscribe(like => {
+      this.likeService.addLike(likedTweetId, this.authenticatedUser.id).subscribe(like => {
         this.like = like;
         this.likeService.newLikedAdded(this.like);
       });
     } else {
-      this.likeService.removeLike(this.tweets[tweetIndex].id).subscribe(resp => {
+      this.likeService.removeLike(this.tweets[tweetIndex].id, this.authenticatedUser.id).subscribe(resp => {
         if (resp) {
           this.likeService.likeRemoved(this.tweets[tweetIndex].id);
         }

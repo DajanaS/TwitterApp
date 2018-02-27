@@ -42,7 +42,7 @@
             src="../../assets/img/star-icon-empty.png" style="width:25px; height:25px;"/></a>
           <a *ngIf="liked[indx]" (click)="likeTweet(indx)" class="card-link" style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
-          <p class="card-link" style="float:right">Likes: {{tweet.likes}}</p>
+          <p class="card-link" style="float:right">Likes: {{tweet.sumLikes}}</p>
         </div>
         <div class="col">
           <button class="card-link" style="float:right; border:none; background:transparent;"

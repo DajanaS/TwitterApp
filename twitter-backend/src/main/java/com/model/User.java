@@ -47,7 +47,7 @@ public class User {
     private List<User> followers;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "likeOwner", fetch = FetchType.EAGER)
+    @ElementCollection
     private List<TweetLike> likes;
 
     @ElementCollection(fetch = FetchType.EAGER)

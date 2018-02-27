@@ -11,9 +11,7 @@ public class TweetLike {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    private User likeOwner;
+    private Long likeOwnerId;
 
-    @OneToOne
-    private Tweet likedTweet;
+    private Long likedTweetId;
 }

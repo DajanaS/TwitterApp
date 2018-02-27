@@ -44,28 +44,26 @@ export class HomeComponent implements OnInit {
   getAllTweets() {
     this.tweetService.getAllTweets(this.page).subscribe(data => {
       this.topTweets = data['content'];
-      /* let index = 0;
+      let index = 0;
       this.authUserLiked = [];
       this.authUserLiked.length = this.topTweets.length;
       for (const tweet of this.topTweets) {
-        this.likeService.getLikesByTweet(tweet.id).subscribe(likes => {
-          if (likes.length === 0) {
-            tweet.likes = 0;
-            this.authUserLiked[index] = false;
-          } else {
-            tweet.likes = likes.length;
-            for (const like of likes) {
-              if (like.likeOwner.email === this.authenticatedUser.email) {
-                this.authUserLiked[index] = true;
-                break;
-              } else {
-                this.authUserLiked[index] = false;
-              }
+        const tweetLikes = tweet.likes;
+        tweet.sumLikes = tweetLikes.length;
+        if (tweetLikes.length === 0) {
+          this.authUserLiked[index] = false;
+        } else {
+          for (const like of tweetLikes) {
+            if (like.likeOwnerId === this.authenticatedUser.id) {
+              this.authUserLiked[index] = true;
+              break;
+            } else {
+              this.authUserLiked[index] = false;
             }
           }
-          index++;
-        });
-      } */
+        }
+        index++;
+      }
     }, (error) => {
       console.log(error.error.message);
     });
@@ -83,12 +81,12 @@ export class HomeComponent implements OnInit {
     if (!this.authUserLiked[tweetIndex]) {
       const likedTweetId = this.topTweets[tweetIndex].id;
       this.authUserLiked[tweetIndex] = true;
-      this.likeService.addLike(likedTweetId).subscribe(like => {
+      this.likeService.addLike(likedTweetId, this.authenticatedUser.id).subscribe(like => {
         this.like = like;
         this.likeService.newLikedAdded(this.like);
       });
     } else {
-      this.likeService.removeLike(this.topTweets[tweetIndex].id).subscribe(resp => {
+      this.likeService.removeLike(this.topTweets[tweetIndex].id, this.authenticatedUser.id).subscribe(resp => {
         if (resp) {
           this.likeService.likeRemoved(this.topTweets[tweetIndex].id);
         }

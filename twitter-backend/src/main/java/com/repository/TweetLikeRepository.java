@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface TweetLikeRepository extends CrudRepository<TweetLike, Long> {
 
-    List<TweetLike> findAllByLikeOwner(Long id);
+    List<TweetLike> findAllByLikeOwnerId(Long id);
 
-    List<TweetLike> findAllByLikedTweet(Tweet likedTweet);
+    List<TweetLike> findAllByLikedTweetId(Long id);
 
 
 }

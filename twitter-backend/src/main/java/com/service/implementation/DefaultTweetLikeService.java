@@ -30,13 +30,12 @@ public class DefaultTweetLikeService implements TweetLikeService {
 
     @Override
     public List<TweetLike> getTweetLikesByTweet(Long id) {
-        Tweet likedTweet = tweetRepository.findOne(id);
-        return Lists.newArrayList(likeRepository.findAllByLikedTweet(likedTweet));
+        return Lists.newArrayList(likeRepository.findAllByLikedTweetId(id));
     }
 
     @Override
     public List<TweetLike> getTweetLikesByUser(Long id) {
-        return Lists.newArrayList(likeRepository.findAllByLikeOwner(id));
+        return Lists.newArrayList(likeRepository.findAllByLikeOwnerId(id));
     }
 
     @Override
@@ -45,8 +44,8 @@ public class DefaultTweetLikeService implements TweetLikeService {
         if (likeOwner != null) {
             Tweet likedTweet = tweetRepository.findOne(likedTweetId);
             TweetLike like = new TweetLike();
-            like.setLikeOwner(likeOwner);
-            like.setLikedTweet(likedTweet);
+            like.setLikeOwnerId(likeOwner.getId());
+            like.setLikedTweetId(likedTweet.getId());
             List<TweetLike> likes = likedTweet.getLikes();
             if (likes == null) {
                 likes = new ArrayList<>();
@@ -69,10 +68,11 @@ public class DefaultTweetLikeService implements TweetLikeService {
         Tweet likedTweet = tweetRepository.findOne(tweetId);
         User likeOwner = userRepository.findOne(userId);
 
-        List<TweetLike> likes = likeRepository.findAllByLikedTweet(likedTweet);
+        List<TweetLike> likes = likeRepository.findAllByLikedTweetId(tweetId);
         TweetLike likeToRemove = null;
         for (TweetLike tl : likes) {
-            if (tl.getLikeOwner().getEmail().equals(likeOwner.getEmail())) {
+            User tmpUser = userRepository.getUserById(tl.getLikeOwnerId());
+            if (tmpUser.getEmail().equals(likeOwner.getEmail())) {
                 likeToRemove = tl;
                 break;
             }
