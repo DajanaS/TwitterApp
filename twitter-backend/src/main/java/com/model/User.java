@@ -1,16 +1,19 @@
 package com.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Data
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
@@ -38,19 +41,17 @@ public class User {
     @OneToMany(mappedBy = "author", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Tweet> tweets;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<User> following;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> following;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "following", fetch = FetchType.EAGER)
-    private List<User> followers;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> followers;
 
     @JsonIgnore
     @ElementCollection
     private List<TweetLike> likes;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection
     private List<Float> rating;
 
     public User() {

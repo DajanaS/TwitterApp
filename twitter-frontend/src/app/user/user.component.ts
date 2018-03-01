@@ -22,6 +22,9 @@ export class UserComponent implements OnInit {
   liked: boolean[];
   like: TweetLike;
 
+  following: Set<string>;
+  followers: Set<string>;
+
   @Output() totalRate: string;
 
   constructor(private modalService: NgbModal,
@@ -57,6 +60,8 @@ export class UserComponent implements OnInit {
       this.authenticatedUser = user;
       this.setRating();
       this.loadTweets();
+      this.setFollowers();
+      this.setFollowing();
     });
   }
 
@@ -96,6 +101,14 @@ export class UserComponent implements OnInit {
     }, (error) => {
       console.log(error.error.message);
     });
+  }
+
+  setFollowers() {
+    this.followers = this.authenticatedUser.followers;
+  }
+
+  setFollowing() {
+    this.following = this.authenticatedUser.following;
   }
 
   likeTweet(tweetIndex: number) {

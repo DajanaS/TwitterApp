@@ -10,15 +10,15 @@ export class UserManagementService {
   private profileDataChangedSource = new Subject<User>();
   private avatarUpdatedSource = new Subject<User>();
 
-  private followUserSource = new Subject<User>();
-  private unfollowUserSource = new Subject<User>();
+  private userFollowedSource = new Subject<User>();
+  private userUnfollowedSource = new Subject<User>();
   private rateUserSource = new Subject<User>();
 
   profileDataChanged$ = this.profileDataChangedSource.asObservable();
   avatarUpdated$ = this.avatarUpdatedSource.asObservable();
 
-  followUser$ = this.followUserSource.asObservable();
-  unfollowUser$ = this.unfollowUserSource.asObservable();
+  userFollowed$ = this.userFollowedSource.asObservable();
+  userUnfollowed$ = this.userUnfollowedSource.asObservable();
   rateUser$ = this.rateUserSource.asObservable();
 
   isLoggedIn: boolean;
@@ -36,11 +36,11 @@ export class UserManagementService {
   }
 
   userFollowed(user: User) {
-    this.followUserSource.next(user);
+    this.userFollowedSource.next(user);
   }
 
   userUnfollowed(user: User) {
-    this.unfollowUserSource.next(user);
+    this.userUnfollowedSource.next(user);
   }
 
   userRated(user: User) {

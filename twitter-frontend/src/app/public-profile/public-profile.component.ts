@@ -23,6 +23,11 @@ export class PublicProfileComponent implements OnInit {
   currentLiked: boolean[];
   like: TweetLike;
 
+  following: Set<string>;
+  followers: Set<string>;
+
+  didFollow: boolean;
+
   @Output() totalRate: string;
 
   constructor(private route: ActivatedRoute,
@@ -40,6 +45,14 @@ export class PublicProfileComponent implements OnInit {
     likeService.likeRemoved$.subscribe(tweetId => {
       this.setTweets();
     });
+    userService.userFollowed$.subscribe(user => {
+      this.currentUser = user;
+      this.setFollowers();
+    });
+    userService.userUnfollowed$.subscribe(user => {
+      this.currentUser = user;
+      this.setFollowers();
+    });
   }
 
   ngOnInit() {
@@ -53,6 +66,8 @@ export class PublicProfileComponent implements OnInit {
         this.setInitialCurrentRate();
         this.setRating();
         this.setTweets();
+        this.setFollowers();
+        this.setFollowing();
       });
     });
   }
@@ -107,6 +122,20 @@ export class PublicProfileComponent implements OnInit {
     });
   }
 
+  setFollowers() {
+    this.didFollow = false;
+    this.followers = this.currentUser.followers;
+    this.followers.forEach(follower => {
+      if (follower === this.authenticatedUser.email) {
+        this.didFollow = true;
+      }
+    });
+  }
+
+  setFollowing() {
+    this.following = this.currentUser.following;
+  }
+
   rateUser(event) {
     this.userService.rateUser(this.currentUser.id, this.authenticatedUser.id, event).subscribe(user => {
       this.userService.userRated(user);
@@ -128,5 +157,17 @@ export class PublicProfileComponent implements OnInit {
         }
       });
     }
+  }
+
+  followUser() {
+    this.userService.followUser(this.currentUser.id, this.authenticatedUser.id).subscribe(user => {
+      this.userService.userFollowed(user);
+    });
+  }
+
+  unfollowUser() {
+    this.userService.unfollowUser(this.currentUser.id, this.authenticatedUser.id).subscribe(user => {
+      this.userService.userUnfollowed(user);
+    });
   }
 }

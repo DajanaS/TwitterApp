@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -89,11 +90,11 @@ public class DefaultUserService implements UserService {
         User user = userRepository.getUserById(userId);
         User follower = userRepository.getUserById(followerId);
 
-        List<User> userFollowers = user.getFollowers();
-        List<User> followerFollowing = follower.getFollowing();
+        Set<String> userFollowers = user.getFollowers();
+        Set<String> followerFollowing = follower.getFollowing();
 
-        userFollowers.add(follower);
-        followerFollowing.add(user);
+        userFollowers.add(follower.getEmail());
+        followerFollowing.add(user.getEmail());
 
         user.setFollowers(userFollowers);
         follower.setFollowing(followerFollowing);
@@ -107,11 +108,11 @@ public class DefaultUserService implements UserService {
         User user = userRepository.getUserById(userId);
         User follower = userRepository.getUserById(followerId);
 
-        List<User> userFollowers = user.getFollowers();
-        List<User> followerFollowing = follower.getFollowing();
+        Set<String> userFollowers = user.getFollowers();
+        Set<String> followerFollowing = follower.getFollowing();
 
-        userFollowers.remove(follower);
-        followerFollowing.remove(user);
+        userFollowers.remove(follower.getEmail());
+        followerFollowing.remove(user.getEmail());
 
         user.setFollowers(userFollowers);
         follower.setFollowing(followerFollowing);

@@ -1,4 +1,3 @@
-
 export class User {
   id: number;
   name: string;
@@ -7,8 +6,8 @@ export class User {
   birth: Date;
   password: string;
   avatar: string;
-  following: User[];
-  followers: User[];
+  following: Set<string>;
+  followers: Set<string>;
   rating: number[];
 
   constructor(name, gender, email, birth, password) {
