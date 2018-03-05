@@ -52,9 +52,9 @@ Both fields *Reset* and *Register* are disabled if nothing is entered, *Reset* w
 15. Change avatar - by clicking on *Change avatar*. When nothing is uploaded, the button *Upload* is disabled.
 ![pic15](prtscs/prtsc15-change-avatar.png)
 16. The photo to be uploaded is limited on 3MB and if the user tries to upload larger photo an alert will appear, and the button *Upload* will still is disabled.
-![pic16](prtscs/prtsc16-change-avatar-failed.png)
+![pic16](prtscs/prtsc16-change-avatar-failed.PNG)
 17. The following situation is okay and now the photo is going to be saved as base64.
-![pic17](prtscs/prtsc17-change-avatar.png)
+![pic17](prtscs/prtsc17-change-avatar.PNG)
 18. The changes, like editing profile information, uploading avatar, or deleting a tweet, are taking place immediately. This is how the profile looks with the changes made so far.
 ![pic18](prtscs/prtsc18-changed-profile.png)
 19. Users can search for other users' unique usernames (here emails are taken as username) so by writing more 
@@ -62,22 +62,22 @@ than two letters, a list of suggestion appears. They can select one of them and 
 keyboard or on the search icon they will be taken to selected user's public profile.
 ![pic19](prtscs/prtsc19-user-search.png)
 20. If nothing is selected and the user writes something that cannot be found, an error message will appear.
-![pic20](prtscs/prtsc20-user-search-failed.png)
+![pic20](prtscs/prtsc20-user-search-failed.PNG)
 21. Now will logout from this user and login as one of the others. This is how other users' public profile looks like.
 ![pic21](prtscs/prtsc21-public-profile.png)
 22. Like a tweet by clicking on the star, now it will become filled and the number of likes raises up. If the user clicks on the star again it returns in its initial form as empty and the like would be removed. 
-![pic22](prtscs/prtsc22-like-tweet.png)
+![pic22](prtscs/prtsc22-like-tweet.PNG)
 23. The user can set a rating to the user and can follow them, meaning this user's tweets will be listed on the homepage.
 ![pic23](prtscs/prtsc23-follow-rating.png)
 24. By clicking *Back to home* from the Navigation bar, the user will return to the starting view. If there are more than 4 tweets, *Pagination* will appear, max 4 tweets per page.
 ![pic24](prtscs/prtsc24-pagination.png)
 25. If the first user logs in again and check their profile, they are going to see that they have a follower, tweet like and rating.
-![pic25](prtscs/prtsc25-profile.png)
+![pic25](prtscs/prtsc25-profile.PNG)
 26. If the user now visits the other user's profile, and follows them back, now on his own profile he is going to have both follower and following.
 ![pic26](prtscs/prtsc26-follow.png)
 27. Looked from mobile, the three parts of the profile will go one under another. Same is with public profile.
-![pic27](prtscs/prtsc27-profile-mobile.png)
+![pic27](prtscs/prtsc27-profile-mobile.PNG)
 28. The home page from mobile looks similar like from the web, tweets are in the middle. Same is with login page.
-![pic28](prtscs/prtsc28-home-mobile.png)
+![pic28](prtscs/prtsc28-home-mobile.PNG)
 29. User can logout after which is redirected on */login* screen.
 30. If user is not logged in they are forbidden to go to */nav* or visit other users' public profiles. If they try visiting a forbidden page, the */login* screen will be displayed.
