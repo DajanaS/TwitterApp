@@ -30,7 +30,7 @@ Both fields *Reset* and *Register* are disabled if nothing is entered, *Reset* w
 4. Form Validation - If some of the fields are not filled in correctly or not filled at all, an alert message will show below it. If the password fields don't match, a warning will be shown.
 ![pic4](prtscs/prtsc4-register-failed.png)
 5. Registering looks okay also from a mobile screen, because of using Bootstrap.
-![pic5](prtscs/prtsc5-register-mobile.png)
+![pic5](prtscs/prtsc5-register-mobile.PNG)
 6. Now if some user (another or the same one) tries to register with the same email, an alert will appear, because emails must be unique, and only one user is allowed per email.
 ![pic6](prtscs/prtsc6-register-failed.png)
 7. When user enters their credentials successfully, homepage comes up. This is the initial look where anyone hasn't published anything yet.
