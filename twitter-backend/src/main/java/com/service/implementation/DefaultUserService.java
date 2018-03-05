@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,7 +38,7 @@ public class DefaultUserService implements UserService {
             user1.setAvatar(user.getAvatar());
             return userRepository.save(user1); // save the updated user
         }
-        if (getAllRegisteredUsersEmails(Long.valueOf(-1)).stream().anyMatch(email -> user.getEmail().equals(email))) {
+        if (getAllRegisteredUsersEmails((long) -1).stream().anyMatch(email -> user.getEmail().equals(email))) {
             return null; // duplicate emails not allowed
         }
         return userRepository.save(user1); // save the new user
@@ -50,18 +49,18 @@ public class DefaultUserService implements UserService {
         List<User> all = Lists.newArrayList(userRepository.findAll());
         User authenticatedUser = userRepository.findOne(authUserId);
         if (authenticatedUser != null) {
-            return all.stream().map(user -> user.getEmail())
+            return all.stream().map(User::getEmail)
                     .filter(e -> !e.equals(authenticatedUser.getEmail()))
                     .collect(Collectors.toList());
         }
-        return all.stream().map(user -> user.getEmail()).collect(Collectors.toList());
+        return all.stream().map(User::getEmail).collect(Collectors.toList());
     }
 
     @Override
     public Long getUserByEmail(String email) {
         User user = userRepository.findByEmail(email);
         if (user != null) return user.getId();
-        else return Long.valueOf(-1);
+        return (long) -1;
     }
 
     @Override
@@ -78,11 +77,7 @@ public class DefaultUserService implements UserService {
 
     @Override
     public boolean authenticateUser(String email, String password) {
-        if (getUserById(getUserByEmail(email)).getPassword().equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
+        return getUserById(getUserByEmail(email)).getPassword().equals(password);
     }
 
     @Override
@@ -124,7 +119,6 @@ public class DefaultUserService implements UserService {
     @Override
     public User rateUser(Long userId, Long senderId, Float rating) {
         User user = userRepository.getUserById(userId);
-        User sender = userRepository.getUserById(senderId);
 
         List<Float> userRatings = user.getRating();
         userRatings.add(rating);

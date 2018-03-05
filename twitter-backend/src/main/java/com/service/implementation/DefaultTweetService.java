@@ -55,6 +55,7 @@ public class DefaultTweetService implements TweetService {
 
     @Override
     public boolean deleteTweet(Long id) {
+        if (tweetRepository.getTweetById(id) != null) return false;
         tweetRepository.delete(tweetRepository.getTweetById(id));
         return true;
     }

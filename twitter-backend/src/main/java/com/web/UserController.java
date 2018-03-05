@@ -57,14 +57,14 @@ public class UserController {
         if (userService.getUserByEmail(loginData.email) != -1 && userService.authenticateUser(loginData.email, loginData.password)) {
             return userService.getUserByEmail(loginData.email);
         } else {
-            return Long.valueOf(-1);
+            return (long) -1;
         }
     }
 
     @Data
-    public static class LoginData {
-        public String email;
-        public String password;
+    final static class LoginData {
+        String email;
+        String password;
     }
 
     @PostMapping("{userId}/upload/avatar")

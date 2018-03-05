@@ -46,9 +46,9 @@ public class TweetController {
     }
 
     @Data
-    public static class TweetData {
-        public String content;
-        public Long userId;
+    final static class TweetData {
+        String content;
+        Long userId;
     }
 
     @PostMapping("/delete")

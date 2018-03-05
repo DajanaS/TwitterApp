@@ -27,9 +27,9 @@ public class TweetLikeController {
     }
 
     @Data
-    public static class TweetData {
-        public Long likedTweetId;
-        public Long userId;
+    final static class TweetData {
+        Long likedTweetId;
+        Long userId;
     }
 
     @PostMapping("/remove")

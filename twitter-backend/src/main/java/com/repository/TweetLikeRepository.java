@@ -1,6 +1,5 @@
 package com.repository;
 
-import com.model.Tweet;
 import com.model.TweetLike;
 import org.springframework.data.repository.CrudRepository;
 

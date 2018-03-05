@@ -77,6 +77,7 @@ public class DefaultTweetLikeService implements TweetLikeService {
                 break;
             }
         }
+        if (likeToRemove == null) return false;
 
         likes = likedTweet.getLikes();
         likes.remove(likeToRemove);
