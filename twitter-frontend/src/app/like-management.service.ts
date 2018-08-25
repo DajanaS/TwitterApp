@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LikeManagementService {
-  api = 'http://localhost:8080/likes';
+  api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/likes';
   private newLikeAddedSource = new Subject<TweetLike>();
   private likeRemovedSource = new Subject<number>();
   newLikeAdded$ = this.newLikeAddedSource.asObservable();

@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class TweetManagementService {
-  api = 'http://localhost:8080/tweets';
+  api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/tweets';
   private newTweetPublishedSource = new Subject<Tweet>();
   private tweetDeletedSource = new Subject<number>();
   newTweetPublished$ = this.newTweetPublishedSource.asObservable();

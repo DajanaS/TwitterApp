@@ -6,7 +6,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UserManagementService {
-  api = 'http://localhost:8080/users';
+  api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/users';
   private profileDataChangedSource = new Subject<User>();
   private avatarUpdatedSource = new Subject<User>();
 
