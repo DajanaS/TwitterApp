@@ -45,15 +45,15 @@ public class TweetController {
         return tweetService.save(tweetData.content, tweetData.userId);
     }
 
-    @Data
-    final static class TweetData {
-        String content;
-        Long userId;
-    }
-
     @PostMapping("/delete")
     @ResponseBody
     public boolean deleteTweet(@RequestBody Long id) {
         return this.tweetService.deleteTweet(id);
+    }
+
+    @Data
+    final static class TweetData {
+        String content;
+        Long userId;
     }
 }

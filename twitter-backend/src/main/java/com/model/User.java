@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @GeneratedValue
     private Long id;

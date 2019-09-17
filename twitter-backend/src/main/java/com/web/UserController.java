@@ -61,12 +61,6 @@ public class UserController {
         }
     }
 
-    @Data
-    final static class LoginData {
-        String email;
-        String password;
-    }
-
     @PostMapping("{userId}/upload/avatar")
     @ResponseBody
     public User updateAvatar(@PathVariable @NotNull Long userId, @RequestBody String value) {
@@ -89,5 +83,11 @@ public class UserController {
     @ResponseBody
     public User rateUser(@PathVariable @NotNull Long senderId, @PathVariable @NotNull Long userId, @RequestBody Float rating) {
         return userService.rateUser(userId, senderId, rating);
+    }
+
+    @Data
+    final static class LoginData {
+        String email;
+        String password;
     }
 }

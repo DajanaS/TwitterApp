@@ -26,12 +26,6 @@ public class TweetLikeController {
         return likeService.save(tweetData.likedTweetId, tweetData.userId);
     }
 
-    @Data
-    final static class TweetData {
-        Long likedTweetId;
-        Long userId;
-    }
-
     @PostMapping("/remove")
     @ResponseBody
     public boolean removeLike(@RequestBody TweetData tweetData) {
@@ -42,6 +36,12 @@ public class TweetLikeController {
     @ResponseBody
     public List<TweetLike> getLikesByTweet(@RequestParam Long id) {
         return likeService.getTweetLikesByTweet(id);
+    }
+
+    @Data
+    final static class TweetData {
+        Long likedTweetId;
+        Long userId;
     }
 
 }
