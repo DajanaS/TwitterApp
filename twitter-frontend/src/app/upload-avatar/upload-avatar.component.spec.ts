@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UploadAvatarComponent } from './upload-avatar.component';
+import {UploadAvatarComponent} from './upload-avatar.component';
 
 describe('UploadAvatarComponent', () => {
   let component: UploadAvatarComponent;
@@ -8,9 +8,9 @@ describe('UploadAvatarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadAvatarComponent ]
+      declarations: [UploadAvatarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

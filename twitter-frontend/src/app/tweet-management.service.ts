@@ -8,8 +8,8 @@ import {Subject} from 'rxjs/Subject';
 export class TweetManagementService {
   api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/tweets';
   private newTweetPublishedSource = new Subject<Tweet>();
-  private tweetDeletedSource = new Subject<number>();
   newTweetPublished$ = this.newTweetPublishedSource.asObservable();
+  private tweetDeletedSource = new Subject<number>();
   tweetDeleted$ = this.tweetDeletedSource.asObservable();
 
   constructor(private http: HttpClient) {

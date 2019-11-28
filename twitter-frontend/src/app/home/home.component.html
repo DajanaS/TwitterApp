@@ -8,16 +8,16 @@
   </div>
 
   <div *ngIf="topTweets">
-    <div class="card" *ngFor="let tweet of topTweets; let i = index">
+    <div *ngFor="let tweet of topTweets; let i = index" class="card">
       <h4 class="card-title">{{tweet.author.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!authUserLiked[i]" (click)="likeTweet(i)" class="card-link"
+          <a (click)="likeTweet(i)" *ngIf="!authUserLiked[i]" class="card-link"
              style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
-          <a *ngIf="authUserLiked[i]" (click)="likeTweet(i)" class="card-link"
+          <a (click)="likeTweet(i)" *ngIf="authUserLiked[i]" class="card-link"
              style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
         </div>
@@ -28,6 +28,6 @@
     </div>
   </div>
 
-  <ngb-pagination *ngIf="topTweets && topTweets.length>=1" [collectionSize]="totalTweets" [(page)]="page" [pageSize]="4"
-                  (pageChange)="pageChanged()" [boundaryLinks]="true"></ngb-pagination>
+  <ngb-pagination (pageChange)="pageChanged()" *ngIf="topTweets && topTweets.length>=1" [(page)]="page" [boundaryLinks]="true"
+                  [collectionSize]="totalTweets" [pageSize]="4"></ngb-pagination>
 </div>

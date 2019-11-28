@@ -17,9 +17,10 @@
   <ngb-tab disabled="true">
     <ng-template ngbTabTitle>
       <div class="form-group">
-        <input style="float:left; width:70%;" id="typeahead-basic" type="text" class="form-control" (keyup.enter)="onSubmit()" [(ngModel)]="model"
-               [ngbTypeahead]="search" placeholder="User search"/>
-        <button type="button" class="btn btn-outline-light" style="width:30%" (click)="onSubmit()">
+        <input (keyup.enter)="onSubmit()" [(ngModel)]="model" [ngbTypeahead]="search" class="form-control"
+               id="typeahead-basic" placeholder="User search"
+               style="float:left; width:70%;" type="text"/>
+        <button (click)="onSubmit()" class="btn btn-outline-light" style="width:30%" type="button">
           <img src="../../assets/img/search-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
         </button>
         <div *ngIf="noUserFound"><p style="color: red;">No user found.</p></div>

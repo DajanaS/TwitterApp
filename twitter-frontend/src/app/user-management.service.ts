@@ -1,27 +1,23 @@
 import {Injectable} from '@angular/core';
 import {User} from './model/user';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UserManagementService {
   api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/users';
-  private profileDataChangedSource = new Subject<User>();
-  private avatarUpdatedSource = new Subject<User>();
-
-  private userFollowedSource = new Subject<User>();
-  private userUnfollowedSource = new Subject<User>();
-  private rateUserSource = new Subject<User>();
-
-  profileDataChanged$ = this.profileDataChangedSource.asObservable();
-  avatarUpdated$ = this.avatarUpdatedSource.asObservable();
-
-  userFollowed$ = this.userFollowedSource.asObservable();
-  userUnfollowed$ = this.userUnfollowedSource.asObservable();
-  rateUser$ = this.rateUserSource.asObservable();
-
   isLoggedIn: boolean;
+  private profileDataChangedSource = new Subject<User>();
+  profileDataChanged$ = this.profileDataChangedSource.asObservable();
+  private avatarUpdatedSource = new Subject<User>();
+  avatarUpdated$ = this.avatarUpdatedSource.asObservable();
+  private userFollowedSource = new Subject<User>();
+  userFollowed$ = this.userFollowedSource.asObservable();
+  private userUnfollowedSource = new Subject<User>();
+  userUnfollowed$ = this.userUnfollowedSource.asObservable();
+  private rateUserSource = new Subject<User>();
+  rateUser$ = this.rateUserSource.asObservable();
 
   constructor(private http: HttpClient) {
     this.isLoggedIn = false;

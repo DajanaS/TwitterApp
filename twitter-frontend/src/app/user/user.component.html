@@ -1,25 +1,25 @@
 <div *ngIf="authenticatedUser" class="row">
 
-  <div id="profileInfo" class="col-sm-4">
+  <div class="col-sm-4" id="profileInfo">
     <div id="nov">
-      <img id="profile" style="width:225px; height:225px;" src={{authenticatedUser.avatar}}/>
+      <img id="profile" src={{authenticatedUser.avatar}}/ style="width:225px; height:225px;">
       <h4>{{authenticatedUser.name}}</h4>
       <h6>{{authenticatedUser.birth | age}}</h6>
 
       <div style="display:flex;justify-content: center;">
-        <ngb-rating readonly="true" [(rate)]="totalRate"></ngb-rating>&nbsp;{{totalRate}}
+        <ngb-rating [(rate)]="totalRate" readonly="true"></ngb-rating>&nbsp;{{totalRate}}
       </div>
 
       <div style="display:flex;justify-content: center; margin-top: 10%;">
-        <button class="btn btn-lg btn-outline-primary" (click)="open()">Tweet a new message</button>
+        <button (click)="open()" class="btn btn-lg btn-outline-primary">Tweet a new message</button>
       </div>
 
       <div style="display:flex;justify-content: center; margin-top: 10%;">
-        <button class="btn btn-lg btn-outline-primary" (click)="editProfile()">Edit your profile</button>
+        <button (click)="editProfile()" class="btn btn-lg btn-outline-primary">Edit your profile</button>
       </div>
 
       <div style="display:flex;justify-content: center; margin-top: 10%;">
-        <button class="btn btn-lg btn-outline-primary" (click)="changeAvatar()">Change your avatar</button>
+        <button (click)="changeAvatar()" class="btn btn-lg btn-outline-primary">Change your avatar</button>
       </div>
     </div>
   </div>
@@ -32,21 +32,21 @@
         </div>
       </div>
     </div>
-    <div class="card" *ngFor="let tweet of tweets; let indx = index">
+    <div *ngFor="let tweet of tweets; let indx = index" class="card">
       <h4 class="card-title">{{authenticatedUser.name}}</h4>
       <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
       <p class="card-text">{{tweet.content}}</p>
       <div class="row" style="padding: 0 10% 0 5%;">
         <div class="col">
-          <a *ngIf="!liked[indx]" (click)="likeTweet(indx)" class="card-link" style="float:left; cursor: pointer"><img
+          <a (click)="likeTweet(indx)" *ngIf="!liked[indx]" class="card-link" style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-empty.png" style="width:25px; height:25px;"/></a>
-          <a *ngIf="liked[indx]" (click)="likeTweet(indx)" class="card-link" style="float:left; cursor: pointer"><img
+          <a (click)="likeTweet(indx)" *ngIf="liked[indx]" class="card-link" style="float:left; cursor: pointer"><img
             src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
           <p class="card-link" style="float:right">Likes: {{tweet.sumLikes}}</p>
         </div>
         <div class="col">
-          <button class="card-link" style="float:right; border:none; background:transparent;"
-                  (click)="deleteTweet(tweet.id)">
+          <button (click)="deleteTweet(tweet.id)" class="card-link"
+                  style="float:right; border:none; background:transparent;">
             <img src="../../assets/img/bin-icon.png" style="width:25px; height:25px; cursor: pointer;"/></button>
         </div>
       </div>
@@ -55,18 +55,18 @@
 
   <div class="col-sm-4">
     <div style="border-left:#99A3A4 solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
-      <ul id="followers" class="list-group list-group-flush">
+      <ul class="list-group list-group-flush" id="followers">
         <li class="list-group-item"><h4 style="color: royalblue;">Followers</h4></li>
         <li *ngFor="let follower of followers" class="list-group-item"><img src="../../assets/img/avatar-female.png"
-                                         style="width:25px;height: 25px; margin-right:5%;"/>{{follower}}
+                                                                            style="width:25px;height: 25px; margin-right:5%;"/>{{follower}}
         </li>
       </ul>
     </div>
     <div style="border-left:royalblue solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
-      <ul id="following" class="list-group list-group-flush">
+      <ul class="list-group list-group-flush" id="following">
         <li class="list-group-item"><h4 style="color: dimgray;">Following</h4></li>
         <li *ngFor="let user of following" class="list-group-item"><img src="../../assets/img/avatar-male.png"
-                                         style="width:25px;height: 25px; margin-right:5%;"/>{{user}}
+                                                                        style="width:25px;height: 25px; margin-right:5%;"/>{{user}}
         </li>
       </ul>
     </div>

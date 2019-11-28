@@ -1,6 +1,3 @@
-import {User} from './user';
-import {Tweet} from './tweet';
-
 export class TweetLike {
   id: number;
   likeOwnerId: number;

@@ -5,7 +5,6 @@ import {Tweet} from '../model/tweet';
 import {UserManagementService} from '../user-management.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {TweetManagementService} from '../tweet-management.service';
-import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {LikeManagementService} from '../like-management.service';
 import {TweetLike} from '../model/tweetLike';
 

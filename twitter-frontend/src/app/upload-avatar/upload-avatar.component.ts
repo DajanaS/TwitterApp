@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserManagementService} from '../user-management.service';
 import {User} from '../model/user';

@@ -23,6 +23,30 @@ export class RegisterComponent implements OnInit {
     this.createForm();
   }
 
+  get name() {
+    return this.userForm.get('name');
+  }
+
+  get gender() {
+    return this.userForm.get('gender');
+  }
+
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get birth() {
+    return this.userForm.get('birth');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get repeatPassword() {
+    return this.userForm.get('repeatPassword');
+  }
+
   ngOnInit() {
   }
 
@@ -71,29 +95,5 @@ export class RegisterComponent implements OnInit {
       password: '',
       repeatPassword: ''
     });
-  }
-
-  get name() {
-    return this.userForm.get('name');
-  }
-
-  get gender() {
-    return this.userForm.get('gender');
-  }
-
-  get email() {
-    return this.userForm.get('email');
-  }
-
-  get birth() {
-    return this.userForm.get('birth');
-  }
-
-  get password() {
-    return this.userForm.get('password');
-  }
-
-  get repeatPassword() {
-    return this.userForm.get('repeatPassword');
   }
 }

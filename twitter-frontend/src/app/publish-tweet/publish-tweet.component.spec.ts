@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PublishTweetComponent } from './publish-tweet.component';
+import {PublishTweetComponent} from './publish-tweet.component';
 
 describe('PublishTweetComponent', () => {
   let component: PublishTweetComponent;
@@ -8,9 +8,9 @@ describe('PublishTweetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PublishTweetComponent ]
+      declarations: [PublishTweetComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

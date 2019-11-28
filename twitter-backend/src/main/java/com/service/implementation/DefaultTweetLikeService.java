@@ -1,8 +1,8 @@
 package com.service.implementation;
 
 import com.google.common.collect.Lists;
-import com.model.TweetLike;
 import com.model.Tweet;
+import com.model.TweetLike;
 import com.model.User;
 import com.repository.TweetLikeRepository;
 import com.repository.TweetRepository;

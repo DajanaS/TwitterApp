@@ -1,4 +1,4 @@
-<ngb-tabset *ngIf="currentUser" justify="justified" activeId="profile_tab">
+<ngb-tabset *ngIf="currentUser" activeId="profile_tab" justify="justified">
   <ngb-tab disabled="true">
     <ng-template ngbTabTitle>
       <a routerLink="/nav">Back to Home</a>
@@ -6,24 +6,25 @@
   </ngb-tab>
 
 
-  <ngb-tab title={{currentUser.name}} id="profile_tab">
+  <ngb-tab id="profile_tab" title={{currentUser.name}}>
     <ng-template ngbTabContent>
 
       <div *ngIf="currentUser" class="row">
 
-        <div id="profileInfo" class="col-sm-4">
+        <div class="col-sm-4" id="profileInfo">
           <div id="nov">
-            <img id="profile" style="width:225px; height:225px;" src={{currentUser.avatar}}/>
+            <img id="profile" src={{currentUser.avatar}}/ style="width:225px; height:225px;">
             <h4>{{currentUser.name}}</h4>
             <h6>{{currentUser.birth | age}}</h6>
 
             <div style="display:flex;justify-content: center;">
-              <ngb-rating [(rate)]="currentRate" (rateChange)="rateUser($event)"></ngb-rating>&nbsp;{{totalRate}}
+              <ngb-rating (rateChange)="rateUser($event)" [(rate)]="currentRate"></ngb-rating>&nbsp;{{totalRate}}
             </div>
 
             <div style="display:flex;justify-content: center;">
-              <button *ngIf="!didFollow" class="btn btn-lg btn-outline-primary" (click)="followUser()">Follow</button>
-              <button *ngIf="didFollow" class="btn btn-lg btn-outline-primary" (click)="unfollowUser()">Unfollow</button>
+              <button (click)="followUser()" *ngIf="!didFollow" class="btn btn-lg btn-outline-primary">Follow</button>
+              <button (click)="unfollowUser()" *ngIf="didFollow" class="btn btn-lg btn-outline-primary">Unfollow
+              </button>
             </div>
           </div>
         </div>
@@ -38,16 +39,16 @@
               </div>
             </div>
           </div>
-          <div class="card" *ngFor="let tweet of tweets; let indx2 = index">
+          <div *ngFor="let tweet of tweets; let indx2 = index" class="card">
             <h4 class="card-title">{{tweet.author.name}}</h4>
             <h6 class="card-subtitle mb-2 text-muted">{{tweet.date | date:'medium'}}</h6>
             <p class="card-text">{{tweet.content}}</p>
             <div class="row" style="padding: 0 10% 0 5%;">
               <div class="col">
-                <a *ngIf="!currentLiked[indx2]" (click)="likeTweet(indx2)" class="card-link"
+                <a (click)="likeTweet(indx2)" *ngIf="!currentLiked[indx2]" class="card-link"
                    style="float:left; cursor: pointer"><img
                   src="../../assets/img/star-icon-empty.png" style="width:25px;height: 25px;"/></a>
-                <a *ngIf="currentLiked[indx2]" (click)="likeTweet(indx2)" class="card-link"
+                <a (click)="likeTweet(indx2)" *ngIf="currentLiked[indx2]" class="card-link"
                    style="float:left; cursor: pointer"><img
                   src="../../assets/img/star-icon-colored.png" style="width:25px;height: 25px;"/></a>
               </div>
@@ -60,18 +61,19 @@
 
         <div class="col-sm-4">
           <div style="border-left:#99A3A4 solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
-            <ul id="followers" class="list-group list-group-flush">
+            <ul class="list-group list-group-flush" id="followers">
               <li class="list-group-item"><h4 style="color: royalblue;">Followers</h4></li>
-              <li *ngFor="let follower of followers;" class="list-group-item"><img src="../../assets/img/avatar-male.png"
-                                               style="width:25px;height: 25px; margin-right:5%;"/>{{follower}}
+              <li *ngFor="let follower of followers;" class="list-group-item"><img
+                src="../../assets/img/avatar-male.png"
+                style="width:25px;height: 25px; margin-right:5%;"/>{{follower}}
               </li>
             </ul>
           </div>
           <div style="border-left:royalblue solid 2px; margin: 5% 10% 5% 5%; padding: 2%;">
-            <ul id="following" class="list-group list-group-flush">
+            <ul class="list-group list-group-flush" id="following">
               <li class="list-group-item"><h4 style="color: dimgray;">Following</h4></li>
               <li *ngFor="let user of following;" class="list-group-item"><img src="../../assets/img/avatar-female.png"
-                                               style="width:25px;height: 25px; margin-right:5%;"/>{{user}}
+                                                                               style="width:25px;height: 25px; margin-right:5%;"/>{{user}}
               </li>
             </ul>
           </div>

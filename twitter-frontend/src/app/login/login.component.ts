@@ -17,6 +17,14 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
   createForm() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
@@ -40,13 +48,5 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/nav']);
       }
     });
-  }
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
   }
 }

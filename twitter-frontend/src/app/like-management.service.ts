@@ -8,8 +8,8 @@ import {Observable} from 'rxjs/Observable';
 export class LikeManagementService {
   api = 'http://twitter-app.us-east-2.elasticbeanstalk.com/likes';
   private newLikeAddedSource = new Subject<TweetLike>();
-  private likeRemovedSource = new Subject<number>();
   newLikeAdded$ = this.newLikeAddedSource.asObservable();
+  private likeRemovedSource = new Subject<number>();
   likeRemoved$ = this.likeRemovedSource.asObservable();
 
   constructor(private http: HttpClient) {

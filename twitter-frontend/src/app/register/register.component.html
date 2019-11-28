@@ -4,9 +4,9 @@
   <form [formGroup]="userForm">
 
     <div class="form-group">
-      <label for="fullName">Full name</label> <input type="text" class="form-control" id="fullName"
-                                                     formControlName="name" placeholder="Full Name" ngModel appAutofocus
-                                                     required>
+      <label for="fullName">Full name</label> <input appAutofocus class="form-control" formControlName="name"
+                                                     id="fullName" ngModel placeholder="Full Name" required
+                                                     type="text">
     </div>
     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
       <div *ngIf="name.errors.required || name.hasError('whitespace')">
@@ -22,14 +22,14 @@
 
     <div class="form-group">
       <label>Select your gender</label><br/>
-      <input type="radio" name="gender" value="m" formControlName="gender"> Male
-      <input type="radio" name="gender" value="f" formControlName="gender"> Female
+      <input formControlName="gender" name="gender" type="radio" value="m"> Male
+      <input formControlName="gender" name="gender" type="radio" value="f"> Female
     </div>
 
     <div class="form-group">
-      <label for="email">Email address</label> <input type="email" class="form-control" id="email"
-                                                      [(ngModel)]="newEmail" formControlName="email"
-                                                      placeholder="example@domain.com" required>
+      <label for="email">Email address</label> <input [(ngModel)]="newEmail" class="form-control" formControlName="email"
+                                                      id="email" placeholder="example@domain.com"
+                                                      required type="email">
     </div>
     <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
       <div *ngIf="email.errors.required">
@@ -44,8 +44,8 @@
     </div>
 
     <div class="form-group">
-      <label for="birth">Date of birth</label> <input type="date" class="form-control" id="birth"
-                                                      formControlName="birth" placeholder="dd-mm-yyyy" required>
+      <label for="birth">Date of birth</label> <input class="form-control" formControlName="birth" id="birth"
+                                                      placeholder="dd-mm-yyyy" required type="date">
     </div>
     <div *ngIf="birth.invalid && (birth.dirty || birth.touched)" class="alert alert-danger">
       <div *ngIf="birth.errors.required">
@@ -72,10 +72,10 @@
     -->
 
     <div class="form-group">
-      <label for="password">Password</label> <input type="password" class="form-control" id="password"
-                                                    formControlName="password" placeholder="Strong&Password123"
-                                                    [(ngModel)]="passwordModel"
-                                                    required>
+      <label for="password">Password</label> <input [(ngModel)]="passwordModel" class="form-control" formControlName="password"
+                                                    id="password" placeholder="Strong&Password123"
+                                                    required
+                                                    type="password">
     </div>
     <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
       <div *ngIf="password.errors.required">
@@ -88,12 +88,12 @@
     </div>
 
     <div class="form-group">
-      <label for="repeatPassword">Repeat password</label> <input type="password" class="form-control"
-                                                                 id="repeatPassword"
+      <label for="repeatPassword">Repeat password</label> <input [(ngModel)]="repeatPasswordModel" class="form-control"
                                                                  formControlName="repeatPassword"
+                                                                 id="repeatPassword"
                                                                  placeholder="Strong&Password123"
-                                                                 [(ngModel)]="repeatPasswordModel"
-                                                                 required>
+                                                                 required
+                                                                 type="password">
     </div>
     <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)" class="alert alert-danger">
       <div *ngIf="repeatPassword.errors.required">
@@ -107,13 +107,13 @@
 
     <div class="row">
       <div class="col">
-        <button type="reset" (click)="revert()" [disabled]="userForm.pristine" class="btn btn-danger"
-                style="float:left">Reset
+        <button (click)="revert()" [disabled]="userForm.pristine" class="btn btn-danger" style="float:left"
+                type="reset">Reset
         </button>
       </div>
       <div class="col">
-        <button type="submit" (click)="onSubmit()" [disabled]="userForm.invalid"
-                class="btn btn-success" style="float:right">Register
+        <button (click)="onSubmit()" [disabled]="userForm.invalid" class="btn btn-success"
+                style="float:right" type="submit">Register
         </button>
       </div>
     </div>

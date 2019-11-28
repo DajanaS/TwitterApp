@@ -125,6 +125,30 @@ export class EditProfileComponent implements OnInit {
     this.createForm();
   }
 
+  get name() {
+    return this.userForm.get('name');
+  }
+
+  get gender() {
+    return this.userForm.get('gender');
+  }
+
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get oldPassword() {
+    return this.userForm.get('oldPassword');
+  }
+
+  get repeatPassword() {
+    return this.userForm.get('repeatPassword');
+  }
+
   ngOnInit() {
     this.revert();
     this.newEmail = this.oldEmail;
@@ -180,29 +204,5 @@ export class EditProfileComponent implements OnInit {
         this.invalidEmail = formModel.email as string;
       }
     });
-  }
-
-  get name() {
-    return this.userForm.get('name');
-  }
-
-  get gender() {
-    return this.userForm.get('gender');
-  }
-
-  get email() {
-    return this.userForm.get('email');
-  }
-
-  get password() {
-    return this.userForm.get('password');
-  }
-
-  get oldPassword() {
-    return this.userForm.get('oldPassword');
-  }
-
-  get repeatPassword() {
-    return this.userForm.get('repeatPassword');
   }
 }
